@@ -80,7 +80,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $defaultprofile = 'public/default/default.jpg';
+        $defaultprofile = 'public/default/default.png';
 
         $user = User::create([
             'lastname' => $data['lastname'],

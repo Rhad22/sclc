@@ -31,7 +31,7 @@
 						<div class="col-lg-3 col-md-6">
 							<div class="thumbnail no-padding">
 								<div class="thumb">
-									<img src="{{Storage::url(Auth::user()->profile_pic)}}" alt="">
+									<img src="{{Storage::url($user->profile_pic)}}" alt="">
 									<div class="caption-overflow">
 										<span>
 											<a href="assets/images/demo/images/3.png" class="btn bg-success-400 btn-icon btn-xs legitRipple" data-popup="lightbox"><i class="icon-plus2"></i></a>

@@ -66,7 +66,7 @@
 							</div>
 
 							<div class="form-group">
-								<button type="submit" class="btn bg-pink-400 btn-block">Login <i class="icon-arrow-right14 position-right"></i></button>
+								<button type="submit" class="btn bg-blue-400 btn-block">Login <i class="icon-arrow-right14 position-right"></i></button>
 							</div>
 						</div>
 					</form>

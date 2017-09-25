@@ -196,7 +196,7 @@
 
     						<div class="navigation-wrapper collapse" id="user-nav">
     							<ul class="navigation">
-    								<li><a href="/myprofile"><i class="icon-user"></i> <span>My profile</span></a></li>
+    								<li><a href="{{ route('profile', ['email' => Auth::user()->email ]) }}"><i class="icon-user"></i> <span>My profile</span></a></li>
     								<li class="divider"></li>
     								<li><a href="/myprofile/settings"><i class="icon-cog5"></i> <span>Account settings</span></a></li>
     								<li>

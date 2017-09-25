@@ -35,7 +35,6 @@
 
 	<script type="text/javascript" src="{{asset('js/plugins/ui/ripple.min.js')}}"></script>
 
-	<script type="text/javascript" src="{{asset('js/pages/components_modals.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/plugins/notifications/bootbox.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/plugins/notifications/sweet_alert.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/plugins/forms/selects/select2.min.js')}}"></script>

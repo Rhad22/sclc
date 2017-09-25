@@ -136,21 +136,21 @@
 
 											
 											<div class="panel-body">
-												{!! Form::open(['action' => ['ProfileController@update'], 'method' => 'POST', 'files' => true]) !!}
+												
       											
 													<div class="form-group">
 														<div class="row">
 															<div class="col-md-4">
 																<label>Surname</label>
-																<input type="text" value="{{ Auth::user()->lastname }}" class="form-control">
+																<input type="text" value="{{ $user->lastname}}" class="form-control">
 															</div>
 															<div class="col-md-4">
 																<label>First name</label>
-																<input type="text" value="{{ Auth::user()->firstname }}" name class="form-control">
+																<input type="text" value="{{ $user->firstname }}" name class="form-control">
 															</div>
 															<div class="col-md-4">
 																<label>Middle name</label>
-																<input type="text" value="{{ Auth::user()->middlename }}" class="form-control">
+																<input type="text" value="{{ $user->middlename }}" class="form-control">
 															</div>
 															
 															
@@ -162,11 +162,11 @@
 														<div class="row">
 															<div class="col-md-5">
 																<label>Birthday</label>
-																<input type="date" value="{{ $birthday }}" class="form-control">
+																<input type="date" value="{{ $profile->birthday }}" class="form-control">
 															</div>
 															<div class="col-md-7">
 																<label>Address</label>
-																<input type="text"  name="address" value="{{ $address }}" class="form-control">
+																<input type="text" name="address" value="{{ $profile->address }}" class="form-control">
 															</div>
 														</div>
 													</div>
@@ -175,19 +175,19 @@
 														<div class="row">
 															<div class="col-md-6">
 																<label>Phone #</label>
-																<input type="number" value="{{ $cp }}" class="form-control">
+																<input type="number" value="{{ $profile->mobilenumber }}" class="form-control">
 															</div>
 
 															<div class="form-group">
 																<label class="display-block">Gender:</label>
 
 																<label >
-																	<input type="radio" name="gender" @if ($gender == 1) checked @endif>
+																	<input type="radio" name="gender" @if ($profile->gender == 1) checked @endif>
 																		Male
 																</label>
 
 																<label >
-																	<input type="radio" name="gender" @if ($gender == 2) checked @endif>
+																	<input type="radio" name="gender" @if ($profile->gender == 2) checked @endif>
 																		Female
 																</label>
 															</div>
@@ -207,7 +207,7 @@
 							                        <div class="text-right">
 							                        	<button type="submit" class="btn btn-primary">Save <i class="icon-arrow-right14 position-right"></i></button>
 							                        </div>
-												{!! Form::close() !!}
+												
 											</div>
 											
 										</div>

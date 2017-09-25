@@ -27,10 +27,13 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 // Profile...
-Route::get('/myprofile', 'ProfileController@myprofile');
-Route::get('/myprofile/settings', 'ProfileController@myprofile');
-Route::post('/myprofile/edit', 'ProfileController@update');
-
+// Route::get('/myprofile', 'ProfileController@myprofile');
+// Route::get('/myprofile/settings', 'ProfileController@myprofile');
+// Route::post('/myprofile/edit', 'ProfileController@update');
+Route::get('/­myprofile/{email}', [
+    'uses' => 'ProfileController@index',
+    'as' => 'profile'
+    ]);
 
 // Dashboard...
 Route::get('/home', 'HomeController@index')->name('home');
@@ -44,3 +47,9 @@ Route::resource('/announcements', 'AnnouncementController');
 
 // Communication...
 Route::resource('/communication', 'CommunicationController');
+
+// Reports...
+Route::get('/test', function()
+{
+    return Auth::user()->sample();
+});
