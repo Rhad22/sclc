@@ -48,8 +48,3 @@ Route::resource('/announcements', 'AnnouncementController');
 // Communication...
 Route::resource('/communication', 'CommunicationController');
 
-// Reports...
-Route::get('/test', function()
-{
-    return Auth::user()->sample();
-});
