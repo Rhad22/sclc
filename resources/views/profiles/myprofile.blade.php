@@ -21,7 +21,7 @@
 
 						<div class="navbar-collapse collapse" id="navbar-filter">
 							<ul class="nav navbar-nav">
-								<li class="@if (Request::is('myprofile')) {{'active'}} @endif"><a href="#activity" data-toggle="tab"><i class="icon-menu7 position-left"></i> Activity</a></li>
+								<li class="@if (Request::segment(3) != 'settings') {{'active'}} @endif"><a href="#activity" data-toggle="tab"><i class="icon-menu7 position-left"></i> Activity</a></li>
 								<li><a href="#schedule" data-toggle="tab"><i class="icon-calendar3 position-left"></i> About <span class="badge badge-success badge-inline position-right">32</span></a></li>
 								<li class="@if (Request::segment(3) == 'settings') {{'active'}}  @endif"><a href="#settings" data-toggle="tab"><i class="icon-cog3 position-left"></i> Settings</a></li>
 							</ul>
