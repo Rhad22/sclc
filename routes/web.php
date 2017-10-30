@@ -30,7 +30,11 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 // Route::get('/myprofile', 'ProfileController@myprofile');
 // Route::get('/myprofile/settings', 'ProfileController@myprofile');
 // Route::post('/myprofile/edit', 'ProfileController@update');
-Route::get('/­myprofile/{email}', [
+Route::get('/myprofile/{email}/settings', [
+    'uses' => 'ProfileController@index',
+    'as' => 'profile'
+    ]);
+Route::get('/myprofile/{email}', [
     'uses' => 'ProfileController@index',
     'as' => 'profile'
     ]);

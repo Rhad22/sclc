@@ -36,7 +36,7 @@
 						<div class="col-lg-9">
 							<div class="tabbable">
 								<div class="tab-content">
-									<div class="tab-pane @if (Request::is('myprofile/settings')) {{'fade in'}} @elseif (Request::is('myprofile')) {{'active in'}} @endif" id="activity">
+									<div class="tab-pane @if (Request::segment(3) == 'settings')) {{'fade in'}} @else {{'active in'}} @endif" id="activity">
 
 										<!-- Timeline -->
 										<div class="timeline timeline-left content-group">
@@ -119,9 +119,7 @@
 										<!-- /calendar -->
 
 									</div>
-
-
-									<div class="tab-pane @if (Request::is('myprofile/settings')) {{'active in'}} @endif" id="settings">
+									<div class="tab-pane @if (Request::segment(3) == 'settings') {{'active in'}} @endif" id="settings">
 
 										<!-- Profile info -->
 										<div class="panel panel-flat">
