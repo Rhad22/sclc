@@ -135,7 +135,8 @@
 											
 											<div class="panel-body">
 												
-      											
+      											<form action="{{ route('profile') }}" method="post" enctype="multipart/form-data">
+                                                {{ csrf_field() }}
 													<div class="form-group">
 														<div class="row">
 															<div class="col-md-4">
@@ -160,7 +161,7 @@
 														<div class="row">
 															<div class="col-md-5">
 																<label>Birthday</label>
-																<input type="date" value="{{ $profile->birthday }}" class="form-control">
+																<input type="date" value="{{ $profile->birthday }}" name="birthday" class="form-control">
 															</div>
 															<div class="col-md-7">
 																<label>Address</label>
@@ -173,19 +174,19 @@
 														<div class="row">
 															<div class="col-md-6">
 																<label>Phone #</label>
-																<input type="number" value="{{ $profile->mobilenumber }}" class="form-control">
+																<input type="number" value="{{ $profile->mobilenumber }}" class="form-control" name="phone">
 															</div>
 
 															<div class="form-group">
 																<label class="display-block">Gender:</label>
 
 																<label >
-																	<input type="radio" name="gender" @if ($profile->gender == 1) checked @endif>
+																	<input type="radio" name="gender" value="1" @if ($profile->gender == 1) checked @endif>
 																		Male
 																</label>
 
 																<label >
-																	<input type="radio" name="gender" @if ($profile->gender == 2) checked @endif>
+																	<input type="radio" name="gender" value="2" @if ($profile->gender == 2) checked @endif>
 																		Female
 																</label>
 															</div>
@@ -196,8 +197,8 @@
 							                        <div class="form-group">
 							                        	<div class="row">
 															<div class="col-md-6">
-																<label class="display-block">Upload profile image</label>
-							                                    <input type="file" class="file-styled" accept="image/*">
+																<label class="display-block">Update your Profile Image</label>
+							                                    <input type="file" class="file-styled" name="profilepicture" accept="image/">
 							                                    <span class="help-block">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
 															</div>
 							                        	</div>
@@ -205,7 +206,7 @@
 							                        <div class="text-right">
 							                        	<button type="submit" class="btn btn-primary">Save <i class="icon-arrow-right14 position-right"></i></button>
 							                        </div>
-												
+                                                </form>
 											</div>
 											
 										</div>
@@ -224,7 +225,7 @@
 											</div>
 
 											<div class="panel-body">
-												<form action="#">
+									
 													<div class="form-group">
 														<div class="row">
 															<div class="col-md-6">
@@ -273,7 +274,7 @@
 							                        <div class="text-right">
 							                        	<button type="submit" class="btn btn-primary">Save <i class="icon-arrow-right14 position-right"></i></button>
 							                        </div>
-						                        </form>
+						            
 											</div>
 										</div>
 										<!-- /account settings -->
