@@ -3,17 +3,17 @@
 @section('content')
 <div class="content-wrapper">
 	<div class="content">
-	<h3><span class="text-semibold">Users</span></h3>
+	<h3><span class="text-semibold">Employees</span></h3>
 		<div>
 			<div class="page-header-content"></div>
 				<div class="breadcrumb-line breadcrumb-line-component">
 					<ul class="breadcrumb">
 						<li><a href="/home"><i class="icon-home2 position-left"></i> Home</a></li>
-						<li><a href="/users">Users</a></li>
+						<li><a href="/users">Employees</a></li>
 						<li class="active">List</li>
 					</ul>
 					<ul class="breadcrumb-elements">
-						<li><a href="{{ route('register') }}"><i class="icon-user-plus position-left"></i> Add User</a></li>
+						<li><a href="{{ route('register') }}"><i class="icon-user-plus position-left"></i> Add Employee</a></li>
 					</ul>
 				</div>
 			</div>
@@ -22,7 +22,7 @@
 				@if (count($users)> 0)
 					<div class="datatable-header">
 						<div id="DataTables_Table_0_filter" class="dataTables_filter">
-							<label><span>Search user:</span> <input type="search" class="" placeholder="Type to filter..." aria-controls="DataTables_Table_0"></label>
+							<label><span>Search employee:</span> <input type="search" class="" placeholder="Type to filter..." aria-controls="DataTables_Table_0"></label>
 						</div>
 					</div>
 

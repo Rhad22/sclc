@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Announcement;
+use App\Department;
 use App\Profile;
 
 class AnnouncementController extends Controller
 { 
     public function index()
     {
+        $depts = Department::all();
         $announcements = Announcement::orderBy('created_at','desc')->paginate(5);
-        return view('announcement.index', compact('announcements'));
+        return view('announcement.index', compact('announcements', 'depts'));
     }
 
     public function create()

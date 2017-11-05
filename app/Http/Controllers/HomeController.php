@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Announcement;
 use App\Profile;
 use App\User;
 use Auth;
@@ -26,7 +27,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $announcements = Announcement::orderBy('created_at','desc')->paginate(5);
+        return view('home', compact('announcements'));
     }
 
     public function users()
@@ -39,6 +41,11 @@ class HomeController extends Controller
     {
         $users = User::find($id);
         return view('users.show', compact('users'));
+    }
+
+    public function chatbox()
+    {
+        return view('messenger.chatbox');
     }
 
 }

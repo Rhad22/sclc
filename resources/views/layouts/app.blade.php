@@ -13,11 +13,11 @@
 
     <!-- Global stylesheets -->
 	<link type="text/css" href="{{asset('css/app.css')}}" rel="stylesheet">
-    <link type="text/css" href="{{asset('css/bootstrap.css')}}" rel="stylesheet">
-    <link type="text/css" href="{{asset('css/colors.css')}}" rel="stylesheet">
-    <link type="text/css" href="{{asset('css/components.css')}}" rel="stylesheet">
-    <link type="text/css" href="{{asset('css/core.css')}}" rel="stylesheet">
-    <link type="text/css" href="{{asset('css/icons/icomoon/styles.css')}}" rel="stylesheet"> 
+    <link href="{{asset('css/icons/icomoon/styles.css')}}" rel="stylesheet" type="text/css">
+	<link href="{{asset('css/bootstrap.css')}}" rel="stylesheet" type="text/css">
+	<link href="{{asset('css/core.css')}}" rel="stylesheet" type="text/css">
+	<link href="{{asset('css/components.css')}}" rel="stylesheet" type="text/css">
+	<link href="{{asset('css/colors.css')}}" rel="stylesheet" type="text/css">
     <!-- /global stylesheets -->
 
     <!-- Core JS files -->
@@ -50,8 +50,7 @@
 	<script type="text/javascript" src="{{asset('js/plugins/pickers/daterangepicker.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/pages/dashboard.js')}}"></script>
 
-    <script type="text/javascript" src="{{asset('js/plugins/visualization/d3/d3.min.js')}}"></script>
-	<script type="text/javascript" src="{{asset('js/plugins/visualization/d3/d3_tooltip.js')}}"></script>
+    <script src="{{asset('js/graph/highcharts.js')}}"></script>
 	<!-- /theme JS files -->
 
 </head>
@@ -71,6 +70,7 @@
      <script src="{{asset('js/app.js')}}"></script>
 @endif 
      <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+     <script src="{{asset('js/graph/dashboardgraph.js')}}"></script>
      <script>
         CKEDITOR.replace( 'article-ckeditor' );
      </script>
