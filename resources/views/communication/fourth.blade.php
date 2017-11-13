@@ -41,8 +41,9 @@
 				
 					
 				</div>
+				@include('layouts.messages')
 				<div style="text-align: right;">
-					<form class="form-horizontal" role="form" action="{{ route('/communication.4th') }}" method="GET">
+					{!! Form::open(['action' => ['CommunicationController@fourth'], 'method' => 'GET']) !!}
                        	{{ csrf_field() }}
 						<ul class="icons-list ">
 							<li><label for="year">Select year:</label></li>
@@ -58,7 +59,7 @@
 							</li>
 							<li><button type="submit">OK</button></li>
 			            </ul>
-					</form>
+					{!! Form::close() !!} 
 				</div>
 			<div> 
 								

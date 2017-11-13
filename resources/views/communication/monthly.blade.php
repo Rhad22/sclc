@@ -13,7 +13,9 @@
 						<li><a href="/communication">Communication Department</a></li>
 						<li class="active">List</li>
 					</ul>
+
 					{{--  @if (Auth::user()->user_postion == 'District Pastor')  --}}
+
 					<ul class="breadcrumb-elements">
 							<li><a href="/communication/create"><i class="icon-pencil7 position-left"></i> Create report</a></li>
 					        <li class="dropdown">
@@ -38,14 +40,30 @@
 					                	
 					</ul>
 						{{--  @endif  --}}
-				
-					
 				</div>
+				@include('layouts.messages')
 				<div style="text-align: right;">
-					<form class="form-horizontal" role="form" action="{{ route('communication.index') }}" method="GET">
+					{!! Form::open(['action' => ['CommunicationController@monthly'], 'method' => 'GET']) !!}
                        	{{ csrf_field() }}
 						<ul class="icons-list ">
-							<li><label for="year">Select year:</label></li>
+							<li><label for="year">Select month:</label></li>
+							<li>
+								<select name="month" class="form-control">
+									<option value="01">Jan</option>
+									<option value="02">Feb</option>
+									<option value="03">Mar</option>
+									<option value="04">Apr</option>
+									<option value="05">May</option>
+									<option value="06">Jun</option>
+									<option value="07">Jul</option>
+									<option value="08">Aug</option>
+									<option value="09">Sept</option>
+									<option value="10">Oct</option>
+									<option value="11">Nov</option>
+									<option value="12">Dec</option>
+								</select>
+							</li>
+							<li><label for="year">year:</label></li>
 							<li>
 								<select name="year" class="form-control">
 									<script>
@@ -58,7 +76,7 @@
 							</li>
 							<li><button type="submit">OK</button></li>
 			            </ul>
-					</form>
+					{!! Form::close() !!} 
 				</div>
 			<div> 
 								
@@ -71,161 +89,69 @@
 							<h5 class="panel-title data">
 								South-Central Luzon Conference<br>
 								Communication Department<br><br>
-								<strong>November 2017 Monthly Report</strong>
+								<strong> {{$tmonth}} Monthly Report of {{$year}}</strong>
 							</h5>
 							
 						</div>
-
 						<div class="panel-body">
-							
 							<div class="row">
-							<div class="col-md-6 col-xs-9">
-								<div class="table-responsive">
-								<table class="table table-framed table-hover">
-									<thead>
-										<tr>
-											<th><strong>A. Reach Up With God</strong></th>
-									</thead>
-									<tbody>
-										<tr>
-											<td>&nbsp;&nbsp;&nbsp;&nbsp;1. No. of members following the yearly bible reading plan. {{$bible4}} {{$bible5}} {{$from4}}</td>
-											
-										</tr>
-										<tr>
-											<td>&nbsp;&nbsp;&nbsp;&nbsp;2. No. of members following the 777 Program.</td>
-											
-										</tr>
-										<tr>
-											<td>&nbsp;&nbsp;&nbsp;&nbsp;3. No of church following the hour of worship format</td>
-											
-										</tr>
-										<tr>
-											<td>&nbsp;&nbsp;&nbsp;&nbsp;4. No. of members following the revive by his prophet initiative</td>
-											
-										</tr>
-									</tbody>
-									<thead>
-										<tr>
-											<th><strong>B. Reach Out With God</strong></th>
-											
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>&nbsp;&nbsp;&nbsp;&nbsp;1. No. of church with directional signs.</td>
-											
-										</tr>
-										<tr>
-											<td>&nbsp;&nbsp;&nbsp;&nbsp;2. No. of cable head ends carrying hope channel.</td>
-											
-										</tr>
-									<tbody>
-								</table>
-								</div>
-							</div>
-							<div class="col-md-6 col-xs-3" style="margin-left: -22px">
-								<div class="table-responsive">
-								<table class="table table-framed table-hover">
-									<thead>
-										<tr>
-											
-                                            <script>
-										        var i = 1
-										        for (var i; i <= 31; i++) {
-											    document.write('<th class="data">'+i+'</th>');
-										    }
-									        </script>
-                                            <td class="data"><strong>0</strong></td>
-											<td class="data"><strong>0&#37;</strong></td>
-									</thead>
-									<tbody>
-										<tr>
-											
-											<script>
-										        var i = 1
-										        for (var i; i <= 31; i++) {
-											    document.write('<th class="data">0</th>');
-										    }
-									        </script>
-											<td class="data"><strong>0</strong></td>
-											<td class="data"><strong>0&#37;</strong></td>
-										</tr>
-										<tr>
-											
-											<script>
-										        var i = 1
-										        for (var i; i <= 31; i++) {
-											    document.write('<th class="data">0</th>');
-										    }
-									        </script>
-											<td class="data"><strong>0</strong></td>
-											<td class="data"><strong>0&#37;</strong></td>
-										</tr>
-										<tr>
-											
-											<script>
-										        var i = 1
-										        for (var i; i <= 31; i++) {
-											    document.write('<th class="data">0</th>');
-										    }
-									        </script>
-											<td class="data"><strong>0</strong></td>
-											<td class="data"><strong>0&#37;</strong></td>
-										</tr>
-										<tr>
-											
-											<script>
-										        var i = 1
-										        for (var i; i <= 31; i++) {
-											    document.write('<th class="data">0</th>');
-										    }
-									        </script>
-											<td class="data"><strong>0</strong></td>
-											<td class="data"><strong>0&#37;</strong></td>
-										</tr>
-									</tbody>
-									<thead>
-										<tr>
-											
-											<script>
-										        var i = 1
-										        for (var i; i <= 31; i++) {
-											    document.write('<th class="data"></th>');
-										    }
-									        </script>
-											<th><br></th>
-											<th><br></th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											
-											<script>
-										        var i = 1
-										        for (var i; i <= 31; i++) {
-											    document.write('<th class="data">0</th>');
-										    }
-									        </script>
-											<td class="data"><strong>0</strong></td>
-											<td class="data"><strong>0&#37;</strong></td>
-										</tr>
-										<tr>
-											
-											<script>
-										        var i = 1
-										        for (var i; i <= 31; i++) {
-											    document.write('<th class="data">0</th>');
-										    }
-									        </script>
-											<td class="data"><strong>0</strong></td>
-											<td class="data"><strong>0&#37;</strong></td>
-										</tr>
-									<tbody>
-								</table>
-								</div>
-							</div>
+								
+									<div class="table-responsive">
+										<table class="table table-framed table-hover">
+											<thead style="border: solid 1px;">
+												<tr style="border: solid 1px;">
+													<th class="col-md-1" style="border: solid 1px;" rowspan="2"><strong>Date</strong></th>
+													<th style="border: solid 1px; text-align: center;" colspan="4"><strong>A. Reach Up With God</strong></th>
+													<th style="border: solid 1px; text-align: center;" colspan="2"><strong>B. Reach Out With God</strong></th>
+													
+												</tr>
+												<tr style="border: solid 1px;">
+													<th style="border: solid 1px;"><strong>No. of members following the yearly bible reading plan.</strong></th>
+													<th style="border: solid 1px;"><strong>No. of members following the 777 Program.</strong></th>
+													<th style="border: solid 1px;"><strong>No of church following the hour of worship format</strong></th>
+													<th style="border: solid 1px;"><strong>No. of members following the revive by his prophet initiative</strong></th>
+													<th style="border: solid 1px;"><strong>No. of church with directional signs.</strong></th>
+													<th style="border: solid 1px;"><strong>No. of cable head ends carrying hope channel.</strong></th>
+												</tr>
+												@if(count($days) > 0)
+												@foreach ($days as $day)
+												<tr>
+													<td style="border: solid 1px;" ><a href="/communication/{{$day->id}}/edit"><div class="letter-icon-title text-default"><i data-popup="tooltip" title="" data-placement="top" id="top" data-original-title="click to edit report">{{ $day->created_at->format('M d') }}</i></div></a></td>
+													<td style="border: solid 1px; text-align: right;">{{ $day->row1}}</td>
+													<td style="border: solid 1px; text-align: right;">{{ $day->row2}}</td>
+													<td style="border: solid 1px; text-align: right;">{{ $day->row3}}</td>
+													<td style="border: solid 1px; text-align: right;">{{ $day->row4}}</td>
+													<td style="border: solid 1px; text-align: right;">{{ $day->row5}}</td>
+													<td style="border: solid 1px; text-align: right;">{{ $day->row6}}</td>
+												</tr>
+												@endforeach
+												@else
+													<td style="border: solid 1px;">{{ $td }}</td>
+													<td style="border: solid 1px; text-align: right;">0</td>
+													<td style="border: solid 1px; text-align: right;">0</td>
+													<td style="border: solid 1px; text-align: right;">0</td>
+													<td style="border: solid 1px; text-align: right;">0</td>
+													<td style="border: solid 1px; text-align: right;">0</td>
+													<td style="border: solid 1px; text-align: right;">0</td>
+
+													<!-- <h4 align="center"><i class=" icon-database-remove" style="font-size:140px;"></i> <br>No report data found </h4> -->		
+												@endif
+												<tr>
+													<td style="border: solid 1px;"><strong>Total</strong></td>
+													<td style="border: solid 1px; text-align: right;"><strong>{{$row1}}</strong></td>
+													<td style="border: solid 1px; text-align: right;"><strong>{{$row2}}</strong></td>
+													<td style="border: solid 1px; text-align: right;"><strong>{{$row3}}</strong></td>
+													<td style="border: solid 1px; text-align: right;"><strong>{{$row4}}</strong></td>
+													<td style="border: solid 1px; text-align: right;"><strong>{{$row5}}</strong></td>
+													<td style="border: solid 1px; text-align: right;"><strong>{{$row6}}</strong></td>
+												</tr>
+											</thead>
+										</table>
+									</div>
+								
 							</div>
 						</div>
+						
 					</div>
 					<div style="text-align: right;">
 						<a href="#" class="btn btn-primary legitRipple"><i class="icon-printer"></i> <span class="hidden-xs position-right">Print</span></a>

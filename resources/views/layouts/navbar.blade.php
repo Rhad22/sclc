@@ -231,7 +231,7 @@
                                         <a href="/messenger.chatbox"><i class="icon-comment-discussion"></i> <span>Messages<span class="label bg-blue-400">8</span></span></a>
                                     </li>
                                     <li>
-                                        <a href="/reportnotifications"><i class="icon-bell2"></i> <span>Notifications<span class="label bg-orange-400">15</span></span></a> 
+                                        <a href="#"><i class="icon-bell2"></i> <span>Notifications<span class="label bg-orange-400">15</span></span></a> 
                                     </li>
                                     <!-- /main -->
                                 </ul>
