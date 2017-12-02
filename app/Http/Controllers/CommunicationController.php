@@ -35,6 +35,7 @@ class CommunicationController extends Controller
             ->whereBetween('created_at', array($from, $to))
             ->get();
         
+
     //2nd quater
         $qr2 = Report::where('dept_id','1')
             ->whereBetween('created_at', array($from2, $to2))
@@ -76,6 +77,25 @@ class CommunicationController extends Controller
             ->whereYear('created_at', $year)
             ->orderBy('created_at','asc')
             ->get();
+
+        $row1 = Report::where('dept_id', $dept)->whereMonth('created_at', $month)->whereYear('created_at', $year)->sum('row1');
+        $row2 = Report::where('dept_id', $dept)->whereMonth('created_at', $month)->whereYear('created_at', $year)->sum('row2');
+        $row3 = Report::where('dept_id', $dept)->whereMonth('created_at', $month)->whereYear('created_at', $year)->sum('row3');
+        $row4 = Report::where('dept_id', $dept)->whereMonth('created_at', $month)->whereYear('created_at', $year)->sum('row4');
+        $row5 = Report::where('dept_id', $dept)->whereMonth('created_at', $month)->whereYear('created_at', $year)->sum('row5');
+        $row6 = Report::where('dept_id', $dept)->whereMonth('created_at', $month)->whereYear('created_at', $year)->sum('row6');
+
+
+        $tmonth = date("F", mktime(0, 0, 0, $month, 1, $year));
+        $td = date("M", mktime(0, 0, 0, $month, 1, $year));
+        // date("l", mktime(0, 0, 0, 7, 1, 2000));
+
+        $days = Report::where('dept_id', $dept)
+            ->whereMonth('created_at', $month)
+            ->whereYear('created_at', $year)
+            ->orderBy('created_at','asc')
+            ->get();
+
 
         $row1 = Report::where('dept_id', $dept)->whereMonth('created_at', $month)->whereYear('created_at', $year)->sum('row1');
         $row2 = Report::where('dept_id', $dept)->whereMonth('created_at', $month)->whereYear('created_at', $year)->sum('row2');
