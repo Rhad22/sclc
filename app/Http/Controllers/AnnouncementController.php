@@ -11,9 +11,8 @@ class AnnouncementController extends Controller
 { 
     public function index()
     {
-        $depts = Department::all();
         $announcements = Announcement::orderBy('created_at','desc')->paginate(5);
-        return view('announcement.index', compact('announcements', 'depts'));
+        return view('announcement.index', compact('announcements'));
     }
 
     public function create()

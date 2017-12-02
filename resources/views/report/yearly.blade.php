@@ -41,11 +41,12 @@
 				
 					
 				</div>
+				@include('layouts.messages')
 				<div style="text-align: right;">
-					<form class="form-horizontal" role="form" action="{{ route('communication.create') }}" method="GET">
+					{!! Form::open(['action' => ['CommunicationController@index'], 'method' => 'GET']) !!}
                        	{{ csrf_field() }}
 						<ul class="icons-list ">
-							<li><label for="year">Select year:</label></li>
+							<li><label>Select year:</label></li>
 							<li>
 								<select name="year" class="form-control">
 									<script>
@@ -58,7 +59,7 @@
 							</li>
 							<li><button type="submit">OK</button></li>
 			            </ul>
-					</form>
+					{!! Form::close() !!}
 				</div>
 			<div> 
 								
@@ -70,79 +71,41 @@
 						<div class="panel-heading">
 							<h5 class="panel-title data">
 								South-Central Luzon Conference<br>
-								Communication Department<br><br>
-								<strong>1st Quarterly Report of {{$year}}</strong>
+								{{$content[$id][0]}}
+								<br><br>
+								<strong>{{$year}} Yearly Report</strong>
 							</h5>
 							
 						</div>
 
 						<div class="panel-body">
 							<div class="table-responsive ">
-								
-								<table class="table table-framed table-hover">
+								<table class="table table-framed table-hover" style="margin-left: 0px">
 									<thead>
 										<tr>
-											<th><strong>A. Reach Up With God</strong></th>
-											<th class="data"><strong>Jan.</strong></th>
-											<th class="data"><strong>Feb.</strong></th>
-											<th class="data"><strong>Mar.</strong></th>
+											<th></th>
+											<th class="data">1st Qr.</th>
+											<th class="data">2nd Qr.</th>
+											<th class="data">3rd Qr.</th>
+											<th class="data">4th Qr.</th>
 											<th class="data"><strong>Total</strong></th>
+										</tr>
 									</thead>
 									<tbody>
+										@for ($x = 1; $x < $length; $x++)
 										<tr>
-											<td>&nbsp;&nbsp;&nbsp;&nbsp;1. No. of members following the yearly bible reading plan.</td>
-											<td class="data">{{$bible1}}</td>
-											<td class="data">{{$bible2}}</td>
-											<td class="data">{{$bible3}}</td>
-											<td class="data"><strong>{{$biblet1}}</strong></td>
+											<td>
+												{{$content[$id][$x]}}
+											</td>
+											<td class="data">{{$qr1->sum('row'.$x)}}</td>
+											<td class="data">{{$qr2->sum('row'.$x)}}</td>
+											<td class="data">{{$qr3->sum('row'.$x)}}</td>
+											<td class="data">{{$qr4->sum('row'.$x)}}</td>
+											<td class="data"><strong>{{$qrt->sum('row'.$x)}}</strong></td>
+											
 										</tr>
-										<tr>
-											<td>&nbsp;&nbsp;&nbsp;&nbsp;2. No. of members following the 777 Program.</td>
-											<td class="data">{{$seven1}}</td>
-											<td class="data">{{$seven2}}</td>
-											<td class="data">{{$seven3}}</td>
-											<td class="data"><strong>{{$sevent1}}</strong></td>
-										</tr>
-										<tr>
-											<td>&nbsp;&nbsp;&nbsp;&nbsp;3. No of church following the hour of worship format</td>
-											<td class="data">{{$worship1}}</td>
-											<td class="data">{{$worship2}}</td>
-											<td class="data">{{$worship3}}</td>
-											<td class="data"><strong>{{$worshipt1}}</strong></td>
-										</tr>
-										<tr>
-											<td>&nbsp;&nbsp;&nbsp;&nbsp;4. No. of members following the revive by his prophet initiative</td>
-											<td class="data">{{$prophet1}}</td>
-											<td class="data">{{$prophet2}}</td>
-											<td class="data">{{$prophet3}}</td>
-											<td class="data"><strong>{{$prophett1}}</strong></td>
-										</tr>
+										@endfor
 									</tbody>
-									<thead>
-										<tr>
-											<th><strong>B. Reach Out With God</strong></th>
-											<th></th>
-											<th></th>
-											<th></th>
-											<th></th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>&nbsp;&nbsp;&nbsp;&nbsp;1. No. of church with directional signs.</td>
-											<td class="data">{{$signs1}}</td>
-											<td class="data">{{$signs2}}</td>
-											<td class="data">{{$signs3}}</td>
-											<td class="data"><strong>{{$signst1}}</strong></td>
-										</tr>
-										<tr>
-											<td>&nbsp;&nbsp;&nbsp;&nbsp;2. No. of cable head ends carrying hope channel.</td>
-											<td class="data">{{$hope1}}</td>
-											<td class="data">{{$hope2}}</td>
-											<td class="data">{{$hope3}}</td>
-											<td class="data"><strong>{{$hopet1}}</strong></td>
-										</tr>
-									<tbody>
 								</table>
 							</div>
 						</div>
@@ -150,6 +113,8 @@
 					<div style="text-align: right;">
 						<a href="#" class="btn btn-primary legitRipple"><i class="icon-printer"></i> <span class="hidden-xs position-right">Print</span></a>
 					</div>
+
+					
 		@include('layouts.footer')
 	</div>
 </div>

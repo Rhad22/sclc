@@ -218,20 +218,20 @@
                                     <li>
                                         <a href="/reports"><i class="icon-stack2"></i> <span>Department and Ministries</span></a>
                                         <ul>
-                                            <li><a href="/communication">Communication Department</a></li>
-                                            <li><a href="/communication">Children's Ministries</a></li>
-                                            <li><a href="/communication">Women's Ministries</a></li>
-                                            <li><a href="/communication">Ministerial</a></li>
-                                            <li><a href="/communication">Stewardship Ministries</a></li>
-                                            <li><a href="/communication">Health Ministries</a></li>
-                                            <li><a href="/communication">Personal Ministries</a></li>
+                                            <li><a href="/report/1/2017">Communication Department</a></li>
+                                            <li><a href="/report/2/2017">Children's Ministries</a></li>
+                                            <li><a href="/report/3/2017">Women's Ministries</a></li>
+                                            <li><a href="/report/4/2017">Ministerial</a></li>
+                                            <li><a href="/report/5/2017">Stewardship Ministries</a></li>
+                                            <li><a href="/report/6/2017">Health Ministries</a></li>
+                                            <li><a href="/report/7/2017">Personal Ministries</a></li>
                                         </ul>
                                     </li>
                                     <li>
                                         <a href="/messenger.chatbox"><i class="icon-comment-discussion"></i> <span>Messages<span class="label bg-blue-400">8</span></span></a>
                                     </li>
                                     <li>
-                                        <a href="/reportnotifications"><i class="icon-bell2"></i> <span>Notifications<span class="label bg-orange-400">15</span></span></a> 
+                                        <a href="#"><i class="icon-bell2"></i> <span>Notifications<span class="label bg-orange-400">15</span></span></a> 
                                     </li>
                                     <!-- /main -->
                                 </ul>

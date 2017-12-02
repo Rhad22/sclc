@@ -41,8 +41,9 @@
 				
 					
 				</div>
+				@include('layouts.messages')
 				<div style="text-align: right;">
-					<form class="form-horizontal" role="form" action="{{ route('/communication.3rd') }}" method="GET">
+					{!! Form::open(['action' => ['CommunicationController@second'], 'method' => 'GET']) !!}
                        	{{ csrf_field() }}
 						<ul class="icons-list ">
 							<li><label for="year">Select year:</label></li>
@@ -58,7 +59,7 @@
 							</li>
 							<li><button type="submit">OK</button></li>
 			            </ul>
-					</form>
+					{!! Form::close() !!} 
 				</div>
 			<div> 
 								
@@ -71,7 +72,7 @@
 							<h5 class="panel-title data">
 								South-Central Luzon Conference<br>
 								Communication Department<br><br>
-								<strong>3rd Quarterly Report of {{$year}}</strong>
+								<strong>2nd Quarterly Report of {{$year}}</strong>
 							</h5>
 							
 						</div>
@@ -83,39 +84,39 @@
 									<thead>
 										<tr>
 											<th><strong>A. Reach Up With God</strong></th>
-											<th class="data"><strong>Jul.</strong></th>
-											<th class="data"><strong>Aug.</strong></th>
-											<th class="data"><strong>Sept.</strong></th>
+											<th class="data"><strong>Apr.</strong></th>
+											<th class="data"><strong>May.</strong></th>
+											<th class="data"><strong>Jun.</strong></th>
 											<th class="data"><strong>Total</strong></th>
 									</thead>
 									<tbody>
 										<tr>
 											<td>&nbsp;&nbsp;&nbsp;&nbsp;1. No. of members following the yearly bible reading plan.</td>
-											<td class="data">{{$bible7}}</td>
-											<td class="data">{{$bible8}}</td>
-											<td class="data">{{$bible9}}</td>
-											<td class="data"><strong>{{$biblet3}}</strong></td>
+											<td class="data">{{$bible4}}</td>
+											<td class="data">{{$bible5}}</td>
+											<td class="data">{{$bible6}}</td>
+											<td class="data"><strong>{{$biblet2}}</strong></td>
 										</tr>
 										<tr>
 											<td>&nbsp;&nbsp;&nbsp;&nbsp;2. No. of members following the 777 Program.</td>
-											<td class="data">{{$seven7}}</td>
-											<td class="data">{{$seven8}}</td>
-											<td class="data">{{$seven9}}</td>
-											<td class="data"><strong>{{$sevent3}}</strong></td>
+											<td class="data">{{$seven4}}</td>
+											<td class="data">{{$seven5}}</td>
+											<td class="data">{{$seven6}}</td>
+											<td class="data"><strong>{{$sevent2}}</strong></td>
 										</tr>
 										<tr>
 											<td>&nbsp;&nbsp;&nbsp;&nbsp;3. No of church following the hour of worship format</td>
-											<td class="data">{{$worship7}}</td>
-											<td class="data">{{$worship8}}</td>
-											<td class="data">{{$worship9}}</td>
-											<td class="data"><strong>{{$worshipt3}}</strong></td>
+											<td class="data">{{$worship4}}</td>
+											<td class="data">{{$worship5}}</td>
+											<td class="data">{{$worship6}}</td>
+											<td class="data"><strong>{{$worshipt2}}</strong></td>
 										</tr>
 										<tr>
 											<td>&nbsp;&nbsp;&nbsp;&nbsp;4. No. of members following the revive by his prophet initiative</td>
-											<td class="data">{{$prophet7}}</td>
-											<td class="data">{{$prophet8}}</td>
-											<td class="data">{{$prophet9}}</td>
-											<td class="data"><strong>{{$prophett3}}</strong></td>
+											<td class="data">{{$prophet4}}</td>
+											<td class="data">{{$prophet5}}</td>
+											<td class="data">{{$prophet6}}</td>
+											<td class="data"><strong>{{$prophett2}}</strong></td>
 										</tr>
 									</tbody>
 									<thead>
@@ -130,17 +131,17 @@
 									<tbody>
 										<tr>
 											<td>&nbsp;&nbsp;&nbsp;&nbsp;1. No. of church with directional signs.</td>
-											<td class="data">{{$signs7}}</td>
-											<td class="data">{{$signs8}}</td>
-											<td class="data">{{$signs9}}</td>
-											<td class="data"><strong>{{$signst3}}</strong></td>
+											<td class="data">{{$signs4}}</td>
+											<td class="data">{{$signs5}}</td>
+											<td class="data">{{$signs6}}</td>
+											<td class="data"><strong>{{$signst2}}</strong></td>
 										</tr>
 										<tr>
 											<td>&nbsp;&nbsp;&nbsp;&nbsp;2. No. of cable head ends carrying hope channel.</td>
-											<td class="data">{{$hope7}}</td>
-											<td class="data">{{$hope8}}</td>
-											<td class="data">{{$hope9}}</td>
-											<td class="data"><strong>{{$hopet3}}</strong></td>
+											<td class="data">{{$hope4}}</td>
+											<td class="data">{{$hope5}}</td>
+											<td class="data">{{$hope6}}</td>
+											<td class="data"><strong>{{$hopet2}}</strong></td>
 										</tr>
 									<tbody>
 								</table>

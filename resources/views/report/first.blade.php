@@ -41,8 +41,9 @@
 				
 					
 				</div>
+				@include('layouts.messages')
 				<div style="text-align: right;">
-					<form class="form-horizontal" role="form" action="{{ route('communication.index') }}" method="GET">
+					{!! Form::open(['action' => ['CommunicationController@first'], 'method' => 'GET']) !!}
                        	{{ csrf_field() }}
 						<ul class="icons-list ">
 							<li><label for="year">Select year:</label></li>
@@ -58,7 +59,7 @@
 							</li>
 							<li><button type="submit">OK</button></li>
 			            </ul>
-					</form>
+					{!! Form::close() !!}
 				</div>
 			<div> 
 								
@@ -71,159 +72,79 @@
 							<h5 class="panel-title data">
 								South-Central Luzon Conference<br>
 								Communication Department<br><br>
-								<strong>November 2017 Monthly Report</strong>
+								<strong>1st Quarterly Report of {{$year}}</strong>
 							</h5>
 							
 						</div>
 
 						<div class="panel-body">
-							
-							<div class="row">
-							<div class="col-md-6 col-xs-9">
-								<div class="table-responsive">
+							<div class="table-responsive ">
+								
 								<table class="table table-framed table-hover">
 									<thead>
 										<tr>
 											<th><strong>A. Reach Up With God</strong></th>
+											<th class="data"><strong>Jan.</strong></th>
+											<th class="data"><strong>Feb.</strong></th>
+											<th class="data"><strong>Mar.</strong></th>
+											<th class="data"><strong>Total</strong></th>
 									</thead>
 									<tbody>
 										<tr>
-											<td>&nbsp;&nbsp;&nbsp;&nbsp;1. No. of members following the yearly bible reading plan. {{$bible4}} {{$bible5}} {{$from4}}</td>
-											
+											<td>&nbsp;&nbsp;&nbsp;&nbsp;1. No. of members following the yearly bible reading plan.</td>
+											<td class="data">{{$bible1}}</td>
+											<td class="data">{{$bible2}}</td>
+											<td class="data">{{$bible3}}</td>
+											<td class="data"><strong>{{$biblet1}}</strong></td>
 										</tr>
 										<tr>
 											<td>&nbsp;&nbsp;&nbsp;&nbsp;2. No. of members following the 777 Program.</td>
-											
+											<td class="data">{{$seven1}}</td>
+											<td class="data">{{$seven2}}</td>
+											<td class="data">{{$seven3}}</td>
+											<td class="data"><strong>{{$sevent1}}</strong></td>
 										</tr>
 										<tr>
 											<td>&nbsp;&nbsp;&nbsp;&nbsp;3. No of church following the hour of worship format</td>
-											
+											<td class="data">{{$worship1}}</td>
+											<td class="data">{{$worship2}}</td>
+											<td class="data">{{$worship3}}</td>
+											<td class="data"><strong>{{$worshipt1}}</strong></td>
 										</tr>
 										<tr>
 											<td>&nbsp;&nbsp;&nbsp;&nbsp;4. No. of members following the revive by his prophet initiative</td>
-											
+											<td class="data">{{$prophet1}}</td>
+											<td class="data">{{$prophet2}}</td>
+											<td class="data">{{$prophet3}}</td>
+											<td class="data"><strong>{{$prophett1}}</strong></td>
 										</tr>
 									</tbody>
 									<thead>
 										<tr>
 											<th><strong>B. Reach Out With God</strong></th>
-											
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
 											<td>&nbsp;&nbsp;&nbsp;&nbsp;1. No. of church with directional signs.</td>
-											
+											<td class="data">{{$signs1}}</td>
+											<td class="data">{{$signs2}}</td>
+											<td class="data">{{$signs3}}</td>
+											<td class="data"><strong>{{$signst1}}</strong></td>
 										</tr>
 										<tr>
 											<td>&nbsp;&nbsp;&nbsp;&nbsp;2. No. of cable head ends carrying hope channel.</td>
-											
+											<td class="data">{{$hope1}}</td>
+											<td class="data">{{$hope2}}</td>
+											<td class="data">{{$hope3}}</td>
+											<td class="data"><strong>{{$hopet1}}</strong></td>
 										</tr>
 									<tbody>
 								</table>
-								</div>
-							</div>
-							<div class="col-md-6 col-xs-3" style="margin-left: -22px">
-								<div class="table-responsive">
-								<table class="table table-framed table-hover">
-									<thead>
-										<tr>
-											
-                                            <script>
-										        var i = 1
-										        for (var i; i <= 31; i++) {
-											    document.write('<th class="data">'+i+'</th>');
-										    }
-									        </script>
-                                            <td class="data"><strong>0</strong></td>
-											<td class="data"><strong>0&#37;</strong></td>
-									</thead>
-									<tbody>
-										<tr>
-											
-											<script>
-										        var i = 1
-										        for (var i; i <= 31; i++) {
-											    document.write('<th class="data">0</th>');
-										    }
-									        </script>
-											<td class="data"><strong>0</strong></td>
-											<td class="data"><strong>0&#37;</strong></td>
-										</tr>
-										<tr>
-											
-											<script>
-										        var i = 1
-										        for (var i; i <= 31; i++) {
-											    document.write('<th class="data">0</th>');
-										    }
-									        </script>
-											<td class="data"><strong>0</strong></td>
-											<td class="data"><strong>0&#37;</strong></td>
-										</tr>
-										<tr>
-											
-											<script>
-										        var i = 1
-										        for (var i; i <= 31; i++) {
-											    document.write('<th class="data">0</th>');
-										    }
-									        </script>
-											<td class="data"><strong>0</strong></td>
-											<td class="data"><strong>0&#37;</strong></td>
-										</tr>
-										<tr>
-											
-											<script>
-										        var i = 1
-										        for (var i; i <= 31; i++) {
-											    document.write('<th class="data">0</th>');
-										    }
-									        </script>
-											<td class="data"><strong>0</strong></td>
-											<td class="data"><strong>0&#37;</strong></td>
-										</tr>
-									</tbody>
-									<thead>
-										<tr>
-											
-											<script>
-										        var i = 1
-										        for (var i; i <= 31; i++) {
-											    document.write('<th class="data"></th>');
-										    }
-									        </script>
-											<th><br></th>
-											<th><br></th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											
-											<script>
-										        var i = 1
-										        for (var i; i <= 31; i++) {
-											    document.write('<th class="data">0</th>');
-										    }
-									        </script>
-											<td class="data"><strong>0</strong></td>
-											<td class="data"><strong>0&#37;</strong></td>
-										</tr>
-										<tr>
-											
-											<script>
-										        var i = 1
-										        for (var i; i <= 31; i++) {
-											    document.write('<th class="data">0</th>');
-										    }
-									        </script>
-											<td class="data"><strong>0</strong></td>
-											<td class="data"><strong>0&#37;</strong></td>
-										</tr>
-									<tbody>
-								</table>
-								</div>
-							</div>
 							</div>
 						</div>
 					</div>

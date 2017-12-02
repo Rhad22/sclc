@@ -13,7 +13,7 @@ class ProfileController extends Controller
     {
         $user = User::where('email' ,$email)->first();
         $id = User::where('email', $email)->value('id');
-        $profile = profile::where('user_id', $id)->first();
+        $profile = Profile::where('user_id', $id)->first();
         return view('profiles.myprofile',['user'=>$user,'profile'=>$profile]);
     }
 

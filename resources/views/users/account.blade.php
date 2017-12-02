@@ -34,8 +34,8 @@
 									<img src="{{Storage::url($user->profile_pic)}}" alt="">
 									<div class="caption-overflow">
 										<span>
-											<a href="assets/images/demo/images/3.png" class="btn bg-success-400 btn-icon btn-xs legitRipple" data-popup="lightbox"><i class="icon-plus2"></i></a>
-											<a href="/show/{{$user->id}}" class="btn bg-success-400 btn-icon btn-xs legitRipple"><i class="icon-link"></i></a>
+											<a href="#" class="btn bg-success-400 btn-icon btn-xs legitRipple" data-popup="lightbox"><i class="icon-plus2"></i></a>
+											<a href="#" class="btn bg-success-400 btn-icon btn-xs legitRipple"><i class="icon-link"></i></a>
 										</span>
 									</div>
 								</div>
