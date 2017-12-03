@@ -3,19 +3,81 @@
 @section('content')
 <div class="content-wrapper">
 	<div class="content">
-	<h3><span class="text-semibold">Communication Department</span></h3>
+	<h3><span class="text-semibold">{{$content[$id][0]}}</span></h3>
+		@include('layouts.messages')
 		<div>
 			<div class="page-header-content"></div>
 				<div class="breadcrumb-line breadcrumb-line-component">
 					<ul class="breadcrumb">
 						<li><a href="/home"><i class="icon-home2 position-left"></i> Home</a></li>
-						<li><a href="/communication">Communication Department</a></li>
+						<li><a href="/report/dept={{$id}}">{{$content[$id][0]}}</a></li>
 						<li class="active">Create report</li>
+					</ul>
+					<ul class="breadcrumb-elements">
+							<li>
+					            <a href="/report/dept={{$id}}/create"><i class="icon-pencil7 position-left"></i>Create report <b class="caret"></b></a>
+					        </li>
+					        <li class="dropdown">
+					            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="icon-calendar3 position-left"></i>Type of report <b class="caret"></b></a>
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li><a href="#">Monthly</a></li>
+									<li class="dropdown-submenu dropdown-submenu-left">
+										<a href="#">Quarterly</a>
+										<ul class="dropdown-menu">
+											<li><a href="/report/dept={{$id}}/1st">1st quarter</a></li>
+											<li><a href="/report/dept={{$id}}/2nd">2nd quarter</a></li>
+											<li><a href="/report/dept={{$id}}/3rd">3rd quarter</a></li>
+											<li><a href="/report/dept={{$id}}/4th">4rd quarter</a></li>
+										</ul>
+									</li>
+									<li><a href="/report/dept={{$id}}">Yearly</a></li>
+								</ul>
+					        </li>
+							<li>
+								
+							</li>
+					                	
 					</ul>
 				</div>
 			</div>
 
 		<div class="panel panel-flat">
+			<div class="panel-heading">
+							<h5 class="panel-title data">
+								South-Central Luzon Conference<br>
+								{{$content[$id][0]}}
+								<br><br>
+								<strong>Monitoring Report form</strong>
+							</h5>
+							
+						</div>
+			<div class="panel-heading">
+				<div class="table-responsive">
+							{!! Form::open(['action' => 'ReportController@store', 'method' => 'POST']) !!}
+							<table class="table table-framed table-hover" style="margin-left: 0px">
+								<tbody>
+										@for ($x = 1; $x < $length; $x++)
+										<tr>
+											<td>
+												{{$content[$id][$x]}}
+											</td>
+											<td>{{Form::number('row'.$x, '', ['class' => 'form-control', 'required' => '', 'min' => '0', 'placeholder' => 'Input number'])}}</td>
+										</tr>
+										@endfor
+										<input type="hidden" name="dept" value="{{$id}}">
+										<input type="hidden" name="dept_name" value="{{$content[$id][0]}}">
+							</tbody>
+							</table>
+							
+							
+				</div>
+			</div>
+		</div>
+	<div class="text-right">
+							    <button type="submit" class="btn btn-primary legitRipple"><i class="icon-paperplane position-left"></i>Send report</button>
+							</div>
+							{!! Form::close() !!}
+		<!-- <div class="panel panel-flat">
 						<div class="panel-heading">
 							<h5 class="panel-title">Monitoring report<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
 							
@@ -23,7 +85,7 @@
 
 						<div class="panel-body">
 							<div class="table-responsive">
-                            {!! Form::open(['action' => 'CommunicationController@store', 'method' => 'POST']) !!}
+                            {!! Form::open(['action' => 'ReportController@store', 'method' => 'POST']) !!}
 								<table class="table table-framed">
 									<thead>
 										<tr>
@@ -82,7 +144,7 @@
 							</div>
                             {!! Form::close() !!}
 						</div>
-					</div>
+					</div> -->
 		@include('layouts.footer')
 	</div>
 </div>

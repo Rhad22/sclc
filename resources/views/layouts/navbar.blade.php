@@ -218,13 +218,13 @@
                                     <li>
                                         <a href="/reports"><i class="icon-stack2"></i> <span>Department and Ministries</span></a>
                                         <ul>
-                                            <li><a href="/report/1/2017">Communication Department</a></li>
-                                            <li><a href="/report/2/2017">Children's Ministries</a></li>
-                                            <li><a href="/report/3/2017">Women's Ministries</a></li>
-                                            <li><a href="/report/4/2017">Ministerial</a></li>
-                                            <li><a href="/report/5/2017">Stewardship Ministries</a></li>
-                                            <li><a href="/report/6/2017">Health Ministries</a></li>
-                                            <li><a href="/report/7/2017">Personal Ministries</a></li>
+                                            <li><a href="/report/dept=1">Communication Department</a></li>
+                                            <li><a href="/report/dept=2">Children's Ministries</a></li>
+                                            <li><a href="/report/dept=3">Women's Ministries</a></li>
+                                            <li><a href="/report/dept=4">Ministerial</a></li>
+                                            <li><a href="/report/dept=5">Stewardship Ministries</a></li>
+                                            <li><a href="/report/dept=6">Health Ministries</a></li>
+                                            <li><a href="/report/dept=7">Personal Ministries</a></li>
                                         </ul>
                                     </li>
                                     <li>

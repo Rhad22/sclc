@@ -3,33 +3,34 @@
 @section('content')
 <div class="content-wrapper">
 	<div class="content">
-	<h3><span class="text-semibold">Communication Department</span></h3>
+	<h3><span class="text-semibold">{{$content[$id][0]}}</span></h3>
 		<div>
 			<div class="page-header-content"></div>
 				
 				<div class="breadcrumb-line breadcrumb-line-component">
 					<ul class="breadcrumb">
 						<li><a href="/home"><i class="icon-home2 position-left"></i> Home</a></li>
-						<li><a href="/communication">Communication Department</a></li>
-						<li class="active">List</li>
+						<li><a href="/report/dept={{$id}}">{{$content[$id][0]}}</a></li>
+						<li class="active">Yearly Report</li>
 					</ul>
 					{{--  @if (Auth::user()->user_postion == 'District Pastor')  --}}
 					<ul class="breadcrumb-elements">
-							<li><a href="/communication/create"><i class="icon-pencil7 position-left"></i> Create report</a></li>
+							<li><a href="/report/dept={{$id}}/create"><i class="icon-pencil7 position-left"></i>Create report</a>
+					        </li>
 					        <li class="dropdown">
 					            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="icon-calendar3 position-left"></i>Type of report <b class="caret"></b></a>
 								<ul class="dropdown-menu dropdown-menu-right">
-									<li><a href="/communication.monthly">Monthly</a></li>
+									<li><a href="#">Monthly</a></li>
 									<li class="dropdown-submenu dropdown-submenu-left">
 										<a href="#">Quarterly</a>
 										<ul class="dropdown-menu">
-											<li><a href="/communication.1st">1st quarter</a></li>
-											<li><a href="/communication.2nd">2nd quarter</a></li>
-											<li><a href="/communication.3rd">3rd quarter</a></li>
-											<li><a href="/communication.4th">4rd quarter</a></li>
+											<li><a href="/report/dept={{$id}}/1st">1st quarter</a></li>
+											<li><a href="/report/dept={{$id}}/2nd">2nd quarter</a></li>
+											<li><a href="/report/dept={{$id}}/3rd">3rd quarter</a></li>
+											<li><a href="/report/dept={{$id}}/4th">4rd quarter</a></li>
 										</ul>
 									</li>
-									<li><a href="/communication">Yearly</a></li>
+									<li><a href="/report/dept={{$id}}">Yearly</a></li>
 								</ul>
 					        </li>
 							<li>
@@ -43,7 +44,7 @@
 				</div>
 				@include('layouts.messages')
 				<div style="text-align: right;">
-					{!! Form::open(['action' => ['CommunicationController@index'], 'method' => 'GET']) !!}
+					{!! Form::open(['action' => ['ReportController@yearly', $id], 'method' => 'GET']) !!}
                        	{{ csrf_field() }}
 						<ul class="icons-list ">
 							<li><label>Select year:</label></li>
@@ -79,7 +80,7 @@
 						</div>
 
 						<div class="panel-body">
-							<div class="table-responsive ">
+							<div class="table-responsive">
 								<table class="table table-framed table-hover" style="margin-left: 0px">
 									<thead>
 										<tr>
