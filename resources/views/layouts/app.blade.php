@@ -30,8 +30,16 @@
 	<!-- Theme JS files -->
 	<script type="text/javascript" src="{{asset('js/plugins/forms/styling/uniform.min.js')}}"></script>
 
+	
+
+
 	<script type="text/javascript" src="{{asset('js/core/app.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/pages/login.js')}}"></script>
+
+	<script type="text/javascript" src="{{asset('js/pages/datatables_extension_fixed_columns.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/plugins/tables/datatables/datatables.min.js')}}"></script>
+	<script type="text/javascript" src="{{asset('js/plugins/tables/datatables/extensions/fixed_columns.min.js')}}"></script>
+	<script type="text/javascript" src="{{asset('js/plugins/forms/selects/select2.min.js')}}"></script>
 
 	<script type="text/javascript" src="{{asset('js/plugins/ui/ripple.min.js')}}"></script>
 
@@ -51,6 +59,8 @@
 	<script type="text/javascript" src="{{asset('js/pages/dashboard.js')}}"></script>
 
     <script src="{{asset('js/graph/highcharts.js')}}"></script>
+
+
 	<!-- /theme JS files -->
 
 </head>

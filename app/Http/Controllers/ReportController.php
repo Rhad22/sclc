@@ -50,12 +50,33 @@ class ReportController extends Controller
                 array(
                     "Communication Department",
                     "No. of members following the yearly bible reading plan.",
-                    "No. of members following the revive by his prophet initiative",
                     "No. of members following the 777 Program.",
+                    "No of church following the hour of worship format",
+                    "No. of members following the revive by his prophet initiative",
                     "No. of church with directional signs.",
-                    "No. of cable head ends carrying hope channel.",
-                    "No of church following the hour of worship format"),
-                array("Children's Ministries",15,13),
+                    "No. of cable head ends carrying hope channel."),
+                array(
+                    "Children's Ministries",
+                    "Distributed 2,000 copies of Bible Reading Plan for kids",
+                    "Encouraged CHM leaders in 200 local churches to follow the Bible Reading Plan",
+                    "Sold 100 copies of Children's Bible",
+                    "Encouraged 5 directors to read the 'Great Controversy' book",
+                    "Reproduced Bible Study Guide",
+                    "Reproduced Teachers Resource",
+                    "Monitored 7 directors having bible study guide and morning devotional book for their family worship",
+                    "Encouraged 7 directors to read and study the 28 Fundamental Beliefs",
+                    "Sold/Distributed 100 28 FB for Children in missions and conferences",
+                    "Conducted/Assisted 2 Seminanr",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+
+                ),
                 array("Women's Ministries",17,15),
                 array("Ministerial",5,2),
                 array("Stewardship Ministries",17,15),
@@ -93,12 +114,21 @@ class ReportController extends Controller
                 array(
                     "Communication Department",
                     "No. of members following the yearly bible reading plan.",
-                    "No. of members following the revive by his prophet initiative",
                     "No. of members following the 777 Program.",
+                    "No of church following the hour of worship format",
+                    "No. of members following the revive by his prophet initiative",
                     "No. of church with directional signs.",
-                    "No. of cable head ends carrying hope channel.",
-                    "No of church following the hour of worship format"),
-                array("Children's Ministries",15,13),
+                    "No. of cable head ends carrying hope channel."),
+                array(
+                    "Children's Ministries",
+                    "Distributed 2,000 copies of Bible Reading Plan for kids",
+                    "Encouraged CHM leaders in 200 local churches to follow the Bible Reading Plan",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""),
                 array("Women's Ministries",17,15),
                 array("Ministerial",5,2),
                 array("Stewardship Ministries",17,15),
@@ -136,12 +166,21 @@ class ReportController extends Controller
                 array(
                     "Communication Department",
                     "No. of members following the yearly bible reading plan.",
-                    "No. of members following the revive by his prophet initiative",
                     "No. of members following the 777 Program.",
+                    "No of church following the hour of worship format",
+                    "No. of members following the revive by his prophet initiative",
                     "No. of church with directional signs.",
-                    "No. of cable head ends carrying hope channel.",
-                    "No of church following the hour of worship format"),
-                array("Children's Ministries",15,13),
+                    "No. of cable head ends carrying hope channel."),
+                array(
+                    "Children's Ministries",
+                    "Distributed 2,000 copies of Bible Reading Plan for kids",
+                    "Encouraged CHM leaders in 200 local churches to follow the Bible Reading Plan",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""),
                 array("Women's Ministries",17,15),
                 array("Ministerial",5,2),
                 array("Stewardship Ministries",17,15),
@@ -179,12 +218,21 @@ class ReportController extends Controller
                 array(
                     "Communication Department",
                     "No. of members following the yearly bible reading plan.",
-                    "No. of members following the revive by his prophet initiative",
                     "No. of members following the 777 Program.",
+                    "No of church following the hour of worship format",
+                    "No. of members following the revive by his prophet initiative",
                     "No. of church with directional signs.",
-                    "No. of cable head ends carrying hope channel.",
-                    "No of church following the hour of worship format"),
-                array("Children's Ministries",15,13),
+                    "No. of cable head ends carrying hope channel."),
+               array(
+                    "Children's Ministries",
+                    "Distributed 2,000 copies of Bible Reading Plan for kids",
+                    "Encouraged CHM leaders in 200 local churches to follow the Bible Reading Plan",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""),
                 array("Women's Ministries",17,15),
                 array("Ministerial",5,2),
                 array("Stewardship Ministries",17,15),
@@ -197,12 +245,13 @@ class ReportController extends Controller
 
     }
 
+
     public function fourth(Request $request, $id) {
 
         $year = $request->input('year');
         ($year == "") ? $year = date('Y'): "";
 
-       $from1 = date($year. '-10-01');
+        $from1 = date($year. '-10-01');
         $to1 = date($year. '-10-31');
         $from2 = date($year. '-11-01');
         $to2 = date($year. '-11-30');
@@ -222,12 +271,21 @@ class ReportController extends Controller
                 array(
                     "Communication Department",
                     "No. of members following the yearly bible reading plan.",
-                    "No. of members following the revive by his prophet initiative",
                     "No. of members following the 777 Program.",
+                    "No of church following the hour of worship format",
+                    "No. of members following the revive by his prophet initiative",
                     "No. of church with directional signs.",
-                    "No. of cable head ends carrying hope channel.",
-                    "No of church following the hour of worship format"),
-                array("Children's Ministries",15,13),
+                    "No. of cable head ends carrying hope channel."),
+                array(
+                    "Children's Ministries",
+                    "Distributed 2,000 copies of Bible Reading Plan for kids",
+                    "Encouraged CHM leaders in 200 local churches to follow the Bible Reading Plan",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""),
                 array("Women's Ministries",17,15),
                 array("Ministerial",5,2),
                 array("Stewardship Ministries",17,15),
@@ -239,6 +297,75 @@ class ReportController extends Controller
         return view('/report.fourth', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length'));
 
     }
+
+    public function monthly(Request $request, $id) {
+         $year = $request->input('year');
+        ($year == "") ? $year = date('Y'): "";
+        $month = $request->input('month');
+        ($month == "") ? $month = date('m'): "";
+
+        $days = cal_days_in_month(CAL_GREGORIAN,$month,$year);
+        $hmonth  = date("F", strtotime("2011-".$month. "-01"));
+        $dept = array(
+                    "",
+                    "Communication Department",
+                    "Children's Ministries",
+                    "Women's Ministries",
+                    "Ministerial",
+                    "Stewardship Ministries",
+                    "Health Ministries",
+                    "Personal Ministries");
+        $content = array
+            (
+                array(15,13),
+                array(
+                    "No. of members following the yearly bible reading plan.",
+                    "No. of members following the 777 Program.",
+                    "No of church following the hour of worship format",
+                    "No. of members following the revive by his prophet initiative",
+                    "No. of church with directional signs.",
+                    "No. of cable head ends carrying hope channel."), 
+                array(
+                    "Distributed 2,000 copies of Bible Reading Plan for kids",
+                    "Encouraged CHM leaders in 200 local churches to follow the Bible Reading Plan",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""),
+                array(17,15),
+                array(5,2),
+                array(17,15),
+                array(17,15),
+                array(17,15),
+
+            );
+        $length = count($content[$id]);
+        $data = array ();
+        for ($i=1; $i <= $length; $i++) { 
+            $new =  array ();
+            for ($x=1; $x <= $days; $x++) { 
+                array_push($new, $day = Report::where('dept_id', $id)
+                    ->whereYear('created_at', $year)
+                    ->whereMonth('created_at', $month)
+                    ->whereDay('created_at', $x)
+                    ->sum('row'.$i));
+            }
+            array_push($data,$new);
+        }
+
+        $total = array ();
+        for ($x=1; $x <= $length; $x++) { 
+                array_push($total, $day = Report::where('dept_id', $id)
+                    ->whereYear('created_at', $year)
+                    ->whereMonth('created_at', $month)
+                    ->sum('row'.$x));
+            }
+        
+        return view('/report.monthly', compact('data', 'year', 'id', 'content', 'length', 'days', 'dept', 'hmonth', 'total'));
+    }
+
     
     public function report($id) {
         $content = array
@@ -247,11 +374,11 @@ class ReportController extends Controller
                 array(
                     "Communication Department",
                     "No. of members following the yearly bible reading plan.",
-                    "No. of members following the revive by his prophet initiative",
                     "No. of members following the 777 Program.",
+                    "No of church following the hour of worship format",
+                    "No. of members following the revive by his prophet initiative",
                     "No. of church with directional signs.",
-                    "No. of cable head ends carrying hope channel.",
-                    "No of church following the hour of worship format"),
+                    "No. of cable head ends carrying hope channel."),
                 array("Children's Ministries",15,13),
                 array("Women's Ministries",17,15),
                 array("Ministerial",5,2),

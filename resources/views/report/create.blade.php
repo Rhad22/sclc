@@ -20,7 +20,7 @@
 					        <li class="dropdown">
 					            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="icon-calendar3 position-left"></i>Type of report <b class="caret"></b></a>
 								<ul class="dropdown-menu dropdown-menu-right">
-									<li><a href="#">Monthly</a></li>
+									<li><a href="/report/dept={{$id}}/monthly">Monthly</a></li>
 									<li class="dropdown-submenu dropdown-submenu-left">
 										<a href="#">Quarterly</a>
 										<ul class="dropdown-menu">

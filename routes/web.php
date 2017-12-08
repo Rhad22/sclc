@@ -20,13 +20,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/users', 'HomeController@users');
 Route::get('/messenger.chatbox', 'HomeController@chatbox');
 Route::resource('/announcements', 'AnnouncementController');
+
 Route::resource('/communication', 'CommunicationController');
 
 Route::get('report/dept={id}/4th', 'ReportController@fourth');
 Route::get('report/dept={id}/3rd', 'ReportController@third');
 Route::get('report/dept={id}/2nd', 'ReportController@second');
 Route::get('report/dept={id}/1st', 'ReportController@first');
-Route::get('/communication.monthly', 'CommunicationController@monthly');
+Route::get('report/dept={id}/monthly', 'ReportController@monthly');
 
 Route::get('report/dept={id}', 'ReportController@yearly')->name('report');
 Route::post('report/create', 'ReportController@store')->name('report');
