@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Announcement;
 use App\Department;
 use App\Profile;
+use App\User;
 
 class AnnouncementController extends Controller
 { 
     public function index()
     {
-        $announcements = Announcement::orderBy('created_at','desc')->paginate(5);
+        $announcements = User::join('announcements','announcements.user_id','=','users.id')->get();
+            
         return view('announcement.index', compact('announcements'));
     }
 
@@ -39,7 +41,9 @@ class AnnouncementController extends Controller
     public function show($id)
     {
         $announcements = Announcement::find($id);
-        return view('announcement.show', compact('announcements'));
+        $user = Announcement::find($id)->user;
+
+        return view('announcement.show', compact('announcements', 'user'));
     }
 
     public function edit($id)

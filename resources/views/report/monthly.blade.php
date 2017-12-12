@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('pagescript')
+    <script type="text/javascript" src="{{asset('js/pages/datatables_extension_fixed_columns.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/plugins/tables/datatables/datatables.min.js')}}"></script>
+	<script type="text/javascript" src="{{asset('js/plugins/tables/datatables/extensions/fixed_columns.min.js')}}"></script>
+	<script type="text/javascript" src="{{asset('js/plugins/forms/selects/select2.min.js')}}"></script>
+@stop
+
 @section('content')
 <div class="content-wrapper">
 	<div class="content">
@@ -86,7 +93,28 @@
 						<strong>Monthly Report of {{$hmonth}} {{$year}}</strong>
 					</h5>	
 				</div>
+				@if (Auth::user()->position == 'District Pastor')
+					<table class="table datatable-fixed-left" width="100%">
+						<thead>
+							<th></th>
+							@foreach ($sdata as $data)
+							<th>{{$data['created_at']}} <a href="/report/dept={{$id}}/edit/{{$data->id}}"><div class="letter-icon-title text-default"><i data-popup="tooltip" title="" data-placement="top" id="top" data-original-title="click to edit report">edit</i></div></a></th>
+							@endforeach
+						</thead>
+						<tbody>
+							@for ($x = 1; $x < $length; $x++)
+							<tr>
+								<td>{{$content[$id][$x]}}</td>
+								@foreach ($sdata as $data)
+								<td>{{$data['row'. + $x]}}</td>
+								@endforeach
 
+							</tr>
+							@endfor
+						</tbody>
+					</table>
+
+				@else
 				<table class="table datatable-fixed-left" width="100%">
 							<thead>
 								<th ></th>
@@ -96,7 +124,7 @@
 								<th>Total</th>
 							</thead>
 							<tbody>
-								@for ($x = 0; $x < $length; $x++)
+								@for ($x = 1; $x < $length; $x++)
 								<tr>
 									<td >{{$content[$id][$x]}}</td>
 									@for ($i=0; $i < $days ; $i++)
@@ -107,6 +135,7 @@
 								@endfor
 							</tbody>
 						</table>
+				@endif
 
 
 										<!-- <a href="/communication/edit"><div class="letter-icon-title text-default"><i data-popup="tooltip" title="" data-placement="top" id="top" data-original-title="click to edit report">awe</i></div></a> -->

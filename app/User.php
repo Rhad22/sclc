@@ -44,5 +44,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Content');
     }
+    public function announcement() 
+    {
+        return $this->haveOne('App\Announcement');
+    }
 
 }

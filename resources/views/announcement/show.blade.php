@@ -13,23 +13,21 @@
 						<li><a href="/announcements">Announcements</a></li>
 						<li class="active">List</li>
 					</ul>
-					{{--  @if (Auth::user()->user_postion !== 'District Pastor')  --}}
+					@if (Auth::user()->position !== 'District Pastor')
 					<ul class="breadcrumb-elements">
 						<li><a href="/announcements/create"><i class="icon-pencil7 position-left"></i> Create Post</a></li>
 					</ul>
-					{{--  @endif  --}}
+					@endif
 				</div>
 			</div>
     	<div class="panel panel-white">
 			<div class="media stack-media-on-mobile mail-details-read">
 				<a href="#" class="media-left">
-					<span class="btn bg-teal-400 btn-rounded btn-icon btn-xlg legitRipple">
-						<span class="letter-icon">D</span>
-					</span>
+					<img src="{{Storage::url($user->profile_pic)}}" class="img-circle img-lg" alt="">
 				</a>
 				<div class="media-body">
-					<h6 class="media-heading">Web administrator</h6>
-					<div class="letter-icon-title text-semibold">Darwin Rosales <a href="#">&lt;darwin22292@gmail.com&gt;</a></div>
+					<h6 class="media-heading">{{$user->position}}</h6>
+					<div class="letter-icon-title text-semibold">{{$user->firstname}} {{ $user->lastname }}<a href="#"> &lt;{{$user->email}}&gt;</a></div>
 				</div>
 			</div>
             <div class="media stack-media-on-mobile mail-details-read">
@@ -53,12 +51,12 @@
 						<div class="btn-group navbar-btn">
 							<a href="mail_write.html" class="btn btn-default legitRipple"><i class="icon-thumbs-up2"></i> <span class="hidden-xs position-right">Like</span></a>
 							<a href="mail_write.html" class="btn btn-default legitRipple"><i class="icon-bubbles4"></i> <span class="hidden-xs position-right">Comment</span></a>
-							{{--  @if (Auth::user()->id == $announcements->user_id)  --}}
+							@if (Auth::user()->id == $announcements->user_id)
 							<a href="/announcements/{{$announcements->id}}/edit" class="btn btn-default legitRipple"><i class="icon-pencil"></i> <span class="hidden-xs position-right">Edit</span></a>
     							{{ csrf_field() }}
     							{{ method_field('DELETE') }}
     							<button class="btn btn-default legitRipple"><i class="icon-bin"></i> <span class="hidden-xs position-right">Delete</span></button>
-							{{--  @endif   --}}
+							@endif
 						</div>
 						<div class="pull-right-lg">					
 							<div class="btn-group navbar-btn">
@@ -75,5 +73,6 @@
 			@include('layouts.footer')
 		</div>
 	</div>
-</div>			
+</div>
+
 @endsection 
