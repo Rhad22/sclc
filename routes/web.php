@@ -17,6 +17,9 @@ Route::get('/users', 'HomeController@users');
 Route::get('/messenger.chatbox', 'HomeController@chatbox');
 Route::resource('/announcements', 'AnnouncementController');
 
+Route::get('/api', 'AnnouncementController@api');
+
+
 Route::get('report/dept={id}/4th', 'ReportController@fourth');
 Route::get('report/dept={id}/3rd', 'ReportController@third');
 Route::get('report/dept={id}/2nd', 'ReportController@second');

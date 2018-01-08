@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Content;
 use App\Report;
 use App\Profile;
+use App\Notify;
+use App\User;
 use App\Traits\reports;
 
 class ReportController extends Controller
@@ -126,7 +128,7 @@ class ReportController extends Controller
     }
 
     public function monthly(Request $request, $id) {
-         $year = $request->input('year');
+        $year = $request->input('year');
         ($year == "") ? $year = date('Y'): "";
         $month = $request->input('month');
         ($month == "") ? $month = date('m'): "";
@@ -136,7 +138,7 @@ class ReportController extends Controller
         $dept = $this->dept();
         $content = $this->title();
         $length = count($content[$id]);
-        $data = array ();
+        $data = array (0,);
         if (auth()->user()->position == 'District Pastor' ) {
             $sdata = Report::where('dept_id', $id)
                     ->where('user_id', $user_id)
@@ -157,7 +159,7 @@ class ReportController extends Controller
             array_push($data,$new);
             }
         }
-        $total = array ();
+        $total = array (0,);
         for ($x=1; $x <= $length; $x++) { 
                 array_push($total, $day = Report::where('dept_id', $id)
                     ->whereYear('created_at', $year)
@@ -171,10 +173,18 @@ class ReportController extends Controller
     public function report($id) {
         $content =$this->data();
         $length = count($content[$id]);
-        return view('report.create', compact('content', 'length', 'id'));
+        $user = User::select('id')
+                    ->whereIn('position', ['Director', 'Admin'])
+                    ->get();
+        
+        return view('report.create', compact('content', 'length', 'id', 'user'));
     }
 
     public function store(Request $request) {
+
+
+
+
         $post = new Report;
         $post->user_id = auth()->user()->id;
         $post->dept_id =  $request->input('dept');
@@ -225,6 +235,15 @@ class ReportController extends Controller
         $post->row44 = $request->input('row44');
         $post->row45 = $request->input('row45');
         $post->save();
+
+        $dept = $request->input('dept_name');
+        
+        $nofity = new Notify;
+        $nofity->sender = auth()->user()->id;
+        $nofity->receiver = $request->input('reciever');
+        $nofity->content = 'has sent a report in '.$dept;
+        $nofity->read = '0';
+        $nofity->save();
         return redirect()->back()->with('success', ' Report send successfully');
     }
 

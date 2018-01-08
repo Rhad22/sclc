@@ -10,6 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    {!! Charts::styles() !!}
 
     <!-- Global stylesheets -->
 	<link type="text/css" href="{{asset('css/app.css')}}" rel="stylesheet">
@@ -50,7 +51,7 @@
 	<script type="text/javascript" src="{{asset('js/plugins/pickers/daterangepicker.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/pages/dashboard.js')}}"></script>
 
-    <script src="{{asset('js/graph/highcharts.js')}}"></script>
+
 
 
 	<!-- /theme JS files -->

@@ -73,4 +73,11 @@ class AnnouncementController extends Controller
         $announcements->delete();
         return redirect('/announcements')->with('success', 'Post Removed');
     }
+
+    public function api()
+    {
+        $announcements = User::join('announcements','announcements.user_id','=','users.id')->get();
+            
+        return $announcements;
+    }
 }

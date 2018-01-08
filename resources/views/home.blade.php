@@ -4,13 +4,18 @@
 <div class="content-wrapper">
 	<div class="content">
 		<h3>Dashboard</h3>
-		<div class="row">
-			<div class="col-lg-12 data">
-				<div class="panel panel-flat">
-					<div id="container"></div>
-				</div>		
-			</div>
+		<div class="panel panel-flat">
+			<div class="panel panel-body">
+				<div class="app">
+            	<center>{!! $chart->html() !!}</center>
+        	</div>
+        <!-- End Of Main Application -->
+        {!! Charts::scripts() !!}
+        {!! $chart->script() !!}			
+			</div>	
 		</div>
+		
+
 		<div class="row">
 			<div class="col-lg-8 data">
 					<div class="panel panel-flat">
@@ -92,5 +97,8 @@
 		</div>
 		@include('layouts.footer')
 	</div>
+	
 </div>
+
+
 @endsection

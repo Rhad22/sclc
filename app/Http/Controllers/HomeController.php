@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Announcement;
 use App\Profile;
 use App\User;
+use App\Report;
+use Charts;
 use Auth;
 
 class HomeController extends Controller
@@ -28,7 +30,15 @@ class HomeController extends Controller
     public function index()
     {
         $announcements = Announcement::orderBy('created_at','desc')->paginate(5);
-        return view('home', compact('announcements'));
+
+        $chart = Charts::database(Report::all(), 'bar', 'highcharts')
+            ->elementLabel("Total")
+            ->dimensions(1000, 500)
+            ->responsive(false)
+            ->lastByMonth(12, true);
+        
+
+        return view('home', compact('chart','announcements'));
     }
 
     public function users()
@@ -48,4 +58,13 @@ class HomeController extends Controller
         return view('messenger.chatbox');
     }
 
+    public function awea() 
+    {
+
+        $viewer = View::select(DB::raw("SUM(numberofview) as count"))
+        ->orderBy("created_at")
+        ->groupBy(DB::raw("year(created_at)"))
+        ->get()->toArray();
+    $viewer = array_column($viewer, 'count');
+    }
 }

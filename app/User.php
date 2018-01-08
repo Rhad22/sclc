@@ -48,5 +48,9 @@ class User extends Authenticatable
     {
         return $this->haveOne('App\Announcement');
     }
+    public function notify() 
+    {
+        return $this->haveMany('App\Notify');
+    }
 
 }

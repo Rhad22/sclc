@@ -66,6 +66,8 @@
 										@endfor
 										<input type="hidden" name="dept" value="{{$id}}">
 										<input type="hidden" name="dept_name" value="{{$content[$id][0]}}">
+										<input type="hidden" name="receiver[]" value="{{$user}}">
+										
 							</tbody>
 							</table>
 							

@@ -216,7 +216,7 @@
                                         </span></a>
                                     </li>
                                     <li>
-                                        <a href="/reports"><i class="icon-stack2"></i> <span>Department and Ministries</span></a>
+                                        <a><i class="icon-stack2"></i> <span>Department and Ministries</span></a>
                                         <ul>
                                             <li><a href="/report/dept=1">Communication Department</a></li>
                                             <li><a href="/report/dept=2">Children's Ministries</a></li>
