@@ -19,41 +19,42 @@
                 <p class="navbar-text"><span class="label bg-success">Online</span></p>
                 
                 <ul class="nav navbar-nav">             
-                    <li class="dropdown">
+                        <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-puzzle3"></i>
+                            <i class="icon-bell2"></i>
                             <span class="visible-xs-inline-block position-right">Announcements</span>
-                            {{--  @if (count($reportnotifications) > 0) <span class="status-mark border-pink-300"></span> @endif   --}}
+                            @if (count($notifies)> 0)
+                            <span class="status-mark border-pink-300"></span>
+                            @endif
                         </a>
 
                         <div class="dropdown-menu dropdown-content">
                             <div class="dropdown-content-heading">
-                                Announcements
+                                Notifications
                                 <ul class="icons-list">
                                     <li><a href="#"><i class="icon-sync"></i></a></li>
                                 </ul>
                             </div>
                             
                             <ul class="media-list dropdown-content-body width-350">
-                                {{--  @if (count($reportnotifications) > 0)
-                                @foreach ($reportnotifications as $reportnotification)
-                                    @if ($reportnotification->to == 'all')
-                                        @if (Auth::user()->id !== $reportnotification->user_id)
-                                            <li class="media">
-                                                <div @include('layouts.reportnotification')>
-                                                    <div class="media-left">
-                                                        <a href="#" ><img src="{{asset('images/demo/users/face23.jpg')}}" class="img-circle img-lg" alt=""></a>
-                                                    </div>
-                                                    <div class="media-body" >
-                                                    <a href="#">{{$reportnotification->from}}</a> posted an announcement
-                                                    <div class="media-annotation">{{$reportnotification->created_at}}</div>
-                                                    </div>
-                                                </div> 
-                                            </li> 
-                                        @endif
-                                    @endif
+                                @foreach ($notifies as $notify)
+                                <li class="media">
+                                    <div class="media-left">
+                                        <img src="{{Storage::url($notify->profile_pic)}}" class="img-circle img-lg" alt="">
+                                    </div>
+
+                                    <div class="media-body">
+                                        <a class="table-inbox-subject letter-icon-title text-default" @if ($notify->type == 0)
+                                                href="/report/dept={{$notify->dept_id}}/{{$notify->link_id}}"
+                                            @else
+                                                href="/announcements/{{$notify->link_id}}"
+                                            @endif
+                                        >{{$notify->firstname}} {{$notify->lastname}} {{$notify->content}}
+                                        <div class="media-annotation">{{$notify->created_at->diffForHumans()}}</div></a>
+                                    </div>
+                                </li> 
                                 @endforeach
-                                @endif  --}}
+                                       
                             </ul>
 
                             <div class="dropdown-content-footer">
@@ -61,68 +62,13 @@
                             </div>
                         </div>
                         </li>
-                        {{--  @if (Auth::user()->user_postion !== 'District Pastor')
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="icon-bell2"></i>
-                                <span class="visible-xs-inline-block position-right">Notification</span>
-                                @if (count($reportnotifications) > 0)<span class="status-mark border-pink-300"></span> @endif
-                            </a>
-                            <div class="dropdown-menu dropdown-content">
-                                <div class="dropdown-content-heading">
-                                    Notification
-                                    <ul class="icons-list">
-                                        <li data-popup="tooltip" data-placement="left" id="left" data-original-title="Mark all as read"><a href="#"><i class=" icon-folder-check"></i></a></li>
-                                    </ul>
-                                </div>
-                                <ul class="media-list dropdown-content-body width-350">
-                                    @if (count($reportnotifications) > 0)
-                                        @foreach ($reportnotifications as $reportnotification)
-                                            @if (Auth::user()->user_postion !== 'District Pastor')
-                                                @if ($reportnotification->to !== 'all')
-                                                    @if (Auth::user()->department == $reportnotification->to)
-                                                            <li class="media">
-                                                                <div @include('layouts.reportnotification')>
-                                                                    <div class="media-left">
-                                                                        <a href="#" ><img src="{{asset('images/demo/users/face23.jpg')}}" class="img-circle img-lg" alt=""></a>
-                                                                    </div>
-                                                                    <div class="media-body" >
-                                                                        <a href="#">{{$reportnotification->from}}</a> sent a report 
-                                                                        <div class="media-annotation">{{$reportnotification->created_at->diffForHumans()}}</div>
-                                                                    </div>
-                                                                </div> 
-                                                            </li>
-                                                    @elseif (Auth::user()->user_postion == 'Admin')
-                                                        <li class="media">
-                                                            <div @include('layouts.reportnotification')>
-                                                                <div class="media-left">
-                                                                    <a href="#" ><img src="{{asset('images/demo/users/face23.jpg')}}" class="img-circle img-lg" alt=""></a>
-                                                                </div>
-                                                                <div class="media-body" >
-                                                                    <a href="#">{{$reportnotification->from}}</a> sent a report in {{$reportnotification->department}}
-                                                                    <div class="media-annotation">{{$reportnotification->created_at->diffForHumans()}}</div>
-                                                                </div>
-                                                            </div> 
-                                                        </li> 
-                                                        
-                                                    @endif
-                                                @endif
-                                            @endif
-                                        @endforeach
-                                    @endif   
-                                </ul>
-                                <div class="dropdown-content-footer">
-                                    <a href="#" data-popup="tooltip" title="" data-original-title="See all"><i class="icon-menu display-block"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                        @endif  --}}
+                        
                         {{--  Messages  --}}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="icon-bubble8"></i>
                                 <span class="visible-xs-inline-block position-right">Messages</span>
-                                <span class="status-mark border-pink-300"></span>
+                                
                             </a>
 
                             <div class="dropdown-menu dropdown-content width-350">
@@ -209,12 +155,16 @@
                                     <!-- Main -->
                                     <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
                                     <li><a href="/"><i class="icon-stats-dots"></i> <span>Dashboard</span></a></li>
+                                    @if (Auth::user()->position == 'Admin')
                                     <li><a href="/users"><i class="icon-users4"></i> <span>Employee</span></a></li>
+                                    @endif
                                     <li>
                                         <a href="/announcements"><i class="icon-newspaper"></i> <span>Announcements 
                                         {{--  @if ($unread > 0)<span class="label bg-green-400">{{$unread}}</span> @endif  --}}
                                         </span></a>
                                     </li>
+                                    
+                                    @if (Auth::user()->position == 'Admin')
                                     <li>
                                         <a><i class="icon-stack2"></i> <span>Department and Ministries</span></a>
                                         <ul>
@@ -227,11 +177,31 @@
                                             <li><a href="/report/dept=7">Personal Ministries</a></li>
                                         </ul>
                                     </li>
+                                    @elseif (Auth::user()->position == 'District Pastor')
+                                    <li>
+                                        <a><i class="icon-stack2"></i> <span>Department and Ministries</span></a>
+                                        <ul>
+                                            <li><a href="/report/dept=1">Communication Department</a></li>
+                                            <li><a href="/report/dept=2">Children's Ministries</a></li>
+                                            <li><a href="/report/dept=3">Women's Ministries</a></li>
+                                            <li><a href="/report/dept=4">Ministerial</a></li>
+                                            <li><a href="/report/dept=5">Stewardship Ministries</a></li>
+                                            <li><a href="/report/dept=6">Health Ministries</a></li>
+                                            <li><a href="/report/dept=7">Personal Ministries</a></li>
+                                        </ul>
+                                    </li>    
+                                    @else
+                                         @for ($i = 0; $i < 8; $i++)
+                                        @if (Auth::user()->position == 'Director of '.$dept[$i] )
+                                    <li><a href="/report/dept={{$sidebar}}"><i class="icon-stack2"></i> <span>{{$dept[$sidebar]}}</span></a></li>
+                                        @endif  
+                                    @endfor
+                                    @endif
                                     <li>
                                         <a href="/messenger.chatbox"><i class="icon-comment-discussion"></i> <span>Messages<span class="label bg-blue-400">8</span></span></a>
                                     </li>
                                     <li>
-                                        <a href="#"><i class="icon-bell2"></i> <span>Notifications<span class="label bg-orange-400">15</span></span></a> 
+                                        <a href="/notif"><i class="icon-bell2"></i> <span>Notifications<span class="label bg-orange-400">15</span></span></a> 
                                     </li>
                                     <!-- /main -->
                                 </ul>

@@ -196,90 +196,114 @@
 
 			<!-- Main sidebar -->
     			<div class="sidebar sidebar-main">
-    				<div class="sidebar-content">
+                    <div class="sidebar-content">
 
-    					<!-- User menu -->
-						
+                        <!-- User menu -->
+                        
 
-    					<div class="sidebar-user-material">
-    						<div class="category-content">
-								<div class="sidebar-user-material-content">
-    								<div class="media-left">
-    										<a href="/myprofile"><img src="{{Storage::url(Auth::user()->profile_pic)}}" class="img-circle img-lg" alt=""></a>
-										</div>
-										<div class="media-body">
-											<span class="media-heading text-semibold">{{ Auth::user()->firstname .' '. Auth::user()->lastname  }}</span>
-											<div class="text-size-mini text-muted">
-											<i class="icon-price-tag2"></i> &nbsp; {{ Auth::user()->position }}
-										</div>
-									</div>
-    							</div>
-								
-    							<div class="sidebar-user-material-menu">
-    								<a href="#user-nav" data-toggle="collapse"><span>My account</span> <i class="caret"></i></a>
-    							</div>
-    						</div>
+                        <div class="sidebar-user-material">
+                            <div class="category-content">
+                                <div class="sidebar-user-material-content">
+                                    <div class="media-left">
+                                            <a href="/myprofile"><img src="{{Storage::url(Auth::user()->profile_pic)}}" class="img-circle img-lg" alt=""></a>
+                                        </div>
+                                        <div class="media-body">
+                                            <span class="media-heading text-semibold">{{ Auth::user()->firstname .' '. Auth::user()->lastname  }}</span>
+                                            <div class="text-size-mini text-muted">
+                                            <i class="icon-price-tag2"></i> &nbsp; {{ Auth::user()->position }}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="sidebar-user-material-menu">
+                                    <a href="#user-nav" data-toggle="collapse"><span>My account</span> <i class="caret"></i></a>
+                                </div>
+                            </div>
 
-    						<div class="navigation-wrapper collapse" id="user-nav">
-    							<ul class="navigation">
-    								<li><a href="/myprofile/{{ Auth::user()->email }}"><i class="icon-user"></i> <span>My profile</span></a></li>
-    								<li class="divider"></li>
-    								<li><a href="/myprofile/{{ Auth::user()->email }}/settings"><i class="icon-cog5"></i> <span>Account settings</span></a></li>
-    								<li>
-										<a href="{{ route('logout') }}"
-											onclick="event.preventDefault();
+                            <div class="navigation-wrapper collapse" id="user-nav">
+                                <ul class="navigation">
+                                    <li><a href="/myprofile/{{ Auth::user()->email }}"><i class="icon-user"></i> <span>My profile</span></a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/myprofile/{{ Auth::user()->email }}/settings"><i class="icon-cog5"></i> <span>Account settings</span></a></li>
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();"><i class="icon-switch2"></i> <span>
-											Logout</span>
-										</a>
-										<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            Logout</span>
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
-									</li>
-    							</ul>
-    						</div>
-    					</div>
-    					<!-- /user menu -->
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /user menu -->
 
 
-    					<!-- Main navigation -->
-    					<div class="sidebar-category sidebar-category-visible">
-    						<div class="category-content no-padding">
-    							<ul class="navigation navigation-main navigation-accordion">
+                        <!-- Main navigation -->
+                        <div class="sidebar-category sidebar-category-visible">
+                            <div class="category-content no-padding">
+                                <ul class="navigation navigation-main navigation-accordion">
 
-    								<!-- Main -->
-    								<li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
-    								<li><a href="/"><i class="icon-stats-dots"></i> <span>Dashboard</span></a></li>
-									<li><a href="/users"><i class="icon-users4"></i> <span>Users</span></a></li>
-									<li>
-    									<a href="/announcements"><i class="icon-newspaper"></i> <span>Announcements 
-										{{--  @if ($unread > 0)<span class="label bg-green-400">{{$unread}}</span> @endif  --}}
-										</span></a>
-    								</li>
-    								<li>
-    									<a href="/reports"><i class="icon-stack2"></i> <span>Department and Ministries</span></a>
-    									<ul>
-											<li><a href="/communication">Communication Department</a></li>
-											<li><a href="/">Children's Ministries</a></li>
-    										<li><a href="#">Women's Ministries</a></li>
-    										<li><a href="#">Ministerial</a></li>
-    										<li><a href="#">Stewardship Ministries</a></li>
-    										<li><a href="#">Health Ministries</a></li>
-    										<li><a href="#">Personal Ministries</a></li>
-    									</ul>
-    								</li>
-									<li>
-    									<a href="/messenger.chatbox"><i class="icon-comment-discussion"></i> <span>Messages<span class="label bg-blue-400">8</span></span></a>
-    								</li>
-    								<li>
-    									<a href="/reportnotifications"><i class="icon-bell2"></i> <span>Notifications<span class="label bg-orange-400">15</span></span></a>	
-    								</li>
-    								<!-- /main -->
-    							</ul>
-    						</div>
-    					</div>
-    					<!-- /main navigation -->
-    				</div>
-    			</div>
+                                    <!-- Main -->
+                                    <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
+                                    <li><a href="/"><i class="icon-stats-dots"></i> <span>Dashboard</span></a></li>
+                                    @if (Auth::user()->position == 'Admin')
+                                    <li><a href="/users"><i class="icon-users4"></i> <span>Employee</span></a></li>
+                                    @endif
+                                    <li>
+                                        <a href="/announcements"><i class="icon-newspaper"></i> <span>Announcements 
+                                        {{--  @if ($unread > 0)<span class="label bg-green-400">{{$unread}}</span> @endif  --}}
+                                        </span></a>
+                                    </li>
+                                    
+                                    @if (Auth::user()->position == 'Admin')
+                                    <li>
+                                        <a><i class="icon-stack2"></i> <span>Department and Ministries</span></a>
+                                        <ul>
+                                            <li><a href="/report/dept=1">Communication Department</a></li>
+                                            <li><a href="/report/dept=2">Children's Ministries</a></li>
+                                            <li><a href="/report/dept=3">Women's Ministries</a></li>
+                                            <li><a href="/report/dept=4">Ministerial</a></li>
+                                            <li><a href="/report/dept=5">Stewardship Ministries</a></li>
+                                            <li><a href="/report/dept=6">Health Ministries</a></li>
+                                            <li><a href="/report/dept=7">Personal Ministries</a></li>
+                                        </ul>
+                                    </li>
+                                    @elseif (Auth::user()->position == 'District Pastor')
+                                    <li>
+                                        <a><i class="icon-stack2"></i> <span>Department and Ministries</span></a>
+                                        <ul>
+                                            <li><a href="/report/dept=1">Communication Department</a></li>
+                                            <li><a href="/report/dept=2">Children's Ministries</a></li>
+                                            <li><a href="/report/dept=3">Women's Ministries</a></li>
+                                            <li><a href="/report/dept=4">Ministerial</a></li>
+                                            <li><a href="/report/dept=5">Stewardship Ministries</a></li>
+                                            <li><a href="/report/dept=6">Health Ministries</a></li>
+                                            <li><a href="/report/dept=7">Personal Ministries</a></li>
+                                        </ul>
+                                    </li>    
+                                    @else
+                                         @for ($i = 0; $i < 8; $i++)
+                                        @if (Auth::user()->position == 'Director of '.$dept[$i] )
+                                    <li><a href="/report/dept={{$sidebar}}"><i class="icon-stack2"></i> <span>{{$dept[$sidebar]}}</span></a></li>
+                                        @endif  
+                                    @endfor
+                                    @endif
+                                    <li>
+                                        <a href="/messenger.chatbox"><i class="icon-comment-discussion"></i> <span>Messages<span class="label bg-blue-400">8</span></span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/notif"><i class="icon-bell2"></i> <span>Notifications<span class="label bg-orange-400">15</span></span></a> 
+                                    </li>
+                                    <!-- /main -->
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /main navigation -->
+                    </div>
+                </div>
 			<!-- /main sidebar -->
 
 

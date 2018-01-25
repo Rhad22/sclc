@@ -18,14 +18,15 @@
 				<li><a href="/report/dept={{$id}}">{{$content[$id][0]}}</a></li>
 				<li class="active">List</li>
 			</ul>
-			{{--  @if (Auth::user()->user_postion == 'District Pastor')  --}}
 			<ul class="breadcrumb-elements">
+				@if (Auth::user()->position == 'District Pastor')
 				<li><a href="/report/dept={{$id}}/create"><i class="icon-pencil7 position-left"></i>Create report</a>
+				@endif
 				</li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="icon-calendar3 position-left"></i>Type of report <b class="caret"></b></a>
 					<ul class="dropdown-menu dropdown-menu-right">
-						<li><a href="/report/dept={{$id}}/monthly">Monthly</a></li>
+						<li><a href="/report/dept={{$id}}">Monthly</a></li>
 						<li class="dropdown-submenu dropdown-submenu-left">
 							<a href="#">Quarterly</a>
 							<ul class="dropdown-menu">
@@ -35,11 +36,10 @@
 								<li><a href="/report/dept={{$id}}/4th">4rd quarter</a></li>
 							</ul>
 						</li>
-						<li><a href="/report/dept={{$id}}">Yearly</a></li>
+						<li><a href="/report/dept={{$id}}/yearly">Yearly</a></li>
 					</ul>
 				</li>
 			</ul>
-			{{--  @endif  --}}
 		</div>
 		@include('layouts.messages')
 		<div style="text-align: right;">

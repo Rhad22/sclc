@@ -48,9 +48,9 @@ class User extends Authenticatable
     {
         return $this->haveOne('App\Announcement');
     }
-    public function notify() 
+    public function position()
     {
-        return $this->haveMany('App\Notify');
+        return $this->belongsTo('App\Notify');
     }
 
 }

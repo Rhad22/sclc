@@ -34,7 +34,7 @@
                 <h4>Title: {{$announcements->title}}</h4>
                 <div>{!!$announcements->content!!}</div>
                 <hr>
-                <small>Written on {{$announcements->created_at}}</small>			
+                <small>Written on {{$announcements->created_at->format('F d Y, g:i a')}}</small>			
 			</div>
 			<div class="panel-toolbar panel-toolbar-inbox">
 				<div class="navbar navbar-default">

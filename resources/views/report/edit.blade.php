@@ -13,31 +13,6 @@
 						<li><a href="/report/dept={{$ids}}">{{$dept[$ids]}}</a></li>
 						<li class="active">Update report</li>
 					</ul>
-					<ul class="breadcrumb-elements">
-							<li>
-					            <a href="/report/dept={{$ids}}/create"><i class="icon-pencil7 position-left"></i>Create report <b class="caret"></b></a>
-					        </li>
-					        <li class="dropdown">
-					            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="icon-calendar3 position-left"></i>Type of report <b class="caret"></b></a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li><a href="/report/dept={{$ids}}/monthly">Monthly</a></li>
-									<li class="dropdown-submenu dropdown-submenu-left">
-										<a href="#">Quarterly</a>
-										<ul class="dropdown-menu">
-											<li><a href="/report/dept={{$ids}}/1st">1st quarter</a></li>
-											<li><a href="/report/dept={{$ids}}/2nd">2nd quarter</a></li>
-											<li><a href="/report/dept={{$ids}}/3rd">3rd quarter</a></li>
-											<li><a href="/report/dept={{$ids}}/4th">4rd quarter</a></li>
-										</ul>
-									</li>
-									<li><a href="/report/dept={{$ids}}">Yearly</a></li>
-								</ul>
-					        </li>
-							<li>
-								
-							</li>
-					                	
-					</ul>
 				</div>
 			</div>
 

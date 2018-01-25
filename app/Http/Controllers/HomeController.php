@@ -7,11 +7,14 @@ use App\Announcement;
 use App\Profile;
 use App\User;
 use App\Report;
+use App\Notify;
 use Charts;
 use Auth;
+use App\Traits\reports;
 
 class HomeController extends Controller
 {
+    use reports;
     /**
      * Create a new controller instance.
      *
@@ -37,20 +40,28 @@ class HomeController extends Controller
             ->responsive(false)
             ->lastByMonth(12, true);
         
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
 
-        return view('home', compact('chart','announcements'));
+        return view('home', compact('chart','announcements', 'notifies', 'sidebar', 'dept'));
     }
 
     public function users()
     {
         $users = User::orderBy('created_at','desc')->paginate(8);
-        return view('users.account', compact('users'));
+        $notifies = $this->notification();
+        $dept = $this->dept();
+
+        return view('users.account', compact('users', 'notifies', 'dept'));
     }
 
     public function show($id)
     {
         $users = User::find($id);
-        return view('users.show', compact('users'));
+        $dept = $this->dept();
+
+        return view('users.show', compact('users', 'dept'));
     }
 
     public function chatbox()
@@ -58,13 +69,13 @@ class HomeController extends Controller
         return view('messenger.chatbox');
     }
 
-    public function awea() 
+     public function notif()
     {
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
 
-        $viewer = View::select(DB::raw("SUM(numberofview) as count"))
-        ->orderBy("created_at")
-        ->groupBy(DB::raw("year(created_at)"))
-        ->get()->toArray();
-    $viewer = array_column($viewer, 'count');
+        return view('notification.notify', compact('notifies', 'sidebar', 'dept'));
     }
+
 }
