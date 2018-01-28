@@ -20,15 +20,17 @@
 					<li class="active">List</li>
 				</ul>
 
-				{{--  @if (Auth::user()->user_postion == 'District Pastor')  --}}
+				
 
 				<ul class="breadcrumb-elements">
+					@if (Auth::user()->position == 'District Pastor')
 					<li><a href="/report/dept={{$id}}/create"><i class="icon-pencil7 position-left"></i>Create report</a>
-					        </li>
+					</li>
+					@else
 					        <li class="dropdown">
 					            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="icon-calendar3 position-left"></i>Type of report <b class="caret"></b></a>
 								<ul class="dropdown-menu dropdown-menu-right">
-									<li><a href="/report/dept={{$id}}/monthly">Monthly</a></li>
+									<li><a href="/report/dept={{$id}}">Monthly</a></li>
 									<li class="dropdown-submenu dropdown-submenu-left">
 										<a href="#">Quarterly</a>
 										<ul class="dropdown-menu">
@@ -38,14 +40,12 @@
 											<li><a href="/report/dept={{$id}}/4th">4rd quarter</a></li>
 										</ul>
 									</li>
-									<li><a href="/report/dept={{$id}}">Yearly</a></li>
+									<li><a href="/report/dept={{$id}}/yearly">Yearly</a></li>
 								</ul>
 					        </li>
-							<li>
-								
-							</li>         	
+					@endif    	
 				</ul>
-						{{--  @endif  --}}
+						
 			</div>
 				@include('layouts.messages')
 			<div style="text-align: right;">
@@ -53,6 +53,7 @@
                        	{{ csrf_field() }}
 				<ul class="icons-list ">
 					<li><label for="year">Select month:</label></li>
+					@if (Auth::user()->position !== 'District Pastor')
 					<li>
 						<select name="month" class="form-control">
 							<option value="01">Jan</option>
@@ -80,6 +81,29 @@
 							</script>
 						</select>
 					</li>
+					@else
+					<li>
+						<select name="month" class="form-control">
+						@if ($month < 04)
+							<option value="01">Jan</option>
+							<option value="02">Feb</option>
+							<option value="03">Mar</option>
+						@elseif ($month < 07)
+							<option value="04">Apr</option>
+							<option value="05">May</option>
+							<option value="06">Jun</option>
+						@elseif ($month < 10)
+							<option value="07">Jul</option>
+							<option value="08">Aug</option>
+							<option value="09">Sept</option>
+						@else
+							<option value="10">Oct</option>
+							<option value="11">Nov</option>
+							<option value="12">Dec</option>
+						@endif
+						</select>
+					</li>
+					@endif
 					<li><button type="submit">OK</button></li>
 			    </ul>
 			    {!! Form::close() !!}
@@ -98,7 +122,7 @@
 						<thead>
 							<th></th>
 							@foreach ($sdata as $data)
-							<th>{{$data['created_at']}} <a href="/report/dept={{$id}}/edit/{{$data->id}}"><div class="letter-icon-title text-default"><i data-popup="tooltip" title="" data-placement="top" id="top" data-original-title="click to edit report">edit</i></div></a></th>
+							<th>{{$data->created_at->format('M d')}} <a href="/report/dept={{$id}}/edit/{{$data->id}}"><div class="letter-icon-title text-default"><i data-popup="tooltip" title="" data-placement="top" id="top" data-original-title="click to edit report">edit <i class="icon-pencil7 position-left"></i></i></div></a></th>
 							@endforeach
 						</thead>
 						<tbody>
@@ -136,18 +160,24 @@
 							</tbody>
 						</table>
 				@endif
-
-
-										<!-- <a href="/communication/edit"><div class="letter-icon-title text-default"><i data-popup="tooltip" title="" data-placement="top" id="top" data-original-title="click to edit report">awe</i></div></a> -->
-											
-					
 			</div>
-				<div style="text-align: right;">
+				<div class="col-md-6">
+					@if (Auth::user()->position !== 'District Pastor')
+					Summary report of 
+					@foreach ($names as $name)
+					{{$name->firstname}},
+					@endforeach	
+					@endif
+				</div>
+				<div class="col-md-6" style="text-align: right;">
 					<a href="#" class="btn btn-primary legitRipple"><i class="icon-printer"></i> <span class="hidden-xs position-right">Print</span></a>
 				</div>
 
 		@include('layouts.footer')
 		</div>
+		
+
+		
 	</div>
 </div>
 		

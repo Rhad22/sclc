@@ -13,31 +13,6 @@
 						<li><a href="/report/dept={{$id}}">{{$content[$id][0]}}</a></li>
 						<li class="active">Create report</li>
 					</ul>
-					<ul class="breadcrumb-elements">
-							<li>
-					            <a href="/report/dept={{$id}}/create"><i class="icon-pencil7 position-left"></i>Create report <b class="caret"></b></a>
-					        </li>
-					        <li class="dropdown">
-					            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="icon-calendar3 position-left"></i>Type of report <b class="caret"></b></a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li><a href="/report/dept={{$id}}/monthly">Monthly</a></li>
-									<li class="dropdown-submenu dropdown-submenu-left">
-										<a href="#">Quarterly</a>
-										<ul class="dropdown-menu">
-											<li><a href="/report/dept={{$id}}/1st">1st quarter</a></li>
-											<li><a href="/report/dept={{$id}}/2nd">2nd quarter</a></li>
-											<li><a href="/report/dept={{$id}}/3rd">3rd quarter</a></li>
-											<li><a href="/report/dept={{$id}}/4th">4rd quarter</a></li>
-										</ul>
-									</li>
-									<li><a href="/report/dept={{$id}}">Yearly</a></li>
-								</ul>
-					        </li>
-							<li>
-								
-							</li>
-					                	
-					</ul>
 				</div>
 			</div>
 
@@ -66,7 +41,7 @@
 										@endfor
 										<input type="hidden" name="dept" value="{{$id}}">
 										<input type="hidden" name="dept_name" value="{{$content[$id][0]}}">
-										<input type="hidden" name="receiver[]" value="{{$user}}">
+										
 										
 							</tbody>
 							</table>

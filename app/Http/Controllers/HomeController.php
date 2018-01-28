@@ -7,11 +7,14 @@ use App\Announcement;
 use App\Profile;
 use App\User;
 use App\Report;
+use App\Notify;
 use Charts;
 use Auth;
+use App\Traits\reports;
 
 class HomeController extends Controller
 {
+    use reports;
     /**
      * Create a new controller instance.
      *
@@ -31,40 +34,94 @@ class HomeController extends Controller
     {
         $announcements = Announcement::orderBy('created_at','desc')->paginate(5);
 
-        $chart = Charts::database(Report::all(), 'bar', 'highcharts')
-            ->elementLabel("Total")
-            ->dimensions(1000, 500)
-            ->responsive(false)
-            ->lastByMonth(12, true);
-        
+        $content = $this->title();
+        $dept = 1;
+        $row = 1;
+        $year = 2018;
+        $dept_id = 1;
 
-        return view('home', compact('chart','announcements'));
+        
+            $value =  array ();
+            for ($x=1; $x <= 12; $x++) { 
+                array_push($value, $day = Report::where('dept_id', $dept)
+                    ->whereYear('created_at', $year)
+                    ->whereMonth('created_at', $x)
+                    ->sum('row'.$row));
+                }
+         
+        
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+
+        return view('home', compact('chart','announcements', 'notifies', 'sidebar', 'dept','value', 'dept_id', 'row', 'content', 'year'));
+    }
+
+    public function chart(Request $request, $dept_id, $row)
+    {
+        $announcements = Announcement::orderBy('created_at','desc')->paginate(5);
+        $dept = $this->dept();
+        $content = $this->title();
+        $year = $request->input('year');
+        ($year == "") ? $year = date('Y'): "";
+
+        
+            $value =  array ();
+            for ($x=1; $x <= 12; $x++) { 
+                array_push($value, $day = Report::where('dept_id', $dept_id)
+                    ->whereYear('created_at', $year)
+                    ->whereMonth('created_at', $x)
+                    ->sum('row'.$row));
+                }
+         
+        
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+
+        return view('home', compact('chart','announcements', 'notifies', 'sidebar', 'dept','value', 'dept', 'dept_id', 'content', 'row' , 'year'));
     }
 
     public function users()
     {
         $users = User::orderBy('created_at','desc')->paginate(8);
-        return view('users.account', compact('users'));
+        $notifies = $this->notification();
+        $dept = $this->dept();
+
+        return view('users.account', compact('users', 'notifies', 'dept'));
     }
 
     public function show($id)
     {
         $users = User::find($id);
-        return view('users.show', compact('users'));
+        $dept = $this->dept();
+
+        return view('users.show', compact('users', 'dept'));
     }
 
     public function chatbox()
     {
-        return view('messenger.chatbox');
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+
+        return view('messenger.chatbox', compact('notifies', 'sidebar', 'dept'));
     }
 
-    public function awea() 
+     public function notif()
     {
+        $ids = auth()->user()->id;
+        $allnotify = User::join('notifies','notifies.sender','=','users.id')
+            ->where(['receiver'=> $ids])
+            ->orderBy('notifies.created_at','DESC')
+            ->get();
+        
 
-        $viewer = View::select(DB::raw("SUM(numberofview) as count"))
-        ->orderBy("created_at")
-        ->groupBy(DB::raw("year(created_at)"))
-        ->get()->toArray();
-    $viewer = array_column($viewer, 'count');
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+
+        return view('notification.notify', compact('allnotify','notifies', 'sidebar', 'dept'));
     }
+
 }

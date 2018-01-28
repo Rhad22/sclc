@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'middlename','lastname', 'slug', 'position', 'profile_pic', 'email', 'password',
+        'firstname', 'middlename','lastname', 'slug', 'position', 'profile_pic', 'email', 'password', 'district',
     ];
 
     /**
@@ -48,9 +48,8 @@ class User extends Authenticatable
     {
         return $this->haveOne('App\Announcement');
     }
-    public function notify() 
+    public function position()
     {
-        return $this->haveMany('App\Notify');
+        return $this->belongsTo('App\Notify');
     }
-
 }

@@ -6,20 +6,35 @@ use Illuminate\Http\Request;
 use App\Announcement;
 use App\Department;
 use App\Profile;
+use App\Notify;
 use App\User;
+use App\Traits\reports;
 
 class AnnouncementController extends Controller
-{ 
+{
+    use reports;
+
     public function index()
     {
-        $announcements = User::join('announcements','announcements.user_id','=','users.id')->get();
-            
-        return view('announcement.index', compact('announcements'));
+        $announcements = User::join('announcements','announcements.user_id','=','users.id')
+            ->orderBy('announcements.created_at','DESC')->paginate(10);
+
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+
+        return view('announcement.index', compact('announcements', 'notifies', 'sidebar', 'dept'));
     }
 
     public function create()
     {
-        return view('announcement.create');
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+
+        
+        
+        return view('announcement.create', compact('notifies', 'sidebar', 'dept'));
     }
 
     public function store(Request $request)
@@ -35,6 +50,19 @@ class AnnouncementController extends Controller
         $announcements->user_id = auth()->user()->id;
         $announcements->save();
 
+        $users = User::all();
+
+        foreach ($users as $position) {
+            Notify::create([
+                'sender' => auth()->user()->id,
+                'receiver' => $position->id,
+                'content' => 'post an announcement',
+                'read' => 0,
+                'type' => 1,
+                'link_id' => $announcements->id,
+                'dept_id' => 0
+            ]);
+        }
         return redirect('/announcements')->with('success', 'Post Created');
     }
 
@@ -42,14 +70,21 @@ class AnnouncementController extends Controller
     {
         $announcements = Announcement::find($id);
         $user = Announcement::find($id)->user;
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
 
-        return view('announcement.show', compact('announcements', 'user'));
+        return view('announcement.show', compact('announcements', 'user', 'notifies', 'sidebar', 'dept'));
     }
 
     public function edit($id)
     {
         $announcements = Announcement::find($id);
-        return view('announcement.edit', compact('announcements'));
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+        
+        return view('announcement.edit', compact('announcements', 'notifies', 'sidebar', 'dept'));
     }
 
     public function update(Request $request, $id)
@@ -74,10 +109,19 @@ class AnnouncementController extends Controller
         return redirect('/announcements')->with('success', 'Post Removed');
     }
 
-    public function api()
+    public function viewann($link_id, $notif_id)
     {
-        $announcements = User::join('announcements','announcements.user_id','=','users.id')->get();
-            
-        return $announcements;
+        $announcements = Announcement::find($link_id);
+        $user = Announcement::find($link_id)->user;
+
+        $markasread = Notify::find($notif_id);
+        $markasread->read = 1;
+        $markasread->save();
+
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+
+        return view('announcement.show', compact('announcements', 'user', 'notifies', 'sidebar', 'dept'));
     }
 }

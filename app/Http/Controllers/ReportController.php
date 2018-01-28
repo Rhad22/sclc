@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Content;
 use App\Report;
-use App\Profile;
 use App\Notify;
+use App\Profile;
 use App\User;
 use App\Traits\reports;
 
@@ -15,6 +15,8 @@ class ReportController extends Controller
     use reports;
 
     public function yearly(Request $request, $id) {
+        
+
         $year = $request->input('year');
         ($year == "") ? $year = date('Y'): "";
         $from = date($year . '-01-01');
@@ -42,8 +44,13 @@ class ReportController extends Controller
             ->get();
         $content = $this->data();
         $length = count($content[$id]);
+
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+
         return view('/report.yearly', compact( 'year',
-        'qr1','qr2','qr3','qr4','qrt', 'content', 'id', 'length'));
+        'qr1','qr2','qr3','qr4','qrt', 'content', 'id', 'length', 'notifies', 'sidebar', 'dept'));
     }
 
     public function first(Request $request, $id) {
@@ -63,7 +70,12 @@ class ReportController extends Controller
         $mt = Report::where('dept_id', $id)->whereBetween('created_at', array($fromt1, $tot1))->get();
         $content =$this->data();
         $length = count($content[$id]);
-        return view('/report.first', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length'));
+
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+
+        return view('/report.first', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length', 'notifies', 'sidebar', 'dept'));
     }
 
     public function second(Request $request, $id) {
@@ -83,7 +95,12 @@ class ReportController extends Controller
         $mt = Report::where('dept_id', $id)->whereBetween('created_at', array($fromt1, $tot1))->get();
         $content =$this->data();
         $length = count($content[$id]);
-        return view('/report.second', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length'));
+
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+
+        return view('/report.second', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length', 'notifies', 'sidebar', 'dept'));
     }
 
     public function third(Request $request, $id) {
@@ -103,7 +120,12 @@ class ReportController extends Controller
         $mt = Report::where('dept_id', $id)->whereBetween('created_at', array($fromt1, $tot1))->get();
         $content =$this->data();
         $length = count($content[$id]);
-        return view('/report.third', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length'));
+
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+
+        return view('/report.third', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length', 'notifies', 'sidebar', 'dept'));
     }
 
 
@@ -124,7 +146,12 @@ class ReportController extends Controller
         $mt = Report::where('dept_id', $id)->whereBetween('created_at', array($fromt1, $tot1))->get();
         $content = $this->data();
         $length = count($content[$id]);
-        return view('/report.fourth', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length'));
+
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+
+        return view('/report.fourth', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length', 'notifies', 'sidebar', 'dept'));
     }
 
     public function monthly(Request $request, $id) {
@@ -134,7 +161,7 @@ class ReportController extends Controller
         ($month == "") ? $month = date('m'): "";
         $days = cal_days_in_month(CAL_GREGORIAN,$month,$year);
         $hmonth  = date("F", strtotime("2011-".$month. "-01"));
-        $user_id = 2;
+        $user_id = auth()->user()->id;
         $dept = $this->dept();
         $content = $this->title();
         $length = count($content[$id]);
@@ -166,24 +193,61 @@ class ReportController extends Controller
                     ->whereMonth('created_at', $month)
                     ->sum('row'.$x));
         }
-        return view('/report.monthly', compact('data', 'year', 'id', 'content', 'length', 'days', 'dept', 'hmonth', 'total', 'sdata'));
+
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+
+        $list = Report::join('users','users.id','=','reports.user_id')
+            ->where('dept_id', $id)
+            ->select('user_id')
+            ->groupBy('user_id')
+            ->get();
+
+        $allsenders = count($list);
+        $senders = array();
+        for ($i=0; $i < $allsenders ; $i++) { 
+            array_push($senders, $list[$i]['user_id']);
+        }
+
+        $names = User::whereIn('id', $senders)->get();
+
+        return view('/report.monthly', compact('data', 'year', 'id', 'content', 'length', 'days', 'dept', 'month', 'hmonth', 'total', 'sdata', 'notifies', 'sidebar', 'dept', 'names'));
     }
 
-    
+    public function viewreport(Request $request, $ids, $link_id, $notif_id)
+    {
+        $id = Notify::where('link_id', $link_id)->value('sender');
+        $user = User::where('id' ,$id)->first();
+
+        $markasread = Notify::find($notif_id);
+        $markasread->read = 1;
+        $markasread->save();
+
+        $days = Report::find($link_id);
+        $content = $this->title();
+        $length = count($content[$ids]);
+        $dept = $this->dept();
+         
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+
+        return view('report.viewreport', compact('notifies', 'sidebar', 'dept', 'content', 'length', 'ids', 'days', 'user')); 
+    }
+
     public function report($id) {
         $content =$this->data();
         $length = count($content[$id]);
-        $user = User::select('id')
-                    ->whereIn('position', ['Director', 'Admin'])
-                    ->get();
-        
-        return view('report.create', compact('content', 'length', 'id', 'user'));
+
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+
+        return view('report.create', compact('content', 'length', 'id', 'notifies', 'sidebar', 'dept'));
     }
 
     public function store(Request $request) {
-
-
-
 
         $post = new Report;
         $post->user_id = auth()->user()->id;
@@ -237,25 +301,23 @@ class ReportController extends Controller
         $post->save();
 
         $dept = $request->input('dept_name');
-        
-        $nofity = new Notify;
-        $nofity->sender = auth()->user()->id;
-        $nofity->receiver = $request->input('reciever');
-        $nofity->content = 'has sent a report in '.$dept;
-        $nofity->read = '0';
-        $nofity->save();
-        return redirect()->back()->with('success', ' Report send successfully');
-    }
+        $users = User::with('position')->whereIn('position', array('Admin', 'Director of '.$dept))
+            ->orWhere('id', auth()->user()->id)
+            ->get();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        foreach ($users as $position) {
+            Notify::create([
+                'sender' => auth()->user()->id,
+                'receiver' => $position->id,
+                'content' => 'sent a report in '. $dept,
+                'read' => 0,
+                'type' => 0,
+                'link_id' => $post->id,
+                'dept_id' =>  $request->input('dept')
+            ]);
+        }
+
+        return redirect()->back()->with('success', ' Report send successfully');
     }
 
     /**
@@ -271,7 +333,11 @@ class ReportController extends Controller
         $length = count($content[$ids]);
         $dept = $this->dept();
 
-        return view('report.edit', compact('days', 'content', 'length', 'ids', 'dept'));
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+
+        return view('report.edit', compact('days', 'content', 'length', 'ids', 'dept', 'notifies', 'sidebar', 'dept'));
     }
 
     /**
@@ -334,6 +400,17 @@ class ReportController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -344,8 +421,6 @@ class ReportController extends Controller
         //
     }
 
-    public function awe($id) {
+   
 
-        echo $id;
-    }
 }

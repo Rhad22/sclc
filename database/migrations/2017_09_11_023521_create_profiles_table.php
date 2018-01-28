@@ -19,7 +19,7 @@ class CreateProfilesTable extends Migration
             $table->integer('gender')->nullable();
             $table->string('address')->nullable();
             $table->text('birthday')->nullable();
-            $table->integer('status')->nullable();
+            $table->string('status')->nullable();
             $table->string('dept')->nullable();
             $table->string('mobilenumber')->nullable();
             $table->timestamps();

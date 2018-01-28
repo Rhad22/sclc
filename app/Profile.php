@@ -13,6 +13,7 @@ class Profile extends Model
         'status',
         'mobilenumber',
         'user_id',
+        'dept',
     ]; 
 
     public function user() 

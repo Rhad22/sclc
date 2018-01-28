@@ -17,42 +17,45 @@
 					</ul>
 				</div>
 			</div>
-			
-			<div>
-				@if (count($users)> 0)
-					<div class="datatable-header">
-						<div id="DataTables_Table_0_filter" class="dataTables_filter">
-							<label><span>Search employee:</span> <input type="search" class="" placeholder="Type to filter..." aria-controls="DataTables_Table_0"></label>
-						</div>
-					</div>
 
-					<div class="row">
-						@foreach($users as $user)
-						<div class="col-lg-3 col-md-6">
-							<div class="thumbnail no-padding">
-								<div class="thumb">
-									<img src="{{Storage::url($user->profile_pic)}}" alt="">
-									<div class="caption-overflow">
-										<span>
-											<a href="#" class="btn bg-success-400 btn-icon btn-xs legitRipple" data-popup="lightbox"><i class="icon-plus2"></i></a>
-											<a href="#" class="btn bg-success-400 btn-icon btn-xs legitRipple"><i class="icon-link"></i></a>
-										</span>
-									</div>
+
+			<div class="content">
+				<div class="row">
+					@foreach($users as $user)
+					<div class="col-lg-6 col-md-6">
+						<div class="panel panel-body">
+							<div class="media">
+								<div class="media-left">
+									<a href="" data-popup="lightbox">
+										<img src="{{Storage::url($user->profile_pic)}}" class="img-circle img-lg" alt="">
+									</a>
 								</div>
-							
-						    	<div class="caption text-center">
-						    		<h6 class="text-semibold no-margin">{{$user->firstname . ' '. $user->lastname}}<small class="display-block">{{$user->position}}</small></h6>
-					    			
-						    	</div>
-					    	</div>
+
+								<div class="media-body">
+									<h6 class="media-heading">{{$user->firstname . ' '. $user->lastname}}</h6>
+									<span class="text-muted">{{$user->position}}</span>
+								</div>
+
+								<div class="media-right media-middle">
+									<ul class="icons-list">
+					                    <li class="dropdown">
+						                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+						                    <ul class="dropdown-menu dropdown-menu-right">
+												<li><a href="#"><i class="icon-comment-discussion pull-right"></i> Start chat</a></li>
+												<li><a href="#"><i class=" icon-sync pull-right"></i>Update info.</a></li>
+												<li><a href="#"><i class=" icon-user-cancel pull-right"></i>Deactivate account</a></li>
+											</ul>
+					                    </li>
+				                    </ul>
+								</div>
+							</div>
 						</div>
-						@endforeach
 					</div>
-						<div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_1_paginate">
+					@endforeach
+				</div>
+				<div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_1_paginate">
 							{{ $users->links() }}
-						</div>
-				@endif	
-			</div>
+				</div>
 			@include('layouts.footer')	
 		</div>
 	</div>

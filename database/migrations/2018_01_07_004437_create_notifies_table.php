@@ -19,6 +19,9 @@ class CreateNotifiesTable extends Migration
             $table->integer('receiver');
             $table->string('content');
             $table->integer('read');
+            $table->integer('type');
+            $table->string('link_id');
+            $table->integer('dept_id');
             $table->timestamps();
         });
     }

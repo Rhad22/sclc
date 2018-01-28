@@ -3,14 +3,14 @@
 @section('content')
 <div class="content-wrapper">
 	<div class="content">
-		{{--  <div class="page-title">  --}}
-			<h4><span class="text-semibold">My account</span> - Profile</h4>
+		<div class="page-title">
+			<h4><span class="text-semibold">@if (Auth::user()->id == $user->id) My account @else {{$user->firstname}} {{$user->lastname}} @endif</span> - Profile</h4>
 			<ul class="breadcrumb position-right">
 				<li><a href="/home">Home</a></li>
-				<li><a href="/myprofile">My account</a></li>
+				<li><a href="/myprofile/{{ Auth::user()->email }}">My account</a></li>
 				<li class="active">Profile</li>
 			</ul>
-		{{--  </div>  --}}
+		</div>
 				
 		@include('layouts.messages')
 		<div>
@@ -21,14 +21,14 @@
 
 						<div class="navbar-collapse collapse" id="navbar-filter">
 							<ul class="nav navbar-nav">
-								<li class="@if (Request::segment(3) != 'settings') {{'active'}} @endif"><a href="#activity" data-toggle="tab"><i class="icon-menu7 position-left"></i> Activity</a></li>
-								<li><a href="#schedule" data-toggle="tab"><i class="icon-calendar3 position-left"></i> About <span class="badge badge-success badge-inline position-right">32</span></a></li>
+								<li class="@if (Request::segment(3) != 'settings') {{'active'}} @endif"><a href="#activity" data-toggle="tab"><i class="icon-menu7 position-left"></i> Activity Log</a></li>
+								<li><a href="#schedule" data-toggle="tab"><i class="  icon-profile position-left"></i> About <span class="badge badge-success badge-inline position-right"></span></a></li>
+								@if (Auth::user()->id == $user->id)
 								<li class="@if (Request::segment(3) == 'settings') {{'active'}}  @endif"><a href="#settings" data-toggle="tab"><i class="icon-cog3 position-left"></i> Settings</a></li>
+								@endif
 							</ul>
 						</div>
 					</div>
-
-					{{--  /  --}}
 					<div class="content">
 
 					<!-- User profile -->
@@ -36,87 +36,77 @@
 						<div class="col-lg-9">
 							<div class="tabbable">
 								<div class="tab-content">
-									<div class="tab-pane @if (Request::segment(3) == 'settings')) {{'fade in'}} @else {{'active in'}} @endif" id="activity">
-
-										<!-- Timeline -->
+									@foreach ($activities as $activity)
+									<div class="tab-pane @if (Request::segment(3) == 'settings')) {{'fade in'}} 	@else {{'active in'}} @endif" id="activity">
 										<div class="timeline timeline-left content-group">
 											<div class="timeline-container">
-
-												<!-- Sales stats -->
 												<div class="timeline-row">
 													<div class="timeline-icon">
-														<a href="#"><img src="{{Storage::url(Auth::user()->profile_pic)}}"></a>
+														<img src="{{Storage::url($activity->profile_pic)}}" alt="">
 													</div>
-
 													<div class="panel panel-flat timeline-content">
-														<div class="panel-heading">
-															<h6 class="panel-title">Daily statistics</h6>
-															<div class="heading-elements">
-																<span class="heading-text"><i class="icon-history position-left text-success"></i> Updated 3 hours ago</span>
-
-																<ul class="icons-list">
-											                		<li><a data-action="reload"></a></li>
-											                	</ul>
-										                	</div>
-														</div>
-
 														<div class="panel-body">
-															<div class="chart-container">
-																<div class="chart has-fixed-height" id="sales"></div>
-															</div>
+															<a class="table-inbox-subject letter-icon-title text-default" @if ($activity->type < 1)
+                                                href="/report/dept={{$activity->dept_id}}/{{$activity->link_id}}/{{$activity->id}}"
+                                            @elseif ($activity->type < 2) 
+                                                href="/announcements/{{$activity->link_id}}/{{$activity->id}}"
+                                            @else
+                                                href="/myprofile/{{$activity->link_id}}/{{$activity->id}}"
+                                            @endif >
+																{{$activity->firstname}} {{$activity->lastname}} {{$activity->content}}
+																	<div class="media-annotation">@if ($activity->type == 0)
+                                                <i class=" icon-file-plus"></i> @else <i class="icon-paperplane"></i> @endif {{$activity->created_at->diffForHumans()}} ...</div>
+
+															</a>
 														</div>
 													</div>
 												</div>
-												<!-- /sales stats -->
 											</div>
 									    </div>
-									    <!-- /timeline -->
-
 									</div>
-
+									@endforeach
 
 									<div class="tab-pane fade" id="schedule">
 
 										<!-- Available hours -->
 										<div class="panel panel-flat">
 											<div class="panel-heading">
-												<h6 class="panel-title">Available hours</h6>
-												<div class="heading-elements">
-													<ul class="icons-list">
-								                		<li><a data-action="collapse"></a></li>
-								                		<li><a data-action="reload"></a></li>
-								                		<li><a data-action="close"></a></li>
-								                	</ul>
-							                	</div>
+												<h6 class="panel-title">Contact information</h6><hr>
 											</div>
 
 											<div class="panel-body">
-												<div class="chart-container">
-													<div class="chart has-fixed-height" id="plans"></div>
-												</div>
+													<div class="form-group">
+														<div class="row">
+															<div class="col-md-11 col-md-offset-1">
+																<label class="media-annotation"><i class="icon-location3 position-left"></i>Address: </label>@if ($profile->address == '') None @else {{ $profile->address}} @endif<br>
+																<label class="media-annotation"> <i class="icon-phone2 position-left"></i>Mobile phone: </label>@if ($profile->mobilenumber == '') None @else  {{ $profile->mobilenumber}} @endif<br>
+																<label class="media-annotation"> <i class="icon-envelop3 position-left"></i>Email address: </label>{{ $user->email}}<br>
+															</div>
+														</div>
+													</div>
 											</div>
+
+											<div class="panel-heading">
+												<h6 class="panel-title">Basic information</h6><hr>
+											</div>
+
+											<div class="panel-body">
+													<div class="form-group">
+														<div class="row">
+															<div class="col-md-11 col-md-offset-1">
+																<label class="media-annotation"><i class="icon-heart6 position-left"></i>Civil status:</label>@if ($profile->status == '') None @else {{$profile->status}} @endif<br>
+																<label class="media-annotation"><i class=" icon-calendar2 position-left"></i>Birth Date: </label>@if ($profile->birthday == '') None @else {{$profile->birthday}} @endif<br>
+																<label class="media-annotation"><i class=" icon-circle position-left"></i>Gender: </label>@if ($profile->gender == '') None @elseif ($profile->gender < 2 ) Male @else Female @endif<br>
+															</div>
+														</div>
+													</div>
+											</div>
+
+
+											
 										</div>
 										<!-- /available hours -->
-
-
-										<!-- Calendar -->
-										<div class="panel panel-flat">
-											<div class="panel-heading">
-												<h6 class="panel-title">My schedule</h6>
-												<div class="heading-elements">
-													<ul class="icons-list">
-								                		<li><a data-action="collapse"></a></li>
-								                		<li><a data-action="reload"></a></li>
-								                		<li><a data-action="close"></a></li>
-								                	</ul>
-							                	</div>
-											</div>
-
-											<div class="panel-body">
-												<div class="schedule"></div>
-											</div>
-										</div>
-										<!-- /calendar -->
+										
 
 									</div>
 									<div class="tab-pane @if (Request::segment(3) == 'settings') {{'active in'}} @endif" id="settings">
@@ -172,12 +162,29 @@
 
 													<div class="form-group">
 														<div class="row">
-															<div class="col-md-6">
+															<div class="col-md-4">
 																<label>Phone #</label>
 																<input type="number" value="{{ $profile->mobilenumber }}" class="form-control" name="phone">
 															</div>
 
-															<div class="form-group">
+															<div class="col-md-4 form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                                        						<label for="status" class="col-md-7 control-label">Civil Status</label>
+                                        						<div class="col-md-12">
+                                        							<select name="status">
+                                            							<option value="Single">Single</option>
+                                            							<option value="Married">Married</option>
+                                            							<option value="Seperated">Seperated</option>
+                                            							<option value="Widowed">Widowed</option>
+                                        							</select>
+                                         							@if ($errors->has('status'))
+                                            						<span class="help-block">
+                                                						<strong>{{ $errors->first('status') }}</strong>
+                                            						</span>
+                                       								 @endif
+                                        						</div>
+                                    						</div>
+
+															<div class="col-md-4 form-group">
 																<label class="display-block">Gender:</label>
 
 																<label >
@@ -299,7 +306,7 @@
 								</div>
 							
 						    	<div class="caption text-center">
-						    		<h6 class="text-semibold no-margin">{{ Auth::user()->firstname .' '. Auth::user()->lastname }}<small class="display-block">{{ Auth::user()->position }}</small></h6>
+						    		<h6 class="text-semibold no-margin">{{$user->firstname}} {{$user->middlename}} {{$user->lastname }}<small class="display-block">{{$user->position }}@if ($user->position == 'District Pastor') / {{$user->district}} @endif</small></h6>
 						    	</div>
 					    	</div>
 					    	<!-- /user thumbnail -->

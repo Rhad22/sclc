@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Traits;
+use App\User;
+use App\Profile;
 
 trait Reports 
 {
@@ -453,6 +455,27 @@ trait Reports
             );
 
         return $content;
+    }
+
+    public function notification() {
+
+        $ids = auth()->user()->id;
+        $notifies = User::join('notifies','notifies.sender','=','users.id')
+            ->where(['receiver'=> $ids, 'read'=> 0])
+            ->where('sender', '!=', $ids)
+            ->orderBy('notifies.created_at','DESC')
+            ->get();
+
+        return $notifies;
+    }
+
+    public function sidebar() {
+
+        $id = auth()->user()->id;
+        $sidebar = Profile::where('user_id', $id)->value('dept');
+
+        return $sidebar;
+
     }
 }
 

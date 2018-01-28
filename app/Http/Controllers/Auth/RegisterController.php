@@ -56,6 +56,7 @@ class RegisterController extends Controller
             'middlename' => $data['middlename'],
             'slug' => str_slug($data['firstname'] . $data['lastname']),
             'position' => $data['position'],
+            'district' => $data['district'],
             'profile_pic' => $defaultprofile,
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
