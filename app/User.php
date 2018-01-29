@@ -52,4 +52,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Notify');
     }
+    public function dept()
+    {
+        return $this->belongsTo('App\Profile');
+    }
 }

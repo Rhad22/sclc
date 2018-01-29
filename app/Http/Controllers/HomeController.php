@@ -84,7 +84,9 @@ class HomeController extends Controller
 
     public function users()
     {
-        $users = User::orderBy('created_at','desc')->paginate(8);
+        $users = User::join('profiles','profiles.user_id','=','users.id')
+            ->orderBy('users.created_at','DESC')->paginate(8)
+            ;
         $notifies = $this->notification();
         $dept = $this->dept();
 

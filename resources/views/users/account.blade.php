@@ -33,7 +33,7 @@
 
 								<div class="media-body">
 									<h6 class="media-heading">{{$user->firstname . ' '. $user->lastname}}</h6>
-									<span class="text-muted">{{$user->position}}</span>
+									<span class="text-muted">{{$user->position}} @if ($user->position == 'District Pastor') / {{$user->district}} @endif @if ($user->position == 'Director') of {{$dept[$user->dept]}} @endif @if ($user->position == 'Secretary') of {{$dept[$user->dept]}} @endif</span>
 								</div>
 
 								<div class="media-right media-middle">

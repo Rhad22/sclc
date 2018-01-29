@@ -5,7 +5,13 @@
 	<div class="content">
 			<h4>Dashboard</h4>
 			
-			<div style="text-align: right;">
+			
+		
+		<div class="panel panel-flat">
+			<div class="panel panel-body">
+				
+				<div class="app">
+					<div style="text-align: right;">
 			{!! Form::open(['action' => ['HomeController@chart', $dept_id, $row],'method' => 'GET']) !!}
             {{ csrf_field() }}
 			<ul class="icons-list ">
@@ -26,16 +32,12 @@
 				<li><button type="submit">OK</button></li>
 			</ul>
 			{!! Form::close() !!}
-		</div>
-		<div class="panel panel-flat">
-			<div class="panel panel-body">
-				
-				<div class="app">
 					<center>
 						<div id="container" style="min-width: 300px; height: 400px; margin: 0 auto">
 						</div>
 					</center>
         		</div>
+        	</div>
 			</div>
 		</div>
 		<div class="row">
