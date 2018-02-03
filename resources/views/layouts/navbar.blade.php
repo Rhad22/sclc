@@ -21,10 +21,10 @@
                 <ul class="nav navbar-nav">             
                         <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-bell2"></i>
+                            <i class="icon-bell2 @if (count($notifies)> 0) text-danger @endif "></i>
                             <span class="visible-xs-inline-block position-right">Announcements</span>
                             @if (count($notifies)> 0)
-                            <span class="status-mark border-pink-300"></span>
+                            <span class="status-mark border-danger"></span>
                             @endif
                         </a>
 
@@ -73,7 +73,7 @@
                         </li>
                         
                         {{--  Messages  --}}
-                        <li class="dropdown">
+                        <!-- <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="icon-bubble8"></i>
                                 <span class="visible-xs-inline-block position-right">Messages</span>
@@ -96,7 +96,7 @@
                                     <a href="#" data-popup="tooltip" title="All messages"><i class="icon-menu display-block"></i></a>
                                 </div>
                             </div>
-                        </li>                   
+                        </li>  -->                  
                 </ul>
             </div>
         </div>
@@ -216,10 +216,10 @@
                                     @endif
                                     @endif
                                     <li>
-                                        <a href="/chat"><i class="icon-comment-discussion"></i> <span>Messages<span class="label bg-blue-400">8</span></span></a>
+                                        <a href="/chat"><i class="icon-comment-discussion"></i> <span>Messages</a>
                                     </li>
                                     <li>
-                                        <a href="/notif"><i class="icon-bell2"></i> <span>Notifications<span class="label bg-orange-400">@if (count($notifies) > 0){{count($notifies)}} @endif</span></span></a> 
+                                        <a href="/notif"><i class="icon-bell2"></i> <span>Notifications<span class="label bg-danger">@if (count($notifies) > 0){{count($notifies)}} @endif</span></span></a> 
                                     </li>
                                     <!-- /main -->
                                 </ul>
