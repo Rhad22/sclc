@@ -4,9 +4,9 @@
 
 @section('pagescript')
    <style>
-        .list-group{
+        .media-list{
             overflow-y: scroll;
-            height: 300px;
+            height: 350px;
         }
     </style>
 @stop
@@ -14,19 +14,19 @@
 @section('content')
 <div class="content-wrapper">
     <div class="page-header">
-                    <div class="page-header-content">
-                        <div class="page-title">
-                            <h3><span class="text-semibold">Messenger</span></h3>
-                        </div>
-                    </div>
+        <div class="page-header-content">
+            <div class="page-title">
+                 <h3><span class="text-semibold">Messenger</span></h3>
+            </div>
+        </div>
 
-                    <div class="breadcrumb-line breadcrumb-line-component">
-                        <ul class="breadcrumb">
-                            <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
-                            <li class="active">Conversation</li>
-                        </ul>
-                    </div>
-                </div>
+        <div class="breadcrumb-line breadcrumb-line-component">
+            <ul class="breadcrumb">
+                <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
+                <li class="active">Conversation</li>
+            </ul>
+        </div>
+    </div>
     <div class="content">
         <div class="panel panel-flat">
             <div id="app">

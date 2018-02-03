@@ -58,7 +58,13 @@ const app = new Vue({
     	},
     	getTime(){
     		let time = new Date();
-    		return time.getHours()+':'+time.getMinutes();
+    		if (time <= 12) {
+    			return time.getHours()+':'+time.getMinutes()+' am';
+    		}
+    		else {
+    			return time.getHours()-12+':'+time.getMinutes()+' pm';
+    		}
+    		
     	},
         getOldMessages(){
             axios.post('/getOldMessage')
