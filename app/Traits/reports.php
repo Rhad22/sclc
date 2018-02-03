@@ -3,9 +3,208 @@
 namespace App\Traits;
 use App\User;
 use App\Profile;
+use App\Report;
 
 trait Reports 
 {
+    public function qr1($id, $year) {
+        $from = date($year . '-01-01');
+        $to = date($year . '-03-31');
+        $qr1 = Report::where('dept_id',$id)
+            ->whereBetween('created_at', array($from, $to))
+            ->get();
+        return $qr1;
+    }
+
+    public function qr2($id, $year) {
+        $from2 = date($year . '-04-01');
+        $to2 = date($year . '-06-30');
+        $qr2 = Report::where('dept_id',$id)
+            ->whereBetween('created_at', array($from2, $to2))
+            ->get();
+        return $qr2;
+    }
+
+    public function qr3($id, $year) {
+        $from3 = date($year . '-07-01');
+        $to3 = date($year . '-09-30');
+        $qr3 = Report::where('dept_id',$id)
+            ->whereBetween('created_at', array($from3, $to3))
+            ->get();
+        return $qr3;
+    }
+
+    public function qr4($id, $year) {
+        $from4 = date($year . '-10-01');
+        $to4 = date($year . '-12-31');
+        $qr4 = Report::where('dept_id', $id)
+            ->whereBetween('created_at', array($from4, $to4))
+            ->get();
+        return $qr4;
+    }
+
+    public function qrt($id, $year) {
+        $qrt = Report::where('dept_id', $id)
+            ->whereYear('created_at', $year)
+            ->get();
+        return $qrt;
+    }
+
+    public function jan($id, $year) {
+        $from1 = date($year. '-01-01');
+        $to1 = date($year. '-01-31');
+        $m1 = Report::where('dept_id', $id)->whereBetween('created_at', array($from1, $to1))->get();
+        return $m1;
+    }
+
+    public function feb($id, $year) {
+        $from2 = date($year. '-02-01');
+        $to2 = date($year. '-02-29');
+         $m2 = Report::where('dept_id', $id)->whereBetween('created_at', array($from2, $to2))->get();
+         return $m2;
+    }
+
+    public function mar($id, $year) {
+        $from3 = date($year. '-03-01');
+        $to3 = date($year. '-03-31');
+        $m3 = Report::where('dept_id', $id)->whereBetween('created_at', array($from3, $to3))->get();
+        return $m3;
+    }
+
+    public function total1($id, $year) {
+        $fromt1 = date($year. '-01-01');
+        $tot1 = date($year. '-03-31');
+        $mt = Report::where('dept_id', $id)->whereBetween('created_at', array($fromt1, $tot1))->get();
+        return $mt;
+    }
+
+    public function apr($id, $year) {
+        $from1 = date($year. '-04-01');
+        $to1 = date($year. '-04-31');
+        $m1 = Report::where('dept_id', $id)->whereBetween('created_at', array($from1, $to1))->get();
+        return $m1;
+    }
+
+    public function may($id, $year) {
+        $from2 = date($year. '-05-01');
+        $to2 = date($year. '-05-30');
+        $m2 = Report::where('dept_id', $id)->whereBetween('created_at', array($from2, $to2))->get();
+        return $m2;
+    }
+
+    public function jun($id, $year) {
+        $from3 = date($year. '-06-01');
+        $to3 = date($year. '-06-31');
+        $m3 = Report::where('dept_id', $id)->whereBetween('created_at', array($from3, $to3))->get();
+        return $m3;
+    }
+
+    public function total2($id, $year) {
+        $fromt1 = date($year. '-04-01');
+        $tot1 = date($year. '-06-31');
+        $mt = Report::where('dept_id', $id)->whereBetween('created_at', array($fromt1, $tot1))->get();
+        return $mt;
+    }
+    public function jul($id, $year) {
+        $from1 = date($year. '-07-01');
+        $to1 = date($year. '-07-31');
+        $m1 = Report::where('dept_id', $id)->whereBetween('created_at', array($from1, $to1))->get();
+        return $m1;
+    }
+
+    public function aug($id, $year) {
+        $from2 = date($year. '-08-01');
+        $to2 = date($year. '-08-30');
+        $m2 = Report::where('dept_id', $id)->whereBetween('created_at', array($from2, $to2))->get();
+        return $m2;
+    }
+
+    public function sept($id, $year) {
+        $from3 = date($year. '-09-01');
+        $to3 = date($year. '-09-31');
+        $m3 = Report::where('dept_id', $id)->whereBetween('created_at', array($from3, $to3))->get();
+        return $m3;
+    }
+
+    public function total3($id, $year) {
+        $fromt1 = date($year. '-07-01');
+        $tot1 = date($year. '-09-31');
+        $mt = Report::where('dept_id', $id)->whereBetween('created_at', array($fromt1, $tot1))->get();
+        return $mt;
+    }
+
+    public function oct($id, $year) {
+        $from1 = date($year. '-10-01');
+        $to1 = date($year. '-10-31');
+        $m1 = Report::where('dept_id', $id)->whereBetween('created_at', array($from1, $to1))->get();
+        return $m1;
+    }
+
+    public function nov($id, $year) {
+        $from2 = date($year. '-11-01');
+        $to2 = date($year. '-11-30');
+        $m2 = Report::where('dept_id', $id)->whereBetween('created_at', array($from2, $to2))->get();
+        return $m2;
+    }
+
+    public function dec($id, $year) {
+        $from3 = date($year. '-12-01');
+        $to3 = date($year. '-12-31');
+        $m3 = Report::where('dept_id', $id)->whereBetween('created_at', array($from3, $to3))->get();
+        return $m3;
+    }
+
+    public function total4($id, $year) {
+        $fromt1 = date($year. '-10-01');
+        $tot1 = date($year. '-12-31');
+        $mt = Report::where('dept_id', $id)->whereBetween('created_at', array($fromt1, $tot1))->get();
+        return $mt;
+    }
+
+    public function sender($id) {
+        $list = Report::join('users','users.id','=','reports.user_id')
+            ->where('dept_id', $id)
+            ->select('user_id')
+            ->groupBy('user_id')
+            ->get();
+
+        $allsenders = count($list);
+        $senders = array();
+        for ($i=0; $i < $allsenders ; $i++) { 
+            array_push($senders, $list[$i]['user_id']);
+        }
+
+        $names = User::whereIn('id', $senders)->get();
+        return $names;
+    }
+
+    public function daily($id, $year, $month, $length, $days){
+        $data = array (0,);
+        for ($i=1; $i <= $length; $i++) { 
+            $new =  array ();
+            for ($x=1; $x <= $days; $x++) { 
+                array_push($new, $day = Report::where('dept_id', $id)
+                    ->whereYear('created_at', $year)
+                    ->whereMonth('created_at', $month)
+                    ->whereDay('created_at', $x)
+                    ->sum('row'.$i));
+                }
+            array_push($data,$new);
+            }
+        return $data;
+    }
+
+    public function alldaily($id, $year, $month, $length) {
+        $total = array (0,);
+            for ($x=1; $x <= $length; $x++) { 
+                array_push($total, $day = Report::where('dept_id', $id)
+                    ->whereYear('created_at', $year)
+                    ->whereMonth('created_at', $month)
+                    ->sum('row'.$x));
+            }
+        return $total;
+    }
+
     public function data() 
     {
     	$data =  array

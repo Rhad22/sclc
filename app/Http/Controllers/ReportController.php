@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\UrlGenerator;
 use App\Content;
 use App\Report;
 use App\Notify;
 use App\Profile;
 use App\User;
+use PDF;
 use App\Traits\reports;
 
 class ReportController extends Controller
@@ -15,33 +17,15 @@ class ReportController extends Controller
     use reports;
 
     public function yearly(Request $request, $id) {
-        
-
         $year = $request->input('year');
         ($year == "") ? $year = date('Y'): "";
-        $from = date($year . '-01-01');
-        $to = date($year . '-03-31');
-        $from2 = date($year . '-04-01');
-        $to2 = date($year . '-06-30');
-        $from3 = date($year . '-07-01');
-        $to3 = date($year . '-09-30');
-        $from4 = date($year . '-10-01');
-        $to4 = date($year . '-12-31');
-        $qr1 = Report::where('dept_id',$id)
-            ->whereBetween('created_at', array($from, $to))
-            ->get();
-        $qr2 = Report::where('dept_id',$id)
-            ->whereBetween('created_at', array($from2, $to2))
-            ->get();
-        $qr3 = Report::where('dept_id',$id)
-            ->whereBetween('created_at', array($from3, $to3))
-            ->get();
-        $qr4 = Report::where('dept_id', $id)
-            ->whereBetween('created_at', array($from4, $to4))
-            ->get();
-        $qrt = Report::where('dept_id', $id)
-            ->whereYear('created_at', $year)
-            ->get();
+
+        $qr1 = $this->qr1($id, $year);
+        $qr2 = $this->qr2($id, $year);
+        $qr3 = $this->qr3($id, $year);
+        $qr4 = $this->qr4($id, $year);
+        $qrt = $this->qrt($id, $year);
+
         $content = $this->data();
         $length = count($content[$id]);
 
@@ -53,21 +37,32 @@ class ReportController extends Controller
         'qr1','qr2','qr3','qr4','qrt', 'content', 'id', 'length', 'notifies', 'sidebar', 'dept'));
     }
 
+    public function yearlyPDF($id, $year) {
+        $qr1 = $this->qr1($id, $year);
+        $qr2 = $this->qr2($id, $year);
+        $qr3 = $this->qr3($id, $year);
+        $qr4 = $this->qr4($id, $year);
+        $qrt = $this->qrt($id, $year);
+
+        $content = $this->data();
+        $length = count($content[$id]);
+
+        $url = url()->previous();
+        $pdf = PDF::loadView('report.pdfyearly', compact('year',
+        'qr1','qr2','qr3','qr4','qrt', 'content', 'id', 'length', 'notifies', 'sidebar', 'dept','url'));
+
+        return $pdf->stream('SCLC_yearly_report.pdf');
+    }
+
     public function first(Request $request, $id) {
         $year = $request->input('year');
         ($year == "") ? $year = date('Y'): "";
-        $from1 = date($year. '-01-01');
-        $to1 = date($year. '-01-31');
-        $from2 = date($year. '-02-01');
-        $to2 = date($year. '-02-30');
-        $from3 = date($year. '-03-01');
-        $to3 = date($year. '-03-31');
-        $fromt1 = date($year. '-01-01');
-        $tot1 = date($year. '-03-31');
-        $m1 = Report::where('dept_id', $id)->whereBetween('created_at', array($from1, $to1))->get();
-        $m2 = Report::where('dept_id', $id)->whereBetween('created_at', array($from2, $to2))->get();
-        $m3 = Report::where('dept_id', $id)->whereBetween('created_at', array($from3, $to3))->get();
-        $mt = Report::where('dept_id', $id)->whereBetween('created_at', array($fromt1, $tot1))->get();
+        
+        $m1 = $this->jan($id, $year);
+        $m2 = $this->feb($id, $year);
+        $m3 = $this->mar($id, $year);
+        $mt = $this->total1($id, $year);
+
         $content =$this->data();
         $length = count($content[$id]);
 
@@ -78,21 +73,30 @@ class ReportController extends Controller
         return view('/report.first', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length', 'notifies', 'sidebar', 'dept'));
     }
 
+    public function firstPDF($id, $year) {
+        $m1 = $this->jan($id, $year);
+        $m2 = $this->feb($id, $year);
+        $m3 = $this->mar($id, $year);
+        $mt = $this->total1($id, $year);
+
+        $content =$this->data();
+        $length = count($content[$id]);
+
+        $url = url()->previous();
+        $pdf = PDF::loadView('report.pdffirst', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length','url'));
+
+        return $pdf->stream('SCLC_quarterly_report.pdf');
+    }
+
     public function second(Request $request, $id) {
         $year = $request->input('year');
         ($year == "") ? $year = date('Y'): "";
-        $from1 = date($year. '-04-01');
-        $to1 = date($year. '-04-31');
-        $from2 = date($year. '-05-01');
-        $to2 = date($year. '-05-30');
-        $from3 = date($year. '-06-01');
-        $to3 = date($year. '-06-31');
-        $fromt1 = date($year. '-04-01');
-        $tot1 = date($year. '-06-31');
-        $m1 = Report::where('dept_id', $id)->whereBetween('created_at', array($from1, $to1))->get();
-        $m2 = Report::where('dept_id', $id)->whereBetween('created_at', array($from2, $to2))->get();
-        $m3 = Report::where('dept_id', $id)->whereBetween('created_at', array($from3, $to3))->get();
-        $mt = Report::where('dept_id', $id)->whereBetween('created_at', array($fromt1, $tot1))->get();
+
+        $m1 = $this->apr($id, $year);
+        $m2 = $this->may($id, $year);
+        $m3 = $this->jun($id, $year);
+        $mt = $this->total2($id, $year);
+        
         $content =$this->data();
         $length = count($content[$id]);
 
@@ -103,21 +107,30 @@ class ReportController extends Controller
         return view('/report.second', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length', 'notifies', 'sidebar', 'dept'));
     }
 
+    public function secondPDF($id, $year) {
+        $m1 = $this->apr($id, $year);
+        $m2 = $this->may($id, $year);
+        $m3 = $this->jun($id, $year);
+        $mt = $this->total2($id, $year);
+
+        $content =$this->data();
+        $length = count($content[$id]);
+
+        $url = url()->previous();
+        $pdf = PDF::loadView('report.pdfsecond', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length','url'));
+
+        return $pdf->stream('SCLC_quarterly_report.pdf');
+    }
+
     public function third(Request $request, $id) {
         $year = $request->input('year');
         ($year == "") ? $year = date('Y'): "";
-        $from1 = date($year. '-07-01');
-        $to1 = date($year. '-07-31');
-        $from2 = date($year. '-08-01');
-        $to2 = date($year. '-08-30');
-        $from3 = date($year. '-09-01');
-        $to3 = date($year. '-09-31');
-        $fromt1 = date($year. '-07-01');
-        $tot1 = date($year. '-09-31');
-        $m1 = Report::where('dept_id', $id)->whereBetween('created_at', array($from1, $to1))->get();
-        $m2 = Report::where('dept_id', $id)->whereBetween('created_at', array($from2, $to2))->get();
-        $m3 = Report::where('dept_id', $id)->whereBetween('created_at', array($from3, $to3))->get();
-        $mt = Report::where('dept_id', $id)->whereBetween('created_at', array($fromt1, $tot1))->get();
+        
+        $m1 = $this->jul($id, $year);
+        $m2 = $this->aug($id, $year);
+        $m3 = $this->sept($id, $year);
+        $mt = $this->total3($id, $year);
+        
         $content =$this->data();
         $length = count($content[$id]);
 
@@ -128,22 +141,31 @@ class ReportController extends Controller
         return view('/report.third', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length', 'notifies', 'sidebar', 'dept'));
     }
 
+    public function thirdPDF($id, $year) {
+        $m1 = $this->jul($id, $year);
+        $m2 = $this->aug($id, $year);
+        $m3 = $this->sept($id, $year);
+        $mt = $this->total3($id, $year);
+
+        $content =$this->data();
+        $length = count($content[$id]);
+
+        $url = url()->previous();
+        $pdf = PDF::loadView('report.pdfthird', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length','url'));
+
+        return $pdf->stream('SCLC_quarterly_report.pdf');
+    }
+
 
     public function fourth(Request $request, $id) {
         $year = $request->input('year');
         ($year == "") ? $year = date('Y'): "";
-        $from1 = date($year. '-10-01');
-        $to1 = date($year. '-10-31');
-        $from2 = date($year. '-11-01');
-        $to2 = date($year. '-11-30');
-        $from3 = date($year. '-12-01');
-        $to3 = date($year. '-12-31');
-        $fromt1 = date($year. '-10-01');
-        $tot1 = date($year. '-12-31');
-        $m1 = Report::where('dept_id', $id)->whereBetween('created_at', array($from1, $to1))->get();
-        $m2 = Report::where('dept_id', $id)->whereBetween('created_at', array($from2, $to2))->get();
-        $m3 = Report::where('dept_id', $id)->whereBetween('created_at', array($from3, $to3))->get();
-        $mt = Report::where('dept_id', $id)->whereBetween('created_at', array($fromt1, $tot1))->get();
+        
+        $m1 = $this->oct($id, $year);
+        $m2 = $this->nov($id, $year);
+        $m3 = $this->dec($id, $year);
+        $mt = $this->total4($id, $year);
+        
         $content = $this->data();
         $length = count($content[$id]);
 
@@ -152,6 +174,21 @@ class ReportController extends Controller
         $dept = $this->dept();
 
         return view('/report.fourth', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length', 'notifies', 'sidebar', 'dept'));
+    }
+
+    public function fourthPDF($id, $year) {
+        $m1 = $this->oct($id, $year);
+        $m2 = $this->nov($id, $year);
+        $m3 = $this->dec($id, $year);
+        $mt = $this->total4($id, $year);
+
+        $content =$this->data();
+        $length = count($content[$id]);
+
+        $url = url()->previous();
+        $pdf = PDF::loadView('report.pdffourth', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length','url'));
+
+        return $pdf->stream('SCLC_quarterly_report.pdf');
     }
 
     public function monthly(Request $request, $id) {
@@ -173,46 +210,33 @@ class ReportController extends Controller
                     ->whereMonth('created_at', $month)
                     ->get();
         }
-        else {
-            for ($i=1; $i <= $length; $i++) { 
-            $new =  array ();
-            for ($x=1; $x <= $days; $x++) { 
-                array_push($new, $day = Report::where('dept_id', $id)
-                    ->whereYear('created_at', $year)
-                    ->whereMonth('created_at', $month)
-                    ->whereDay('created_at', $x)
-                    ->sum('row'.$i));
-                }
-            array_push($data,$new);
-            }
-        }
-        $total = array (0,);
-        for ($x=1; $x <= $length; $x++) { 
-                array_push($total, $day = Report::where('dept_id', $id)
-                    ->whereYear('created_at', $year)
-                    ->whereMonth('created_at', $month)
-                    ->sum('row'.$x));
-        }
+        else {$data = $this->daily($id, $year, $month, $length, $days);}
+        $total = $this->alldaily($id, $year, $month, $length);
 
         $notifies = $this->notification();
         $sidebar = $this->sidebar();
         $dept = $this->dept();
 
-        $list = Report::join('users','users.id','=','reports.user_id')
-            ->where('dept_id', $id)
-            ->select('user_id')
-            ->groupBy('user_id')
-            ->get();
-
-        $allsenders = count($list);
-        $senders = array();
-        for ($i=0; $i < $allsenders ; $i++) { 
-            array_push($senders, $list[$i]['user_id']);
-        }
-
-        $names = User::whereIn('id', $senders)->get();
+        $names =  $this->sender($id);
+        
 
         return view('/report.monthly', compact('data', 'year', 'id', 'content', 'length', 'days', 'dept', 'month', 'hmonth', 'total', 'sdata', 'notifies', 'sidebar', 'dept', 'names'));
+    }
+
+    public function monthlyPDF($year,$month, $id){
+        $dept = $this->dept();
+        
+        $hmonth  = date("F", strtotime("2011-".$month. "-01"));
+        $days = cal_days_in_month(CAL_GREGORIAN,$month,$year);
+        $content = $this->data();
+        $length = count($content[$id]);
+        $data = $this->daily($id, $year, $month, $length, $days);
+        $total = $this->alldaily($id, $year, $month, $length);
+        $names =  $this->sender($id);
+        $url = url()->previous();
+        $pdf = PDF::loadView('report.pdf', compact('data', 'year', 'id', 'content', 'length', 'days', 'dept', 'month', 'hmonth', 'total', 'sdata', 'notifies', 'sidebar', 'dept', 'names','url'));
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream('SCLC_monthly_report.pdf');
     }
 
     public function viewreport(Request $request, $ids, $link_id, $notif_id)
@@ -320,12 +344,6 @@ class ReportController extends Controller
         return redirect()->back()->with('success', ' Report send successfully');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($ids, $id)
     {
         $days = Report::find($id);
@@ -340,13 +358,6 @@ class ReportController extends Controller
         return view('report.edit', compact('days', 'content', 'length', 'ids', 'dept', 'notifies', 'sidebar', 'dept'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $ids, $id)
     {
         $post = Report::find($id);
@@ -399,28 +410,14 @@ class ReportController extends Controller
         return redirect()->back()->with('success', ' Report successfully Updated');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
     }
-
-   
 
 }

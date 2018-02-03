@@ -6,10 +6,13 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "barryvdh/laravel-dompdf": "^0.8.1",
         "consoletvs/charts": "5.*",
+        "goodnesskay/laravelpdfviewer": "^1.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
+        "pusher/pusher-php-server": "~3.0",
         "unisharp/laravel-ckeditor": "^4.6"
     },
     "require-dev": {

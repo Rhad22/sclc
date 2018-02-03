@@ -98,8 +98,14 @@
 			</table>		
 		</div>
 		<div style="text-align: right;">
-		<a href="#" class="btn btn-primary legitRipple"><i class="icon-printer"></i> <span class="hidden-xs position-right">Print</span></a>
-		</div>
+			{!! Form::open(['action' => ['ReportController@thirdPDF', $id, $year], 'method' => 'GET']) !!}
+                       	{{ csrf_field() }}
+    				<input name="year" type="hidden" value="{{$year}}">
+    				<input name="id" type="hidden" value="{{$id}}">
+    				<button type="submit" class="btn btn-sm btn-primary">Generate PDF <i class="icon-printer position-right"></i></button>
+					<input type="hidden" value="someVariable" /> 
+					{!! Form::close() !!}
+			</div>
 		@include('layouts.footer')
 	</div>
 </div>	

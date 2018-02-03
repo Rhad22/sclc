@@ -10,6 +10,7 @@ use App\Report;
 use App\Notify;
 use Charts;
 use Auth;
+use PDF;
 use App\Traits\reports;
 
 class HomeController extends Controller
@@ -32,15 +33,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $announcements = Announcement::orderBy('created_at','desc')->paginate(5);
-
+        $announcements = User::join('announcements','announcements.user_id','=','users.id')
+            ->orderBy('announcements.created_at','DESC')->paginate(20);
         $content = $this->title();
-        $dept = 1;
-        $row = 1;
-        $year = 2018;
+        $ids = auth()->user()->id;
+        $profile = Profile::where('user_id', $ids)->first();
+        if (auth()->user()->position == 'Admin') {
+            $dept = 1;
+        }else {
+            $dept = $profile->dept;
+        }
         $dept_id = 1;
-
-        
+        $row = 1;
+        $year = date('Y');
             $value =  array ();
             for ($x=1; $x <= 12; $x++) { 
                 array_push($value, $day = Report::where('dept_id', $dept)
@@ -48,18 +53,39 @@ class HomeController extends Controller
                     ->whereMonth('created_at', $x)
                     ->sum('row'.$row));
                 }
-         
-        
+
+        $allactivity = User::join('notifies','notifies.sender','=','users.id')
+            ->where(['receiver'=> $ids])
+            ->orderBy('notifies.created_at','DESC')
+            ->get();
+
+        $previous_week = strtotime("-1 week +1 day");
+        $start_week = strtotime("last sunday midnight",$previous_week);
+        $end_week = strtotime("next saturday",$start_week);
+        $start = date("Y-m-d",$end_week);
+        $end = date('Y-m-d');
+        $week = Notify::where(['receiver'=> $ids])
+            ->whereBetween('created_at', array($start, $end))
+            ->count('id');
+
+        $month = date('m');
+        $buwan = Notify::where(['receiver'=> $ids])
+            ->whereMonth('created_at', $month)
+            ->count('id');
+        $all = Notify::where(['receiver'=> $ids])
+            ->count('id');
+
         $notifies = $this->notification();
         $sidebar = $this->sidebar();
         $dept = $this->dept();
 
-        return view('home', compact('chart','announcements', 'notifies', 'sidebar', 'dept','value', 'dept_id', 'row', 'content', 'year'));
+        return view('home', compact('chart','announcements', 'notifies', 'sidebar', 'dept','value', 'dept_id', 'row', 'content', 'year', 'allactivity', 'week', 'buwan', 'all', 'profile'));
     }
 
     public function chart(Request $request, $dept_id, $row)
     {
-        $announcements = Announcement::orderBy('created_at','desc')->paginate(5);
+        $announcements = User::join('announcements','announcements.user_id','=','users.id')
+            ->orderBy('announcements.created_at','DESC')->paginate(20);
         $dept = $this->dept();
         $content = $this->title();
         $year = $request->input('year');
@@ -73,13 +99,35 @@ class HomeController extends Controller
                     ->whereMonth('created_at', $x)
                     ->sum('row'.$row));
                 }
-         
-        
+        $ids = auth()->user()->id;
+        $allactivity = User::join('notifies','notifies.sender','=','users.id')
+            ->where(['receiver'=> $ids])
+            ->orderBy('notifies.created_at','DESC')
+            ->get();
+
+        $previous_week = strtotime("-1 week +1 day");
+        $start_week = strtotime("last sunday midnight",$previous_week);
+        $end_week = strtotime("next saturday",$start_week);
+        $start = date("Y-m-d",$end_week);
+        $end = date('Y-m-d');
+        $week = Notify::where(['receiver'=> $ids])
+            ->whereBetween('created_at', array($start, $end))
+            ->count('id');
+
+        $month = date('m');
+        $buwan = Notify::where(['receiver'=> $ids])
+            ->whereMonth('created_at', $month)
+            ->count('id');
+        $all = Notify::where(['receiver'=> $ids])
+            ->count('id');
+
+        $profile = Profile::where('user_id', $ids)->first();
+
         $notifies = $this->notification();
         $sidebar = $this->sidebar();
         $dept = $this->dept();
 
-        return view('home', compact('chart','announcements', 'notifies', 'sidebar', 'dept','value', 'dept', 'dept_id', 'content', 'row' , 'year'));
+        return view('home', compact('chart','announcements', 'notifies', 'sidebar', 'dept','value', 'dept', 'dept_id', 'content', 'row' , 'year', 'allactivity', 'week', 'buwan', 'all', 'profile'));
     }
 
     public function users()
@@ -101,16 +149,7 @@ class HomeController extends Controller
         return view('users.show', compact('users', 'dept'));
     }
 
-    public function chatbox()
-    {
-        $notifies = $this->notification();
-        $sidebar = $this->sidebar();
-        $dept = $this->dept();
-
-        return view('messenger.chatbox', compact('notifies', 'sidebar', 'dept'));
-    }
-
-     public function notif()
+    public function notif()
     {
         $ids = auth()->user()->id;
         $allnotify = User::join('notifies','notifies.sender','=','users.id')

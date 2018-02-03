@@ -54,8 +54,8 @@
                                                 href="/myprofile/{{$notify->link_id}}/{{$notify->id}}"
                                             @endif
                                         >{{$notify->firstname}} {{$notify->lastname}} {{$notify->content}}
-                                        <div class="media-annotation">@if ($notify->type == 0)
-                                                <i class=" icon-file-plus"></i> @else <i class="icon-paperplane"></i> @endif {{$notify->created_at->diffForHumans()}} ...</div></a>
+                                        <div class="media-annotation">@if ($notify->type < 1)
+                                                <i class=" icon-file-plus text-warning"></i> @elseif ($notify->type < 2)<i class="icon-paperplane text-primary"></i> @else <i class="icon-profile text-success"></i> @endif{{$notify->created_at->diffForHumans()}} ...</div></a>
                                     </div>
                                 </li>
                                 @endif 
@@ -171,7 +171,9 @@
 
                                     <!-- Main -->
                                     <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
+                                    @if ( auth()->user()->position !== 'District Pastor' )
                                     <li><a href="/home/1/1"><i class="icon-stats-dots"></i> <span>Dashboard</span></a></li>
+                                    @endif
                                     @if (Auth::user()->position == 'Admin')
                                     <li><a href="/users"><i class="icon-users4"></i> <span>Employee</span></a></li>
                                     @endif
@@ -214,7 +216,7 @@
                                     @endif
                                     @endif
                                     <li>
-                                        <a href="/messenger.chatbox"><i class="icon-comment-discussion"></i> <span>Messages<span class="label bg-blue-400">8</span></span></a>
+                                        <a href="/chat"><i class="icon-comment-discussion"></i> <span>Messages<span class="label bg-blue-400">8</span></span></a>
                                     </li>
                                     <li>
                                         <a href="/notif"><i class="icon-bell2"></i> <span>Notifications<span class="label bg-orange-400">@if (count($notifies) > 0){{count($notifies)}} @endif</span></span></a> 

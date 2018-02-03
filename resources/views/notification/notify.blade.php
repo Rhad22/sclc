@@ -28,8 +28,8 @@
                                                 href="/announcements/{{$notify->link_id}}/{{$notify->id}}"
                                             @else
                                                 href="/myprofile/{{$notify->link_id}}/{{$notify->id}}"
-                                            @endif><div class="col-md-1 col-xs-2"><img src="{{Storage::url($notify->profile_pic)}}" class="img-circle img-lg" alt=""></div>  <div class="col-md-11 col-xs-10"><b>{{$notify->firstname}} {{$notify->lastname}}</b> {{$notify->content}} <br> <span class="media-annotation">@if ($notify->type == 0)
-                                            	<i class=" icon-file-plus"></i> @else <i class="icon-paperplane"></i> @endif  {{$notify->created_at->diffForHumans()}} ...</span> </div></a></td>
+                                            @endif><div class="col-md-1 col-xs-2"><img src="{{Storage::url($notify->profile_pic)}}" class="img-circle img-lg" alt=""></div>  <div class="col-md-11 col-xs-10"><b>{{$notify->firstname}} {{$notify->lastname}}</b> {{$notify->content}} <br> <span class="media-annotation">@if ($notify->type < 1)
+                                                <i class=" icon-file-plus text-warning"></i> @elseif ($notify->type < 2)<i class="icon-paperplane text-primary"></i> @else <i class="icon-profile text-success"></i> @endif{{$notify->created_at->diffForHumans()}} ...</span> </div></a></td>
 
 						</tr>
 						@endif 

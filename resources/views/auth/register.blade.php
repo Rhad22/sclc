@@ -116,7 +116,9 @@
 
                                     <!-- Main -->
                                     <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
-                                    <li><a href="/"><i class="icon-stats-dots"></i> <span>Dashboard</span></a></li>
+                                     @if ( auth()->user()->position !== 'District Pastor' )
+                                    <li><a href="/home/1/1"><i class="icon-stats-dots"></i> <span>Dashboard</span></a></li>
+                                    @endif
                                     @if (Auth::user()->position == 'Admin')
                                     <li><a href="/users"><i class="icon-users4"></i> <span>Employee</span></a></li>
                                     @endif
@@ -271,22 +273,20 @@
                                         @endif
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="col-md-4">
-                                     <div class="form-group{{ $errors->has('dept') ? ' has-error' : '' }}">
+                                    <div class="form-group{{ $errors->has('dept') ? ' has-error' : '' }}">
                                         <label for="dept" class="col-md-4 control-label">Department</label>
                                             <div class="col-md-9">
-                                                <label>
-                                                    <input type="checkbox" name="dept" value="0">  All<br>
-                                                    <input type="checkbox" name="dept" value="1">  Communication Department<br>
-                                                    <input type="checkbox" name="dept" value="2">  Children's Ministries<br>
-                                                    <input type="checkbox" name="dept" value="3">  Women's Ministries<br>
-                                                    <input type="checkbox" name="dept" value="4">  Ministerial<br>
-                                                    <input type="checkbox" name="dept" value="5">  Stewardship Ministries<br>
-                                                    <input type="checkbox" name="dept" value="6">  Health Ministries<br>
-                                                    <input type="checkbox" name="dept" value="7">  Personal Ministries<br>
-                                                </label>
+                                                <select name="dept">
+                                                    <option value="0">All</option>
+                                                    <option value="1">Communication Department</option>
+                                                    <option value="2">Children's Ministries</option>
+                                                    <option value="3">Women's Ministries</option>
+                                                    <option value="4">Ministerial</option>
+                                                    <option value="5">Stewardship Ministries</option>
+                                                    <option value="6">Health Ministries</option>
+                                                    <option value="7">Personal Ministries</option>
+                                                </select>
                                                  @if ($errors->has('dept'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('dept') }}</strong>
@@ -294,9 +294,7 @@
                                                 @endif
                                             </div>
                                     </div>
-                                </div>
 
-                                <div class="col-md-4">
                                     <div class="form-group{{ $errors->has('district') ? ' has-error' : '' }}">
                                         <label for="district" class="col-md-5 control-label">District</label>
                                         <div class="col-md-8">
@@ -314,13 +312,12 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-2 control-label">E-Mail Address</label>
+                                <div class="col-md-8">
+                                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-3 control-label">E-Mail Address</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-9">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
@@ -332,9 +329,9 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-2 control-label">Password</label>
+                            <label for="password" class="col-md-3 control-label">Password</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-9">
                                 <input id="password" type="password" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
@@ -346,20 +343,25 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-2 control-label">Confirm Password</label>
+                            <label for="password-confirm" class="col-md-3 control-label">Confirm Password</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-9">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                            <div class="col-md-2 col-md-offset-10">
                                 <button type="submit" class="btn btn-primary">
                                     Register
                                 </button>
                             </div>
                         </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
                     </form>
                 </div>
             

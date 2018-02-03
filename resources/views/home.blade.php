@@ -3,13 +3,10 @@
 @section('content')
 <div class="content-wrapper">
 	<div class="content">
-			<h4>Dashboard</h4>
-			
-			
+@if ( auth()->user()->position !== 'District Pastor' )
 		
-		<div class="panel panel-flat">
 			<div class="panel panel-body">
-				
+			
 				<div class="app">
 					<div style="text-align: right;">
 			{!! Form::open(['action' => ['HomeController@chart', $dept_id, $row],'method' => 'GET']) !!}
@@ -38,85 +35,141 @@
 					</center>
         		</div>
         	</div>
+        	
 			</div>
-		</div>
+		
 		<div class="row">
-			<div class="col-lg-8 data">
-					<div class="panel panel-flat">
-							@if(count($announcements) > 0)
-							<div class="panel panel-body">
-								<h4><span class="text-semibold">Latest Announcements</span></h4>
-								<div id="DataTables_Table_1_wrapper" class="dataTables_wrapper no-footer">
-									<div class="datatable-scroll-wrap">
-										<table class="table table-condensed table-hover" id="DataTables_Table_1" role="grid" aria-describedby="DataTables_Table_1_info">
-											<thead>
-												<tr role="row">
-													<th>
-														<strong>Title</strong>
-													</th>
-													<th>
-														<strong>Views</strong>
-													</th>
-													<th>
-														<strong>Comments</strong>
-													</th>
-													<th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending">
-														<strong>Date posted</strong>
-													</th>	
-												</tr>
-											</thead>
-											<tbody>	
-												@foreach($announcements as $announcement)
-												<tr role="row" class="odd">
-													<td>
-														<a href="/announcements/{{$announcement->id}}">
-															<div class="letter-icon-title text-default">{{$announcement->title}}</div>
+			<div class="col-lg-8">
+				<div class="panel panel-flat">
+								<div class="panel-heading">
+									<h5 class="panel-title"><i class="icon-newspaper text-success position-left"></i> Announcements</h5>
+									<div class="heading-elements" style="padding-top: 10px">
+										<span >
+											<i class="icon-history text-warning position-left"></i> <span></span> {{date("M j, g:i")}}
+										</span>
+				                	</div>
+								</div>
+
+								<div class="table-responsive">
+									<table class="table text-nowrap">
+										<thead>
+											<tr>
+												<th><i class="icon-watch2 text-warning position-left"></i>Posted</th>
+												<th><i style="margin-left: 7px" class=" icon-user text-success position-left"></i>User</th>
+												<th><i class=" icon-envelop5 text-info-800 position-left"></i>Description</th>
+												
+											</tr>
+										</thead>
+										<tbody>
+											@foreach($announcements as $announcement)
+											<tr>
+												<td class="text-center">
+													@if ($announcement->created_at->format('y m d') < date('y m d')) {{$announcement->created_at->format(' M d')}} @else {{$announcement->created_at->format(' g:i a')}} @endif
+												</td>
+												<td>
+												<div class="media-left media-middle">
+														<a href="/myprofile/{{$announcement->email}}" >
+															<img src="{{Storage::url($announcement->profile_pic)}}" class="img-circle img-xs" alt="">
 														</a>
-													</td>	
-													<td>
-														<a href="/announcements/{{$announcement->id}}">
-															<div class="letter-icon-title text-default">none</div>
-														</a>
-													</td>
-													<td>
-														<a href="/announcements/{{$announcement->id}}">
-															<div class="letter-icon-title text-default">none</div>
-														</a>
-													</td>
-													<td>
-														<a href="/announcements/{{$announcement->id}}">
-															<div class="letter-icon-title text-default">{{$announcement->created_at->diffForHumans()}}</div>
-														</a>
-													</td>
-												</tr>
-												@endforeach
-											</tbody>
-										</table>
-									</div>
-									<div class="datatable-footer">
-										<div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_1_paginate">
-											{{ $announcements->links() }}
-										</div>
+													</div>
+
+													<div class="media-body">
+														<a href="/myprofile/{{$announcement->email}}" class="display-inline-block text-default text-semibold letter-icon-title" data-popup="tooltip" title="View Profile">{{$announcement->firstname}} {{$announcement->lastname}}</a>
+														<div class="text-muted text-size-small"><span class="status-mark border-success position-left"></span> {{$announcement->position}}</div>
+													</div>
+												</td>
+												<td>
+													<a href="/announcements/{{$announcement->id}}" data-popup="tooltip" title="View Content" class="text-default display-inline-block">
+														<span class="text-semibold">{!!substr("$announcement->title",0,60)!!}</span>
+														<span class="display-block text-muted">{!!substr("$announcement->content",3,60)!!}</span>
+													</a>
+												</td>
+											</tr>
+											@endforeach
+										</tbody>
+									</table>
+								</div>
+							</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="panel panel-flat">
+								<div class="panel-heading">
+									<h6 class="panel-title"><i class="icon-clipboard3 text-primary position-left"></i> Activity Log</h6>
+									<div class="heading-elements">
+										<span class="heading-text"><i class="icon-history text-warning position-left"></i> {{date("M j, g:i")}}</span>
+										<span class="label bg-success heading-text">Online</span>
 									</div>
 								</div>
-								@else		
-									<h4 align="center">No posts found</h4>		
-								@endif
-							</div>	
-					</div>
-					<div class="panel panel-flat">
-						<div class="panel panel-body">
-							<h4><span class="text-semibold">Activity Log</span></h4>
-						</div>	
-					</div>
 
-			</div>
-			<div class="col-lg-4 data">
-				<div class="panel panel-flat">
-					<div class="panel panel-body">
-						<h4><span class="text-semibold">Messages</span></h4>
-					</div>
-				</div>
+								<!-- Numbers -->
+								<div class="container-fluid">
+									<div class="row text-center">
+										<div class="col-md-4">
+											<div class="content-group">
+												<h6 class="text-semibold no-margin"><i class="icon-clipboard3 position-left text-slate"></i> {{$week}}</h6>
+												<span class="text-muted text-size-small">this week</span>
+											</div>
+										</div>
+
+										<div class="col-md-4">
+											<div class="content-group">
+												<h6 class="text-semibold no-margin"><i class="icon-calendar3 position-left text-slate"></i>{{$buwan}}</h6>
+												<span class="text-muted text-size-small">this month</span>
+											</div>
+										</div>
+
+										<div class="col-md-4">
+											<div class="content-group">
+												<h6 class="text-semibold no-margin"><i class="icon-comments position-left text-slate"></i>{{$all}}</h6>
+												<span class="text-muted text-size-small">all activity</span>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+								<!-- /numbers -->
+								<hr>
+
+								<!-- Area chart -->
+								<div id="messages-stats"></div>
+								<!-- /area chart -->
+
+
+
+								<!-- Tabs content -->
+								<div class="tab-content">
+									<div style="padding-left: 13px">
+										<ul class="media-list" style="height:400px; overflow-y: scroll;">
+											@foreach($allactivity as $activity)
+											<li class="media table-inbox-subject letter-icon-title text-default">
+												<div class="media-left">
+													<img src="{{Storage::url($activity->profile_pic)}}" class="img-circle img-xs" alt="">
+													<span class="badge label-rounded "><i class="icon-envelop5"></i></span>
+												</div>
+
+												<div class="media-body" style="padding-right:10px">
+													<a @if ($activity->type < 1)
+                                                href="/report/dept={{$activity->dept_id}}/{{$activity->link_id}}/{{$activity->id}}"
+                                            @elseif ($activity->type < 2) 
+                                                href="/announcements/{{$activity->link_id}}/{{$activity->id}}"
+                                            @else
+                                                href="/myprofile/{{$activity->link_id}}/{{$activity->id}}"
+                                            @endif>
+														{{$activity->firstname}} {{$activity->lastname}}
+														<span class="media-annotation pull-right">@if ($activity->created_at->format('y m d') < date('y m d')) {{$activity->created_at->format(' M d')}} @else {{$activity->created_at->format(' g:i a')}} @endif</span>
+													
+													<span class="display-block text-muted">@if ($activity->type < 1)
+                                                <i class=" icon-file-plus text-warning"></i> @elseif ($activity->type < 2)<i class="icon-paperplane text-primary"></i> @else <i class="icon-profile text-success"></i> @endif{{$activity->content}}</span>
+													</a>
+												</div>
+											</li>
+											@endforeach
+										</ul>
+									</div>
+								</div>
+								<!-- /tabs content -->
+
+							</div>
 			</div>
 		</div>
 		@include('layouts.footer')
@@ -140,7 +193,7 @@ Highcharts.chart('container', {
     xAxis: {
         type: 'category',
         labels: {
-            rotation: -45,
+            rotation: 0,
             style: {
                 fontSize: '13px',
                 fontFamily: 'Verdana, sans-serif'
@@ -162,18 +215,18 @@ Highcharts.chart('container', {
     series: [{
         name: 'Population',
         data: [
-            ['January', {{$value[0]}}],
-            ['February', {{$value[1]}}],
-            ['March', {{$value[2]}}],
-            ['April', {{$value[3]}}],
+            ['Jan', {{$value[0]}}],
+            ['Feb', {{$value[1]}}],
+            ['Mar', {{$value[2]}}],
+            ['Apr', {{$value[3]}}],
             ['May', {{$value[4]}}],
-            ['June', {{$value[5]}}],
-            ['July', {{$value[6]}}],
-            ['August', {{$value[7]}}],
-            ['September', {{$value[8]}}],
-            ['October', {{$value[9]}}],
-            ['November', {{$value[10]}}],
-            ['December', {{$value[11]}}],
+            ['Jun', {{$value[5]}}],
+            ['Jul', {{$value[6]}}],
+            ['Aug', {{$value[7]}}],
+            ['Sept', {{$value[8]}}],
+            ['Oct', {{$value[9]}}],
+            ['Nov', {{$value[10]}}],
+            ['Dec', {{$value[11]}}],
         ],
         dataLabels: {
             rotation: -90,
@@ -187,6 +240,57 @@ Highcharts.chart('container', {
     }]
 });
 </script>
+@else
 
+		<h3><span class="text-semibold"> Announcements</span></h3>
+		@include('layouts.messages')
+		<div class="page-header-content"></div>
+		<div class="breadcrumb-line breadcrumb-line-component">
+			<ul class="breadcrumb">
+				<li><a href="/home"><i class="icon-home2 position-left"></i> Home</a></li>
+				<li><a href="/announcements">Announcements</a></li>
+				<li class="active">List</li>
+			</ul>
+			@if (Auth::user()->position !== 'District Pastor')
+			<ul class="breadcrumb-elements">
+				<li><a href="/announcements/create"><i class="icon-pencil7 position-left"></i> Create Post</a></li>
+			</ul>
+			@endif
+		</div>
 
+		<!-- Single line -->
+					<div class="panel panel-white">
+						
+						<div class="table-responsive">
+							<table class="table table-inbox">
+								<tbody data-link="row" class="rowlink">
+									@foreach($announcements as $announcement)
+									<tr>
+										<td class="table-inbox-image">
+											<img src="{{Storage::url($announcement->profile_pic)}}" class="img-circle img-xs" alt="">
+										</td>
+										<td class="table-inbox-name">
+											<a href="/myprofile/{{$announcement->email}}">
+												<div class="letter-icon-title text-default">&nbsp;&nbsp;&nbsp;{{$announcement->firstname}} {{$announcement->lastname}}</div>
+											</a>
+										</td>
+										<td class="table-inbox-message">
+											<a class="table-inbox-subject letter-icon-title text-default" href="/announcements/{{$announcement->id}}">
+											<span class="table-inbox-subject">{{$announcement->title}} &nbsp;-&nbsp;</span>
+											<span class="table-inbox-preview">
+												{!!substr("$announcement->content",3,200)!!}</span></a>
+										</td>
+										<td class="table-inbox-time"> @if ($announcement->created_at->format('y m d') < date('y m d')) {{$announcement->created_at->format(' M d')}} @else {{$announcement->created_at->format(' g:i a')}} @endif
+										</td>
+										@endforeach
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div style="text-align: right;">{{ $announcements->links() }}</div>
+    	@include('layouts.footer')
+    	@endif
+	</div>
+<div>
 @endsection

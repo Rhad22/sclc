@@ -208,7 +208,9 @@
 
                                     <!-- Main -->
                                     <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
-                                    <li><a href="/"><i class="icon-stats-dots"></i> <span>Dashboard</span></a></li>
+                                     @if ( auth()->user()->position !== 'District Pastor' )
+                                    <li><a href="/home/1/1"><i class="icon-stats-dots"></i> <span>Dashboard</span></a></li>
+                                    @endif
                                     @if (Auth::user()->position == 'Admin')
                                     <li><a href="/users"><i class="icon-users4"></i> <span>Employee</span></a></li>
                                     @endif
@@ -305,46 +307,6 @@
 										</div>
 									</a>
 								</li>
-
-								<li class="media">
-									<a href="#" class="media-link">
-										<div class="media-left"><img src="{{asset('images/default.jpg')}}" class="img-circle" alt=""></div>
-										<div class="media-body">
-											<span class="media-heading text-semibold">Margo Baker</span>
-											<span class="text-muted">However hard he threw himself onto..</span>
-										</div>
-									</a>
-								</li>
-
-								<li class="media">
-									<a href="#" class="media-link">
-										<div class="media-left"><img src="{{asset('images/default.jpg')}}" class="img-circle" alt=""></div>
-										<div class="media-body">
-											<span class="media-heading text-semibold">Monica Smith</span>
-											<span class="text-muted">Yes, but was it spanossible to quietly sleep through..</span>
-										</div>
-									</a>
-								</li>
-
-								<li class="media">
-									<a href="#" class="media-link">
-										<div class="media-left"><img src="{{asset('images/default.jpg')}}" class="img-circle" alt=""></div>
-										<div class="media-body">
-											<span class="media-heading text-semibold">Jordana Mills</span>
-											<span class="text-muted">What should he do now? The next train went at..</span>
-										</div>
-									</a>
-								</li>
-
-								<li class="media">
-									<a href="#" class="media-link">
-										<div class="media-left"><img src="{{asset('images/default.jpg')}}" class="img-circle" alt=""></div>
-										<div class="media-body">
-											<span class="media-heading text-semibold">John Craving</span>
-											<span class="text-muted">Gregor then turned to look out the window..</span>
-										</div>
-									</a>
-								</li>
 							</ul>
 						</div>
 					</div>
@@ -356,7 +318,7 @@
 
 
 			<!-- Main content -->
-			<div class="content-wrapper">
+			<div class="content-wrapper" >
 
 				<!-- Page header -->
 				<div class="page-header">
@@ -381,8 +343,9 @@
 
 					<!-- Basic layout -->
 					<div class="panel panel-flat">
+                        <div id="app">
 						<div class="panel-heading">
-							<h6 class="panel-title">User name</h6>
+							<h6 class="panel-title">Group Chat</h6>
 							<div class="heading-elements">
 								<ul class="icons-list">
 			                		<li><a data-action="reload"></a></li>
@@ -391,7 +354,7 @@
 						</div>
 
 						<div class="panel-body">
-							<ul class="media-list chat-list content-group">
+							<ul class="media-list chat-list content-group" v-chat-scroll>
 								<li class="media date-step">
 									<span>Monday, Feb 10</span>
 								</li>
@@ -421,149 +384,28 @@
 										</a>
 									</div>
 								</li>
-
-								<li class="media">
-									<div class="media-left">
-										<a href="assets/images/demo/images/3.png">
-											<img src="{{asset('images/default.jpg')}}" class="img-circle" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<div class="media-content">Darn over sour then cynically less roadrunner up some cast buoyant. Macaw krill when and upon less contrary warthog jeez some koala less since therefore minimal.</div>
-										<span class="media-annotation display-block mt-10">Mon, 10:56 am <a href="#"><i class="icon-pin-alt position-right text-muted"></i></a></span>
-									</div>
-								</li>
-
-								<li class="media reversed">
-									<div class="media-body">
-										<div class="media-content">Some upset impious a and submissive when far crane the belched coquettishly. More the puerile dove wherever</div>
-										<span class="media-annotation display-block mt-10">Mon, 11:29 am <a href="#"><i class="icon-pin-alt position-right text-muted"></i></a></span>
-									</div>
-
-									<div class="media-right">
-										<a href="assets/images/demo/images/3.png">
-											<img src="{{Storage::url(Auth::user()->profile_pic)}}" class="img-circle" alt="">
-										</a>
-									</div>
-								</li>
-
-								<li class="media date-step">
-									<span>Yesterday</span>
-								</li>
-
-								<li class="media">
-									<div class="media-left">
-										<a href="assets/images/demo/images/3.png">
-											<img src="{{asset('images/default.jpg')}}" class="img-circle" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<div class="media-content">Regardless equitably hello heron glum cassowary jocosely before reliably a jeepers wholehearted shuddered more that some where far by koala.</div>
-										<span class="media-annotation display-block mt-10">Tue, 6:40 am <a href="#"><i class="icon-pin-alt position-right text-muted"></i></a></span>
-									</div>
-								</li>
-
-								<li class="media">
-									<div class="media-left">
-										<a href="assets/images/demo/images/3.png">
-											<img src="{{asset('images/default.jpg')}}" class="img-circle" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<div class="media-content">Crud reran and while much withdrew ardent much crab hugely met dizzily that more jeez gent equivalent unsafely far one hesitant so therefore.</div>
-										<span class="media-annotation display-block mt-10">Tue, 10:28 am <a href="#"><i class="icon-pin-alt position-right text-muted"></i></a></span>
-									</div>
-								</li>
-
-								<li class="media reversed">
-									<div class="media-body">
-										<div class="media-content">Thus superb the tapir the wallaby blank frog execrably much since dalmatian by in hot. Uninspiringly arose mounted stared one curt safe</div>
-										<span class="media-annotation display-block mt-10">Tue, 8:12 am <a href="#"><i class="icon-pin-alt position-right text-muted"></i></a></span>
-									</div>
-
-									<div class="media-right">
-										<a href="assets/images/demo/images/3.png">
-											<img src="{{Storage::url(Auth::user()->profile_pic)}}" class="img-circle" alt="">
-										</a>
-									</div>
-								</li>
-
-								<li class="media date-step">
-									<span>Today</span>
-								</li>
-
-								<li class="media">
-									<div class="media-left">
-										<a href="assets/images/demo/images/3.png">
-											<img src="{{asset('images/default.jpg')}}" class="img-circle" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<div class="media-content">Tolerantly some understood this stubbornly after snarlingly frog far added insect into snorted more auspiciously heedless drunkenly jeez foolhardy oh.</div>
-										<span class="media-annotation display-block mt-10">Wed, 4:20 pm <a href="#"><i class="icon-pin-alt position-right text-muted"></i></a></span>
-									</div>
-								</li>
-
-								<li class="media reversed">
-									<div class="media-body">
-										<div class="media-content">Satisfactorily strenuously while sleazily dear frustratingly insect menially some shook far sardonic badger telepathic much jeepers immature much hey.</div>
-										<span class="media-annotation display-block mt-10">2 hours ago <a href="#"><i class="icon-pin-alt position-right text-muted"></i></a></span>
-									</div>
-
-									<div class="media-right">
-										<a href="assets/images/demo/images/3.png">
-											<img src="{{Storage::url(Auth::user()->profile_pic)}}" class="img-circle" alt="">
-										</a>
-									</div>
-								</li>
-
-								<li class="media">
-									<div class="media-left">
-										<a href="assets/images/demo/images/3.png">
-											<img src="{{asset('images/default.jpg')}}" class="img-circle" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<div class="media-content">Grunted smirked and grew less but rewound much despite and impressive via alongside out and gosh easy manatee dear ineffective yikes.</div>
-										<span class="media-annotation display-block mt-10">13 minutes ago <a href="#"><i class="icon-pin-alt position-right text-muted"></i></a></span>
-									</div>
-								</li>
-
-								<li class="media reversed">
-									<div class="media-body">
-										<div class="media-content"><i class="icon-menu display-block"></i></div>
-									</div>
-
-									<div class="media-right">
-										<a href="assets/images/demo/images/3.png">
-											<img src="{{Storage::url(Auth::user()->profile_pic)}}" class="img-circle" alt="">
-										</a>
-									</div>
-								</li>
+                                <message
+                                    v-for="value,index in chat.message"
+                                    :key=value.index
+                                    :color= chat.color[index]
+                                    :user = chat.user[index]
+                                    :time = chat.time[index]
+                                    >
+                                        @{{ value }}
+                                </message>
 							</ul>
 
-	                    	<textarea name="enter-message" class="form-control content-group" rows="3" cols="1" placeholder="Enter your message..."></textarea>
+	                    	<textarea class="form-control content-group" rows="3" cols="1" placeholder="Enter your message..." v-model='message' @keyup.enter='send'></textarea>
 
 	                    	<div class="row">
-	                    		<div class="col-xs-6">
-		                        	<ul class="icons-list icons-list-extended mt-10">
-		                                <li><a href="#" data-popup="tooltip" title="Send photo" data-container="body"><i class="icon-file-picture"></i></a></li>
-		                            	<li><a href="#" data-popup="tooltip" title="Send video" data-container="body"><i class="icon-file-video"></i></a></li>
-		                                <li><a href="#" data-popup="tooltip" title="Send file" data-container="body"><i class="icon-file-plus"></i></a></li>
-		                            </ul>
-	                    		</div>
+	                    		<div class="col-xs-12 text-right">
+		                            <button type="button" class="btn bg-teal-400 btn-labeled btn-labeled-right" v-on:click="send"><b><i class="icon-circle-right2"></i></b> Send</button>
 
-	                    		<div class="col-xs-6 text-right">
-		                            <button type="button" class="btn bg-teal-400 btn-labeled btn-labeled-right"><b><i class="icon-circle-right2"></i></b> Send</button>
 	                    		</div>
 	                    	</div>
 						</div>
 					</div>
+                    </div>
 					<!-- /basic layout -->
 
 					@include('layouts.footer')
@@ -579,8 +421,7 @@
 
 	</div>
 	<!-- /page container -->
-
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 
-<!-- Mirrored from demo.interface.club/limitless/layout_2/LTR/material/chat_layouts.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Mar 2017 06:14:56 GMT -->
 </html>

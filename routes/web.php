@@ -18,7 +18,6 @@ Route::get('/home/{dept}/{row}', 'HomeController@chart')->name('home');
 Route::resource('/announcements', 'AnnouncementController');
 Route::get('/announcements/{link_id}/{notif_id}', 'AnnouncementController@viewann');
 Route::get('/users', 'HomeController@users');
-Route::get('/messenger.chatbox', 'HomeController@chatbox');
 Route::get('/notif', 'HomeController@notif');
 
 
@@ -34,5 +33,21 @@ Route::post('report/create', 'ReportController@store')->name('report');
 Route::get('report/dept={id}/create', 'ReportController@report')->name('report');
 Route::get('report/dept={ids}/edit/{id}', 'ReportController@edit');
 Route::post('report/dept={ids}/edit/{id}', 'ReportController@update')->name('report');
+Route::get('/yearlyPDF/{id}/{year}/Yearly_Report','ReportController@yearlyPDF');
+Route::get('/yearlyPDF/{id}/{year}/1st_Quarter','ReportController@firstPDF');
+Route::get('/yearlyPDF/{id}/{year}/2nd_Quarter','ReportController@secondPDF');
+Route::get('/yearlyPDF/{id}/{year}/3rd_Quarter','ReportController@thirdPDF');
+Route::get('/yearlyPDF/{id}/{year}/4th_Quarter','ReportController@fourthPDF');
+Route::get('/downloadPDF/{year}/{month}/{id}/Monthly_Report','ReportController@monthlyPDF');
 
 Route::get('report/dept={ids}/{link_id}/{notif_id}', 'ReportController@viewreport')->name('report');
+
+
+Route::get('chat','ChatController@chat');
+Route::post('send','ChatController@send');
+Route::post('saveToSession','ChatController@saveToSession');
+Route::post('deleteSession','ChatController@deleteSession');
+Route::post('getOldMessage','ChatController@getOldMessage');
+Route::get('check',function(){
+	return session('chat');
+});

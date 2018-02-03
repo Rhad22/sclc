@@ -21,10 +21,10 @@
 
 						<div class="navbar-collapse collapse" id="navbar-filter">
 							<ul class="nav navbar-nav">
-								<li class="@if (Request::segment(3) != 'settings') {{'active'}} @endif"><a href="#activity" data-toggle="tab"><i class="icon-menu7 position-left"></i> Activity Log</a></li>
-								<li><a href="#schedule" data-toggle="tab"><i class="  icon-profile position-left"></i> About <span class="badge badge-success badge-inline position-right"></span></a></li>
+								<li class="@if (Request::segment(3) != 'settings') {{'active'}} @endif"><a href="#activity" data-toggle="tab"><i class="icon-menu7 text-primary position-left"></i> Activity Log</a></li>
+								<li><a href="#schedule" data-toggle="tab"><i class="  icon-profile text-success position-left"></i> About <span class="badge badge-success badge-inline position-right"></span></a></li>
 								@if (Auth::user()->id == $user->id)
-								<li class="@if (Request::segment(3) == 'settings') {{'active'}}  @endif"><a href="#settings" data-toggle="tab"><i class="icon-cog3 position-left"></i> Settings</a></li>
+								<li class="@if (Request::segment(3) == 'settings') {{'active'}}  @endif"><a href="#settings" data-toggle="tab"><i class="icon-cog3 text-warning position-left"></i> Settings</a></li>
 								@endif
 							</ul>
 						</div>
@@ -54,8 +54,8 @@
                                                 href="/myprofile/{{$activity->link_id}}/{{$activity->id}}"
                                             @endif >
 																{{$activity->firstname}} {{$activity->lastname}} {{$activity->content}}
-																	<div class="media-annotation">@if ($activity->type == 0)
-                                                <i class=" icon-file-plus"></i> @else <i class="icon-paperplane"></i> @endif {{$activity->created_at->diffForHumans()}} ...</div>
+																	<div class="media-annotation">@if ($activity->type < 1)
+                                                <i class=" icon-file-plus text-warning"></i> @elseif ($activity->type < 2)<i class="icon-paperplane text-primary"></i> @else <i class="icon-profile text-success"></i> @endif{{$activity->created_at->diffForHumans()}} ...</div>
 
 															</a>
 														</div>
@@ -131,15 +131,15 @@
 														<div class="row">
 															<div class="col-md-4">
 																<label>Surname</label>
-																<input type="text" value="{{ $user->lastname}}" class="form-control">
+																<input type="text" value="{{ $user->lastname}}" readonly="readonly" class="form-control">
 															</div>
 															<div class="col-md-4">
 																<label>First name</label>
-																<input type="text" value="{{ $user->firstname }}" name class="form-control">
+																<input type="text" value="{{ $user->firstname }}" readonly="readonly" name class="form-control">
 															</div>
 															<div class="col-md-4">
 																<label>Middle name</label>
-																<input type="text" value="{{ $user->middlename }}" class="form-control">
+																<input type="text" value="{{ $user->middlename }}" readonly="readonly" class="form-control">
 															</div>
 															
 															
