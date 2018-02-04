@@ -216,7 +216,7 @@
                                     @endif
                                     @endif
                                     <li>
-                                        <a href="/chat"><i class="icon-comment-discussion"></i> <span>Messages</a>
+                                        <a href="/chat"><i class="icon-comment-discussion"></i> <span>Messenger</a>
                                     </li>
                                     <li>
                                         <a href="/notif"><i class="icon-bell2"></i> <span>Notifications<span class="label bg-danger">@if (count($notifies) > 0){{count($notifies)}} @endif</span></span></a> 

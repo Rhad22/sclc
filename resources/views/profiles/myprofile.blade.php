@@ -223,7 +223,7 @@
 										<!-- Account settings -->
 										<div class="panel panel-flat">
 											<div class="panel-heading">
-												<h6 class="panel-title">Account settings</h6>
+												<h6 class="panel-title">Change Password</h6>
 												<div class="heading-elements">
 													<ul class="icons-list">
 								                		<li><a data-action="collapse"></a></li>>
@@ -231,58 +231,66 @@
 							                	</div>
 											</div>
 
+											<form class="form-horizontal" method="POST" action="{{ url('change/password') }}">
+												{{ csrf_field() }}
 											<div class="panel-body">
-									
 													<div class="form-group">
 														<div class="row">
 															<div class="col-md-6">
-																<label>Email</label>
-																<input type="text" value="{{ Auth::user()->email }}" readonly="readonly" class="form-control">
-															</div>
+																<div class="form-group{{ $errors->has('passwordold') ? ' has-error' : '' }}">
+                            										<label for="password" class="control-label">Old Password</label>
 
+                            										<div>
+                                										<input id="password" type="password" class="form-control" name="passwordold" required>
+
+                                										@if ($errors->has('passwordold'))
+                                    									<span class="help-block">
+                                        									<strong>{{ $errors->first('passwordold') }}</strong>
+                                    									</span>
+                                										@endif
+                            										</div>
+                       											</div>
+															</div>
 														</div>
 													</div>
 
 													<div class="form-group">
 														<div class="row">
 															<div class="col-md-6">
-																<label>New password</label>
-																<input type="password" placeholder="Enter new password" class="form-control">
+																<div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            										<label for="password" class="control-label">New Password</label>
+
+                            										<div>
+                                										<input id="password" type="password" class="form-control" name="password" required>
+
+                                										@if ($errors->has('password'))
+                                    									<span class="help-block">
+                                        								<strong>{{ $errors->first('password') }}</strong>
+                                    									</span>
+                                										@endif
+                            										</div>
+                        										</div>
 															</div>
 
 															<div class="col-md-6">
-																<label>Repeat password</label>
-																<input type="password" placeholder="Repeat new password" class="form-control">
+																<div class="form-group">
+                            										<label for="password-confirm" class="control-label">Confirm Password</label>
+
+                            										<div>
+                                										<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            										</div>
+                        										</div>
 															</div>
 														</div>
 													</div>
 
-													<div class="form-group">
-														<div class="row">
-															<div class="col-md-6">
-																<label>Notifications</label>
-
-																<div class="checkbox">
-																	<label>
-																		<input type="checkbox" class="styled" checked="checked">
-																		New message notification
-																	</label>
-																</div>
-																<div class="checkbox">
-																	<label>
-																		<input type="checkbox" class="styled" checked="checked">
-																		New task notification
-																	</label>
-																</div>
-															</div>
-														</div>
-													</div>
 
 							                        <div class="text-right">
 							                        	<button type="submit" class="btn btn-primary">Save <i class="icon-arrow-right14 position-right"></i></button>
 							                        </div>
 						            
 											</div>
+											</form>
 										</div>
 										<!-- /account settings -->
 

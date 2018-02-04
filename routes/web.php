@@ -1,4 +1,20 @@
 <?php
+use Illuminate\Support\Facades\Input as input;
+use App\User;
+
+Route::post('change/password', function(){
+	$user= User::find(Auth::user()->id);
+	if (Hash::check(Input::get('passwordold'), $user['password']) && Input::get('password') == Input::get('password_confirmation')) {
+		$user->password = bcrypt(Input::get('password'));
+		$user->save();
+		return redirect()->back()->with('success', 'Password Changed');
+	}else {
+		return redirect()->back()->with('error', 'Password NOT Changed!!');
+	}
+});
+
+
+
 Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
@@ -20,9 +36,6 @@ Route::get('/announcements/{link_id}/{notif_id}', 'AnnouncementController@viewan
 Route::get('/users', 'HomeController@users');
 Route::get('/notif', 'HomeController@notif');
 
-
-Route::get('/api', 'AnnouncementController@api');
-
 Route::get('report/dept={id}/4th', 'ReportController@fourth');
 Route::get('report/dept={id}/3rd', 'ReportController@third');
 Route::get('report/dept={id}/2nd', 'ReportController@second');
@@ -41,7 +54,6 @@ Route::get('/yearlyPDF/{id}/{year}/4th_Quarter','ReportController@fourthPDF');
 Route::get('/downloadPDF/{year}/{month}/{id}/Monthly_Report','ReportController@monthlyPDF');
 
 Route::get('report/dept={ids}/{link_id}/{notif_id}', 'ReportController@viewreport')->name('report');
-
 
 Route::get('chat','ChatController@chat');
 Route::post('send','ChatController@send');

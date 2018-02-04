@@ -58,7 +58,7 @@ const app = new Vue({
     	},
     	getTime(){
     		let time = new Date();
-    		if (time <= 12) {
+    		if (time >= 12) {
     			return time.getHours()+':'+time.getMinutes()+' am';
     		}
     		else {

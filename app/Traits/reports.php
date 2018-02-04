@@ -417,7 +417,7 @@ trait Reports
                     "38. No. of ASI Chapters",
                     "39. No. of Church-based Bible Correspondence School - Enrollments",
                     "40. No. of Church-based Bible Correspondence School - Graduates",
-                    "41. No. of Church-based Bible Correspondence School - Baptisms"),
+                    "41. No. of Church-based Bible Correspondence School - Baptisms")
             );
 
         return $data;
