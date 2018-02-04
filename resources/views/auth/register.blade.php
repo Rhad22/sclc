@@ -116,13 +116,11 @@
 
                                     <!-- Main -->
                                     <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
-<<<<<<< HEAD
+
                                      @if ( auth()->user()->position !== 'District Pastor' )
                                     <li><a href="/home/1/1"><i class="icon-stats-dots"></i> <span>Dashboard</span></a></li>
                                     @endif
-=======
-                                    <li><a href="/"><i class="icon-stats-dots"></i> <span>Dashboard</span></a></li>
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
+
                                     @if (Auth::user()->position == 'Admin')
                                     <li><a href="/users"><i class="icon-users4"></i> <span>Employee</span></a></li>
                                     @endif
@@ -266,18 +264,8 @@
                                         <div class="col-md-8">
                                         <select name="position">
                                             <option value="Admin">Admin</option>
-<<<<<<< HEAD
                                             <option value="Director">Director</option>
                                             <option value="Secretary">Secretary</option>
-=======
-                                            <option value="Director of Communication Department">Director of Communication Department</option>
-                                            <option value="Director of Children s Ministries">Director of Children s Ministries</option>
-                                            <option value="Director of Women s Ministries">Director of Women s Ministries</option>
-                                            <option value="Director of Ministerial">Director of Ministerial</option>
-                                            <option value="Director of Stewardship Ministries">Director of Stewardship Ministries</option>
-                                            <option value="Director of Health Ministries">Director of Health Ministries</option>
-                                            <option value="Director of Personal Ministries">Director of Personal Ministries</option>
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
                                             <option value="District Pastor">District Pastor</option>
                                         </select>
                                          @if ($errors->has('position'))
@@ -287,7 +275,6 @@
                                         @endif
                                         </div>
                                     </div>
-<<<<<<< HEAD
 
                                     <div class="form-group{{ $errors->has('dept') ? ' has-error' : '' }}">
                                         <label for="dept" class="col-md-4 control-label">Department</label>
@@ -302,24 +289,6 @@
                                                     <option value="6">Health Ministries</option>
                                                     <option value="7">Personal Ministries</option>
                                                 </select>
-=======
-                                </div>
-
-                                <div class="col-md-4">
-                                     <div class="form-group{{ $errors->has('dept') ? ' has-error' : '' }}">
-                                        <label for="dept" class="col-md-4 control-label">Department</label>
-                                            <div class="col-md-9">
-                                                <label>
-                                                    <input type="checkbox" name="dept" value="0">  All<br>
-                                                    <input type="checkbox" name="dept" value="1">  Communication Department<br>
-                                                    <input type="checkbox" name="dept" value="2">  Children's Ministries<br>
-                                                    <input type="checkbox" name="dept" value="3">  Women's Ministries<br>
-                                                    <input type="checkbox" name="dept" value="4">  Ministerial<br>
-                                                    <input type="checkbox" name="dept" value="5">  Stewardship Ministries<br>
-                                                    <input type="checkbox" name="dept" value="6">  Health Ministries<br>
-                                                    <input type="checkbox" name="dept" value="7">  Personal Ministries<br>
-                                                </label>
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
                                                  @if ($errors->has('dept'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('dept') }}</strong>
@@ -327,7 +296,6 @@
                                                 @endif
                                             </div>
                                     </div>
-<<<<<<< HEAD
 
                                     <div class="form-group{{ $errors->has('district') ? ' has-error' : '' }}">
                                         <label for="district" class="col-md-5 control-label">District</label>
@@ -345,8 +313,6 @@
                                         @endif
                                         </div>
                                     </div>
-=======
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
                                 </div>
 
                                 <div class="col-md-8">

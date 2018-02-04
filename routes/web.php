@@ -30,21 +30,15 @@ Route::get('myprofile/{email}/', 'ProfileController@index')->name('profile');
 Route::get('myprofile/{email}/{id}', 'ProfileController@viewprofile')->name('profile');
 Route::post('myprofile/update/profiles', 'ProfileController@update')->name('profile');
 Route::get('/home', 'HomeController@index')->name('home');
-<<<<<<< HEAD
+
 Route::get('/home/{dept}/{row}', 'HomeController@chart')->name('home');
 Route::resource('/announcements', 'AnnouncementController');
 Route::get('/announcements/{link_id}/{notif_id}', 'AnnouncementController@viewann');
 Route::get('/users', 'HomeController@users');
 Route::get('/notif', 'HomeController@notif');
-=======
-Route::resource('/announcements', 'AnnouncementController');
-Route::get('/users', 'HomeController@users');
-Route::get('/messenger.chatbox', 'HomeController@chatbox');
-Route::get('/notif', 'HomeController@notif');
 
 
-Route::get('/api', 'AnnouncementController@api');
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
+
 
 Route::get('report/dept={id}/4th', 'ReportController@fourth');
 Route::get('report/dept={id}/3rd', 'ReportController@third');
@@ -56,7 +50,7 @@ Route::post('report/create', 'ReportController@store')->name('report');
 Route::get('report/dept={id}/create', 'ReportController@report')->name('report');
 Route::get('report/dept={ids}/edit/{id}', 'ReportController@edit');
 Route::post('report/dept={ids}/edit/{id}', 'ReportController@update')->name('report');
-<<<<<<< HEAD
+
 Route::get('/yearlyPDF/{id}/{year}/Yearly_Report','ReportController@yearlyPDF');
 Route::get('/yearlyPDF/{id}/{year}/1st_Quarter','ReportController@firstPDF');
 Route::get('/yearlyPDF/{id}/{year}/2nd_Quarter','ReportController@secondPDF');
@@ -74,7 +68,4 @@ Route::post('getOldMessage','ChatController@getOldMessage');
 Route::get('check',function(){
 	return session('chat');
 });
-=======
 
-Route::get('report/dept={ids}/{link_id}', 'ReportController@viewreport')->name('report');
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3

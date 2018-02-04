@@ -10,10 +10,8 @@ use App\Report;
 use App\Notify;
 use Charts;
 use Auth;
-<<<<<<< HEAD
 use PDF;
-=======
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
+
 use App\Traits\reports;
 
 class HomeController extends Controller
@@ -95,7 +93,6 @@ class HomeController extends Controller
         ($year == "") ? $year = date('Y'): "";
 
         
-<<<<<<< HEAD
             $value =  array ();
             for ($x=1; $x <= 12; $x++) { 
                 array_push($value, $day = Report::where('dept_id', $dept_id)
@@ -132,24 +129,15 @@ class HomeController extends Controller
         $dept = $this->dept();
 
         return view('home', compact('chart','announcements', 'notifies', 'sidebar', 'dept','value', 'dept', 'dept_id', 'content', 'row' , 'year', 'allactivity', 'week', 'buwan', 'all', 'profile'));
-=======
-        $notifies = $this->notification();
-        $sidebar = $this->sidebar();
-        $dept = $this->dept();
-
-        return view('home', compact('chart','announcements', 'notifies', 'sidebar', 'dept'));
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
     }
 
     public function users()
     {
-<<<<<<< HEAD
+
         $users = User::join('profiles','profiles.user_id','=','users.id')
             ->orderBy('users.created_at','DESC')->paginate(8)
             ;
-=======
-        $users = User::orderBy('created_at','desc')->paginate(8);
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
+
         $notifies = $this->notification();
         $dept = $this->dept();
 
@@ -160,17 +148,12 @@ class HomeController extends Controller
     {
         $users = User::find($id);
         $dept = $this->dept();
-<<<<<<< HEAD
-=======
-
-        return view('users.show', compact('users', 'dept'));
-    }
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
 
         return view('users.show', compact('users', 'dept'));
     }
 
-<<<<<<< HEAD
+
+
     public function notif()
     {
         $ids = auth()->user()->id;
@@ -185,15 +168,6 @@ class HomeController extends Controller
         $dept = $this->dept();
 
         return view('notification.notify', compact('allnotify','notifies', 'sidebar', 'dept'));
-=======
-     public function notif()
-    {
-        $notifies = $this->notification();
-        $sidebar = $this->sidebar();
-        $dept = $this->dept();
 
-        return view('notification.notify', compact('notifies', 'sidebar', 'dept'));
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
-    }
-
+}
 }

@@ -20,11 +20,7 @@ class CreateNotifiesTable extends Migration
             $table->string('content');
             $table->integer('read');
             $table->integer('type');
-<<<<<<< HEAD
             $table->string('link_id');
-=======
-            $table->integer('link_id');
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
             $table->integer('dept_id');
             $table->timestamps();
         });

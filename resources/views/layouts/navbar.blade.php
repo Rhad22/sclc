@@ -21,17 +21,11 @@
                 <ul class="nav navbar-nav">             
                         <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-<<<<<<< HEAD
+
                             <i class="icon-bell2 @if (count($notifies)> 0) text-danger @endif "></i>
                             <span class="visible-xs-inline-block position-right">Announcements</span>
                             @if (count($notifies)> 0)
                             <span class="status-mark border-danger"></span>
-=======
-                            <i class="icon-bell2"></i>
-                            <span class="visible-xs-inline-block position-right">Announcements</span>
-                            @if (count($notifies)> 0)
-                            <span class="status-mark border-pink-300"></span>
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
                             @endif
                         </a>
 
@@ -44,20 +38,16 @@
                             </div>
                             
                             <ul class="media-list dropdown-content-body width-350">
-<<<<<<< HEAD
                                 @if (count($notifies) > 0) 
                                 @foreach ($notifies as $notify)
                                 @if ($notify->sender !== Auth::user()->id)
-=======
-                                @foreach ($notifies as $notify)
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
+
                                 <li class="media">
                                     <div class="media-left">
                                         <img src="{{Storage::url($notify->profile_pic)}}" class="img-circle img-lg" alt="">
                                     </div>
 
                                     <div class="media-body">
-<<<<<<< HEAD
                                         <a class="table-inbox-subject letter-icon-title text-default" @if ($notify->type < 1)
                                                 href="/report/dept={{$notify->dept_id}}/{{$notify->link_id}}/{{$notify->id}}"
                                             @elseif ($notify->type < 2) 
@@ -75,18 +65,6 @@
                                 @else
                                 <p><center>no further notification</center></p>
                                 @endif
-=======
-                                        <a class="table-inbox-subject letter-icon-title text-default" @if ($notify->type == 0)
-                                                href="/report/dept={{$notify->dept_id}}/{{$notify->link_id}}"
-                                            @else
-                                                href="/announcements/{{$notify->link_id}}"
-                                            @endif
-                                        >{{$notify->firstname}} {{$notify->lastname}} {{$notify->content}}
-                                        <div class="media-annotation">{{$notify->created_at->diffForHumans()}}</div></a>
-                                    </div>
-                                </li> 
-                                @endforeach
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
                                        
                             </ul>
 
@@ -195,13 +173,10 @@
 
                                     <!-- Main -->
                                     <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
-<<<<<<< HEAD
                                     @if ( auth()->user()->position !== 'District Pastor' )
                                     <li><a href="/home/1/1"><i class="icon-stats-dots"></i> <span>Dashboard</span></a></li>
                                     @endif
-=======
-                                    <li><a href="/"><i class="icon-stats-dots"></i> <span>Dashboard</span></a></li>
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
+
                                     @if (Auth::user()->position == 'Admin')
                                     <li><a href="/users"><i class="icon-users4"></i> <span>Employee</span></a></li>
                                     @endif
@@ -238,28 +213,19 @@
                                         </ul>
                                     </li>    
                                     @else
-<<<<<<< HEAD
+
                                         @if (Auth::user()->position == 'Director')
                                     <li><a href="/report/dept={{$sidebar}}"><i class="icon-stack2"></i> <span>{{$dept[$sidebar]}}</span></a></li>
                                         @else <li><a href="/report/dept={{$sidebar}}"><i class="icon-stack2"></i> <span>{{$dept[$sidebar]}}</span></a></li> 
                                     @endif
-=======
-                                         @for ($i = 0; $i < 8; $i++)
-                                        @if (Auth::user()->position == 'Director of '.$dept[$i] )
-                                    <li><a href="/report/dept={{$sidebar}}"><i class="icon-stack2"></i> <span>{{$dept[$sidebar]}}</span></a></li>
-                                        @endif  
-                                    @endfor
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
+
                                     @endif
                                     <li>
                                         <a href="/chat"><i class="icon-comment-discussion"></i> <span>Messenger</a>
                                     </li>
                                     <li>
-<<<<<<< HEAD
                                         <a href="/notif"><i class="icon-bell2"></i> <span>Notifications<span class="label bg-danger">@if (count($notifies) > 0){{count($notifies)}} @endif</span></span></a> 
-=======
-                                        <a href="/notif"><i class="icon-bell2"></i> <span>Notifications<span class="label bg-orange-400">15</span></span></a> 
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
+
                                     </li>
                                     <!-- /main -->
                                 </ul>

@@ -3,10 +3,7 @@
 namespace App\Traits;
 use App\User;
 use App\Profile;
-<<<<<<< HEAD
 use App\Report;
-=======
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
 
 trait Reports 
 {
@@ -663,13 +660,10 @@ trait Reports
 
         $ids = auth()->user()->id;
         $notifies = User::join('notifies','notifies.sender','=','users.id')
-<<<<<<< HEAD
+
             ->where(['receiver'=> $ids, 'read'=> 0])
             ->where('sender', '!=', $ids)
             ->orderBy('notifies.created_at','DESC')
-=======
-            ->where('receiver', $ids)
->>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
             ->get();
 
         return $notifies;
