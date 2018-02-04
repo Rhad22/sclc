@@ -231,7 +231,7 @@
 							                	</div>
 											</div>
 
-											<form class="form-horizontal" method="POST" action="{{ url('change/password') }}">
+											<form method="POST" action="{{ url('change/password') }}">
 												{{ csrf_field() }}
 											<div class="panel-body">
 													<div class="form-group">

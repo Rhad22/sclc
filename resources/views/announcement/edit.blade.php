@@ -39,7 +39,7 @@
 												{{Form::textarea('content', $announcements->content, ['class' => 'form-control', 'placeholder' => 'body', 'id' => 'article-ckeditor'])}}
 											</div>
 											<div class="text-right">
-												<button type="submit" class="btn btn-primary">Save <i class=" icon-arrow-right14 position-right"></i></button>
+												<button type="submit" class="btn bg-teal">Save <i class=" icon-arrow-right14 position-right"></i></button>
 											</div>
 										{!! Form::close() !!} 
 									</div>

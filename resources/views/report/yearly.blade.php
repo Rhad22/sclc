@@ -107,7 +107,7 @@
                        	{{ csrf_field() }}
     				<input name="year" type="hidden" value="{{$year}}">
     				<input name="id" type="hidden" value="{{$id}}">
-    				<button type="submit" class="btn btn-sm btn-primary">Generate PDF <i class="icon-printer position-right"></i></button>
+    				<button type="submit" class="btn btn-sm bg-teal">Generate PDF <i class="icon-printer position-right"></i></button>
 					<input type="hidden" value="someVariable" /> 
 					{!! Form::close() !!}
 		</div>	

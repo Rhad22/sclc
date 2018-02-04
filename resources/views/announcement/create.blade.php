@@ -28,7 +28,7 @@
 								<div class="row">
 									<div class="col-md-10 col-md-offset-1">
 										<br>
-										<form class="form-horizontal" role="form" method="POST" action="{{ route('announcements.index')}}">
+										<form  role="form" method="POST" action="{{ route('announcements.index')}}">
                         				{{ csrf_field() }}
 											<div class="form-group">
 												<label>Enter the title:</label>
@@ -39,7 +39,7 @@
 													<textarea rows="5" cols="5" id="article-ckeditor" class="form-control" placeholder="Enter your message here" id="body" name="content"></textarea>
 											</div>
 											<div class="text-right">
-													<button type="submit" class="btn btn-primary"><i class="icon-paperplane position-left"></i>post </button>
+												<button type="submit" class="btn bg-teal">Post <i class=" icon-arrow-right14 position-right"></i></button>
 											</div>
 										</form>
 									</div>

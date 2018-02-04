@@ -13,8 +13,6 @@ Route::post('change/password', function(){
 	}
 });
 
-
-
 Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
@@ -35,10 +33,9 @@ Route::get('/home/{dept}/{row}', 'HomeController@chart')->name('home');
 Route::resource('/announcements', 'AnnouncementController');
 Route::get('/announcements/{link_id}/{notif_id}', 'AnnouncementController@viewann');
 Route::get('/users', 'HomeController@users');
+Route::get('/edituser/{id}', 'HomeController@edituser');
+Route::post('/updateaccount', 'HomeController@updateaccount');
 Route::get('/notif', 'HomeController@notif');
-
-
-
 
 Route::get('report/dept={id}/4th', 'ReportController@fourth');
 Route::get('report/dept={id}/3rd', 'ReportController@third');

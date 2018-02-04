@@ -349,16 +349,20 @@
 
                             <div class="col-md-9">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-2 col-md-offset-10">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
+                                <div class="form-group"><br>
+                            <div class="text-right">
+                                <button type="submit" class="btn bg-teal">
+                                    Register <i class="icon-arrow-right14 position-right"></i>
                                 </button>
                             </div>
+                            
                         </div>
+                            </div>
+
+
+                        </div>
+
+                        
                                 </div>
                             </div>
                         </div>

@@ -31,12 +31,13 @@
         <div class="panel panel-flat">
             <div id="app">
                 <div class="panel-heading">
-                            <h6 class="panel-title">Group Chat (@{{ numberOfUsers }})</h6>
-                            <div class="heading-elements">
+                            <h6 class="panel-title">Group Chat <!-- (@{{ numberOfUsers }}) --></h6>
+                            <hr>
+                            <!-- <div class="heading-elements">
                                 <ul class="icons-list">
                                     <li><a href=''@click.prevent='deleteSession'><i class="icon-bin position-left"></i></a></li>
                                 </ul>
-                            </div>
+                            </div> -->
                 </div>
                 <div class="badge badge-pill badge-primary">@{{ typing }}</div>
                 <div class="panel-body">

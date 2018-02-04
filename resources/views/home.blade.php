@@ -56,7 +56,7 @@
 											<tr>
 												<th><i class="icon-watch2 text-warning position-left"></i>Posted</th>
 												<th><i style="margin-left: 7px" class=" icon-user text-success position-left"></i>User</th>
-												<th><i class=" icon-envelop5 text-info-800 position-left"></i>Description</th>
+												<th><i class=" icon-envelop5 text-primary position-left"></i>Content</th>
 												
 											</tr>
 										</thead>
@@ -94,11 +94,8 @@
 			<div class="col-lg-4">
 				<div class="panel panel-flat">
 								<div class="panel-heading">
-									<h6 class="panel-title"><i class="icon-clipboard3 text-primary position-left"></i> Activity Log</h6>
-									<div class="heading-elements">
-										<span class="heading-text"><i class="icon-history text-warning position-left"></i> {{date("M j, g:i")}}</span>
-										<span class="label bg-success heading-text">Online</span>
-									</div>
+									<h6 class="panel-title"><i class="icon-clipboard3 text-success position-left"></i> Activity Log</h6>
+									
 								</div>
 
 								<!-- Numbers -->
@@ -106,21 +103,21 @@
 									<div class="row text-center">
 										<div class="col-md-4">
 											<div class="content-group">
-												<h6 class="text-semibold no-margin"><i class="icon-clipboard3 position-left text-slate"></i> {{$week}}</h6>
+												<h6 class="text-semibold no-margin"><i class="icon-clipboard3 position-left text-warning"></i> {{$week}}</h6>
 												<span class="text-muted text-size-small">this week</span>
 											</div>
 										</div>
 
 										<div class="col-md-4">
 											<div class="content-group">
-												<h6 class="text-semibold no-margin"><i class="icon-calendar3 position-left text-slate"></i>{{$buwan}}</h6>
+												<h6 class="text-semibold no-margin"><i class="icon-calendar3 position-left text-warning"></i>{{$buwan}}</h6>
 												<span class="text-muted text-size-small">this month</span>
 											</div>
 										</div>
 
 										<div class="col-md-4">
 											<div class="content-group">
-												<h6 class="text-semibold no-margin"><i class="icon-comments position-left text-slate"></i>{{$all}}</h6>
+												<h6 class="text-semibold no-margin"><i class="icon-comments position-left text-warning"></i>{{$all}}</h6>
 												<span class="text-muted text-size-small">all activity</span>
 											</div>
 										</div>

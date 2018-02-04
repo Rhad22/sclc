@@ -39,7 +39,7 @@
 							</div>
                             <br>
                             <div class="text-right">
-							    <button type="submit" class="btn btn-primary legitRipple"><i class="icon-loop3 position-left"></i>Update report</button>
+							    <button type="submit" class="btn bg-teal legitRipple"><i class="icon-loop3 position-left"></i>Update report</button>
 							</div>
                             {!! Form::close() !!}
 						</div>

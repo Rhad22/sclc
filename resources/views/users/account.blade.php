@@ -41,8 +41,7 @@
 					                    <li class="dropdown">
 						                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
 						                    <ul class="dropdown-menu dropdown-menu-right">
-												<li><a href="#"><i class="icon-comment-discussion pull-right"></i> Start chat</a></li>
-												<li><a href="#"><i class=" icon-sync pull-right"></i>Update info.</a></li>
+												<li><a href="/edituser/{{$user->id}}"><i class=" icon-sync pull-right"></i>Edit info.</a></li>
 												<li><a href="#"><i class=" icon-user-cancel pull-right"></i>Deactivate account</a></li>
 											</ul>
 					                    </li>
@@ -56,8 +55,7 @@
 				<div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_1_paginate">
 							{{ $users->links() }}
 				</div>
-			@include('layouts.footer')	
-		</div>
+
 	</div>
 <div>		
 @endsection

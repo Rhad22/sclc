@@ -134,14 +134,58 @@ class HomeController extends Controller
     public function users()
     {
 
-        $users = User::join('profiles','profiles.user_id','=','users.id')
+        $users = Profile::join('users','users.id','=','profiles.user_id')
             ->orderBy('users.created_at','DESC')->paginate(8)
             ;
 
         $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+        if (Auth()->user()->position !== 'Admin') {
+            return redirect('/home');
+        }
+
+        return view('users.account', compact('users', 'notifies', 'dept', 'sidebar'));
+    }
+
+    public function edituser($id)
+    {
+        $user = User::find($id);
+        $profile = Profile::where('user_id', $id)->first();
+
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
         $dept = $this->dept();
 
-        return view('users.account', compact('users', 'notifies', 'dept'));
+        if (Auth()->user()->position !== 'Admin') {
+            return redirect('/home');
+        }
+
+        return view('users.edituser', compact('user', 'profile', 'sidebar', 'notifies', 'dept'));
+    }
+    public function updateaccount(Request $request) {
+
+        $this->validate($request, [
+            'lastname' => 'required',
+            'firstname' => 'required',
+            'middlename' => 'required',
+            'position' => 'required',
+            'dept' => 'required',
+            'district' => 'required'
+        ]);
+        $id = $request->input('id');
+
+        Profile::where('user_id', $id)->update([
+                    'dept' => $request->dept
+            ]);
+        User::where('id', $id)->update([
+                    'lastname' => $request->lastname,
+                    'firstname' => $request->firstname,
+                    'middlename' => $request->middlename,
+                    'position' => $request->position,
+                    'district' => $request->district
+                ]);
+        return redirect()->back()->with('success', 'Account Informations are updated');
     }
 
     public function show($id)

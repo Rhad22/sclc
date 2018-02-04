@@ -160,12 +160,13 @@
 							</tbody>
 						</table>
 				@endif
+				
 			</div>
-				<div class="col-md-6">
+			<div class="col-md-6">
 					@if (Auth::user()->position !== 'District Pastor')
 					Summary report of 
 					@foreach ($names as $name)
-					{{$name->firstname}},
+					<span class="badge bg-teal">{{$name->firstname}},</span>
 					@endforeach	
 					@endif
 				</div>
@@ -176,11 +177,11 @@
     				<input name="year" type="hidden" value="{{$year}}">
     				<input name="month" type="hidden" value="{{$month}}">
     				<input name="id" type="hidden" value="{{$id}}">
-    				<button type="submit" class="btn btn-sm btn-primary">Generate PDF! <i class="icon-printer position-right"></i></button>
+    				<button type="submit" class="btn btn-sm bg-teal">Generate PDF! <i class="icon-printer position-right"></i></button>
 					<input type="hidden" value="someVariable" />
 					{!! Form::close() !!}
 
-				</div>
+				</div>	
 
 		@include('layouts.footer')
 		</div>

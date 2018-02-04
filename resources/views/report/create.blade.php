@@ -51,7 +51,7 @@
 			</div>
 		</div>
 	<div class="text-right">
-							    <button type="submit" class="btn btn-primary legitRipple"><i class="icon-paperplane position-left"></i>Send report</button>
+							    <button type="submit" class="btn bg-teal legitRipple"><i class="icon-paperplane position-left"></i>Send report</button>
 							</div>
 							{!! Form::close() !!}
 		<!-- <div class="panel panel-flat">
