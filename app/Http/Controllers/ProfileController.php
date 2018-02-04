@@ -19,18 +19,25 @@ class ProfileController extends Controller
         $id = User::where('email', $email)->value('id');
         $profile = Profile::where('user_id', $id)->first();
 
+<<<<<<< HEAD
         $ids = auth()->user()->id;
         $activities = User::join('notifies','notifies.sender','=','users.id')
             ->where(['receiver'=> $ids, 'sender'=> $ids])
             ->orderBy('notifies.created_at','DESC')
             ->get();
 
+=======
+>>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
         $notifies = $this->notification();
         $sidebar = $this->sidebar();
         $dept = $this->dept();
 
 
+<<<<<<< HEAD
         return view('profiles.myprofile',['user'=>$user,'profile'=>$profile, 'notifies'=>$notifies, 'sidebar'=>$sidebar, 'dept'=>$dept, 'activities' => $activities]);
+=======
+        return view('profiles.myprofile',['user'=>$user,'profile'=>$profile, 'notifies'=>$notifies, 'sidebar'=>$sidebar, 'dept'=>$dept]);
+>>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
     }
 
     public function update(Request $request)

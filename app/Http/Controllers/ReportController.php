@@ -17,6 +17,8 @@ class ReportController extends Controller
     use reports;
 
     public function yearly(Request $request, $id) {
+        
+
         $year = $request->input('year');
         ($year == "") ? $year = date('Y'): "";
 
@@ -35,6 +37,7 @@ class ReportController extends Controller
 
         return view('/report.yearly', compact( 'year',
         'qr1','qr2','qr3','qr4','qrt', 'content', 'id', 'length', 'notifies', 'sidebar', 'dept'));
+<<<<<<< HEAD
     }
 
     public function yearlyPDF($id, $year) {
@@ -52,6 +55,8 @@ class ReportController extends Controller
         'qr1','qr2','qr3','qr4','qrt', 'content', 'id', 'length', 'notifies', 'sidebar', 'dept','url'));
 
         return $pdf->stream('SCLC_yearly_report.pdf');
+=======
+>>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
     }
 
     public function first(Request $request, $id) {
@@ -71,6 +76,7 @@ class ReportController extends Controller
         $dept = $this->dept();
 
         return view('/report.first', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length', 'notifies', 'sidebar', 'dept'));
+<<<<<<< HEAD
     }
 
     public function firstPDF($id, $year) {
@@ -86,6 +92,8 @@ class ReportController extends Controller
         $pdf = PDF::loadView('report.pdffirst', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length','url'));
 
         return $pdf->stream('SCLC_quarterly_report.pdf');
+=======
+>>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
     }
 
     public function second(Request $request, $id) {
@@ -116,10 +124,18 @@ class ReportController extends Controller
         $content =$this->data();
         $length = count($content[$id]);
 
+<<<<<<< HEAD
         $url = url()->previous();
         $pdf = PDF::loadView('report.pdfsecond', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length','url'));
 
         return $pdf->stream('SCLC_quarterly_report.pdf');
+=======
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+
+        return view('/report.second', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length', 'notifies', 'sidebar', 'dept'));
+>>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
     }
 
     public function third(Request $request, $id) {
@@ -139,6 +155,7 @@ class ReportController extends Controller
         $dept = $this->dept();
 
         return view('/report.third', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length', 'notifies', 'sidebar', 'dept'));
+<<<<<<< HEAD
     }
 
     public function thirdPDF($id, $year) {
@@ -154,6 +171,8 @@ class ReportController extends Controller
         $pdf = PDF::loadView('report.pdfthird', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length','url'));
 
         return $pdf->stream('SCLC_quarterly_report.pdf');
+=======
+>>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
     }
 
 
@@ -174,6 +193,7 @@ class ReportController extends Controller
         $dept = $this->dept();
 
         return view('/report.fourth', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length', 'notifies', 'sidebar', 'dept'));
+<<<<<<< HEAD
     }
 
     public function fourthPDF($id, $year) {
@@ -189,6 +209,8 @@ class ReportController extends Controller
         $pdf = PDF::loadView('report.pdffourth', compact('m1', 'm2', 'm3', 'mt','id', 'year', 'content', 'length','url'));
 
         return $pdf->stream('SCLC_quarterly_report.pdf');
+=======
+>>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
     }
 
     public function monthly(Request $request, $id) {
@@ -210,13 +232,37 @@ class ReportController extends Controller
                     ->whereMonth('created_at', $month)
                     ->get();
         }
+<<<<<<< HEAD
         else {$data = $this->daily($id, $year, $month, $length, $days);}
         $total = $this->alldaily($id, $year, $month, $length);
+=======
+        else {
+            for ($i=1; $i <= $length; $i++) { 
+            $new =  array ();
+            for ($x=1; $x <= $days; $x++) { 
+                array_push($new, $day = Report::where('dept_id', $id)
+                    ->whereYear('created_at', $year)
+                    ->whereMonth('created_at', $month)
+                    ->whereDay('created_at', $x)
+                    ->sum('row'.$i));
+                }
+            array_push($data,$new);
+            }
+        }
+        $total = array (0,);
+        for ($x=1; $x <= $length; $x++) { 
+                array_push($total, $day = Report::where('dept_id', $id)
+                    ->whereYear('created_at', $year)
+                    ->whereMonth('created_at', $month)
+                    ->sum('row'.$x));
+        }
+>>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
 
         $notifies = $this->notification();
         $sidebar = $this->sidebar();
         $dept = $this->dept();
 
+<<<<<<< HEAD
         $names =  $this->sender($id);
         
 
@@ -271,6 +317,54 @@ class ReportController extends Controller
         return view('report.create', compact('content', 'length', 'id', 'notifies', 'sidebar', 'dept'));
     }
 
+=======
+        $list = Report::join('users','users.id','=','reports.user_id')
+            ->where('dept_id', $id)
+            ->select('user_id')
+            ->groupBy('user_id')
+            ->get();
+
+        $allsenders = count($list);
+        $senders = array();
+        for ($i=0; $i < $allsenders ; $i++) { 
+            array_push($senders, $list[$i]['user_id']);
+        }
+
+        $names = User::whereIn('id', $senders)->get();
+
+        return view('/report.monthly', compact('data', 'year', 'id', 'content', 'length', 'days', 'dept', 'month', 'hmonth', 'total', 'sdata', 'notifies', 'sidebar', 'dept', 'names'));
+    }
+
+    public function viewreport(Request $request, $ids, $link_id)
+    {
+        $id = Notify::where('link_id', $link_id)->value('sender');
+        $user = User::where('id' ,$id)->first();
+
+        $days = Report::find($link_id);
+        $content = $this->title();
+        $length = count($content[$ids]);
+        $dept = $this->dept();
+         
+
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+
+        return view('report.viewreport', compact('notifies', 'sidebar', 'dept', 'content', 'length', 'ids', 'days', 'user')); 
+    }
+
+    public function report($id) {
+        $content =$this->data();
+        $length = count($content[$id]);
+
+        $notifies = $this->notification();
+        $sidebar = $this->sidebar();
+        $dept = $this->dept();
+
+        return view('report.create', compact('content', 'length', 'id', 'notifies', 'sidebar', 'dept'));
+    }
+
+>>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
     public function store(Request $request) {
 
         $post = new Report;
@@ -325,9 +419,13 @@ class ReportController extends Controller
         $post->save();
 
         $dept = $request->input('dept_name');
+<<<<<<< HEAD
         $users = User::with('position')->whereIn('position', array('Admin', 'Director of '.$dept))
             ->orWhere('id', auth()->user()->id)
             ->get();
+=======
+        $users = User::with('position')->whereIn('position', array('Admin', 'Director of '.$dept))->get();
+>>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
 
         foreach ($users as $position) {
             Notify::create([
@@ -410,14 +508,39 @@ class ReportController extends Controller
         return redirect()->back()->with('success', ' Report successfully Updated');
     }
 
+<<<<<<< HEAD
+    public function show($id)
+=======
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
         //
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+>>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
+    {
+        //
+    }
+
+<<<<<<< HEAD
     public function destroy($id)
     {
         //
     }
+=======
+   
+>>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
 
 }

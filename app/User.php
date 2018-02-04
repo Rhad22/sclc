@@ -51,9 +51,12 @@ class User extends Authenticatable
     public function position()
     {
         return $this->belongsTo('App\Notify');
+<<<<<<< HEAD
     }
     public function dept()
     {
         return $this->belongsTo('App\Profile');
+=======
+>>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
     }
 }

@@ -62,7 +62,11 @@
 							</table>
 							</div>
                             <br>
+<<<<<<< HEAD
 						</div>	
+=======
+						</div>			
+>>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
 						
 		</div>
 		@include('layouts.footer')

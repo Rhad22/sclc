@@ -170,6 +170,7 @@
 					@endif
 				</div>
 				<div class="col-md-6" style="text-align: right;">
+<<<<<<< HEAD
 					{!! Form::open(['action' => ['ReportController@monthlyPDF', $year, $month, $id], 'method' => 'GET']) !!}
                        	{{ csrf_field() }}
     				<input name="year" type="hidden" value="{{$year}}">
@@ -178,6 +179,9 @@
     				<button type="submit" class="btn btn-sm btn-primary">Generate PDF! <i class="icon-printer position-right"></i></button>
 					<input type="hidden" value="someVariable" />
 					{!! Form::close() !!}
+=======
+					<a href="#" class="btn btn-primary legitRipple"><i class="icon-printer"></i> <span class="hidden-xs position-right">Print</span></a>
+>>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
 				</div>
 
 		@include('layouts.footer')

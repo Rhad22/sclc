@@ -16,8 +16,12 @@ class AnnouncementController extends Controller
 
     public function index()
     {
+<<<<<<< HEAD
         $announcements = User::join('announcements','announcements.user_id','=','users.id')
             ->orderBy('announcements.created_at','DESC')->paginate(10);
+=======
+        $announcements = User::join('announcements','announcements.user_id','=','users.id')->get();
+>>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
 
         $notifies = $this->notification();
         $sidebar = $this->sidebar();
@@ -53,6 +57,10 @@ class AnnouncementController extends Controller
         $users = User::all();
 
         foreach ($users as $position) {
+<<<<<<< HEAD
+=======
+            if ($position->id !== auth()->user()->id) {
+>>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
             Notify::create([
                 'sender' => auth()->user()->id,
                 'receiver' => $position->id,
@@ -62,6 +70,10 @@ class AnnouncementController extends Controller
                 'link_id' => $announcements->id,
                 'dept_id' => 0
             ]);
+<<<<<<< HEAD
+=======
+            } 
+>>>>>>> eed94e903716173a1687c4e9ffb846aa5d71c1f3
         }
         return redirect('/announcements')->with('success', 'Post Created');
     }
