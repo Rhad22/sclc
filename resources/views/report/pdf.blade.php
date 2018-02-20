@@ -40,7 +40,7 @@
 					
 	@for ($x = 1; $x < $length; $x++)
 	<tr>
-		<td class="data">{{$content[$id][$x]}}</td>
+		<td>{{$content[$id][$x]}}</td>
 		@for ($i=0; $i < $days ; $i++)
 		<td class="data">{{$data[$x][$i]}}</td>
 		@endfor

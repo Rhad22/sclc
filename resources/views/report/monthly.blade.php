@@ -31,16 +31,13 @@
 					            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="icon-calendar3 position-left"></i>Type of report <b class="caret"></b></a>
 								<ul class="dropdown-menu dropdown-menu-right">
 									<li><a href="/report/dept={{$id}}">Monthly</a></li>
-									<li class="dropdown-submenu dropdown-submenu-left">
-										<a href="#">Quarterly</a>
-										<ul class="dropdown-menu">
+									<li><a href="/report/dept={{$id}}/yearly">Yearly</a></li>
+									<li class="dropdown-header bg-teal">Quarterly</li>
 											<li><a href="/report/dept={{$id}}/1st">1st quarter</a></li>
 											<li><a href="/report/dept={{$id}}/2nd">2nd quarter</a></li>
 											<li><a href="/report/dept={{$id}}/3rd">3rd quarter</a></li>
 											<li><a href="/report/dept={{$id}}/4th">4rd quarter</a></li>
-										</ul>
 									</li>
-									<li><a href="/report/dept={{$id}}/yearly">Yearly</a></li>
 								</ul>
 					        </li>
 					@endif    	
@@ -162,15 +159,17 @@
 				@endif
 				
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-12">
 					@if (Auth::user()->position !== 'District Pastor')
 					Summary report of 
 					@foreach ($names as $name)
 					<span class="badge bg-teal">{{$name->firstname}},</span>
 					@endforeach	
 					@endif
+					<br><br>
 				</div>
-				<div class="col-md-6" style="text-align: right;">
+					@if (Auth::user()->position !== 'District Pastor')
+				<div class="col-md-12" style="text-align: right;">
 
 					{!! Form::open(['action' => ['ReportController@monthlyPDF', $year, $month, $id], 'method' => 'GET']) !!}
                        	{{ csrf_field() }}
@@ -182,7 +181,7 @@
 					{!! Form::close() !!}
 
 				</div>	
-
+					@endif
 		@include('layouts.footer')
 		</div>
 		

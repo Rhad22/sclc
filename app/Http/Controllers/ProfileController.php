@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Profile;
+use App\Department;
 use App\User;
 use App\Notify;
 use Auth;
@@ -19,9 +20,11 @@ class ProfileController extends Controller
         $id = User::where('email', $email)->value('id');
         $profile = Profile::where('user_id', $id)->first();
 
-        $ids = auth()->user()->id;
+
+        $userdept = Department::where('user_id', $id)->get();
+
         $activities = User::join('notifies','notifies.sender','=','users.id')
-            ->where(['receiver'=> $ids, 'sender'=> $ids])
+            ->where(['receiver'=> $id, 'sender'=> $id])
             ->orderBy('notifies.created_at','DESC')
             ->get();
 
@@ -30,7 +33,7 @@ class ProfileController extends Controller
         $dept = $this->dept();
 
 
-        return view('profiles.myprofile',['user'=>$user,'profile'=>$profile, 'notifies'=>$notifies, 'sidebar'=>$sidebar, 'dept'=>$dept, 'activities' => $activities]);
+        return view('profiles.myprofile',['user'=>$user,'profile'=>$profile, 'notifies'=>$notifies, 'sidebar'=>$sidebar, 'dept'=>$dept, 'activities' => $activities, 'userdept' => $userdept]);
 
     }
 

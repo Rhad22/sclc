@@ -21,10 +21,13 @@
     <script type="text/javascript" src="{{asset('js/core/libraries/jquery.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/core/libraries/bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/plugins/loaders/blockui.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/plugins/forms/styling/uniform.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/plugins/forms/selects/bootstrap_multiselect.js')}}"></script>
     <!-- /core JS files -->
 
     <!-- Theme JS files -->
     <script type="text/javascript" src="{{asset('js/core/app.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/pages/form_multiselect.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/pages/chat_layouts.js')}}"></script>
 
     <script type="text/javascript" src="{{asset('js/plugins/ui/ripple.min.js')}}"></script>
@@ -116,8 +119,7 @@
 
                                     <!-- Main -->
                                     <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
-
-                                     @if ( auth()->user()->position !== 'District Pastor' )
+                                    @if ( auth()->user()->position !== 'District Pastor' )
                                     <li><a href="/home/1/1"><i class="icon-stats-dots"></i> <span>Dashboard</span></a></li>
                                     @endif
 
@@ -129,8 +131,6 @@
                                         {{--  @if ($unread > 0)<span class="label bg-green-400">{{$unread}}</span> @endif  --}}
                                         </span></a>
                                     </li>
-                                    
-                                    @if (Auth::user()->position == 'Admin')
                                     <li>
                                         <a><i class="icon-stack2"></i> <span>Department and Ministries</span></a>
                                         <ul>
@@ -141,33 +141,16 @@
                                             <li><a href="/report/dept=5">Stewardship Ministries</a></li>
                                             <li><a href="/report/dept=6">Health Ministries</a></li>
                                             <li><a href="/report/dept=7">Personal Ministries</a></li>
+                                            <li><a href="/report/dept=8">Youth Ministries</a></li>
+                                            <li><a href="/report/dept=9">Music Ministries</a></li>
+                                            <li><a href="/report/dept=10">Family Ministries</a></li>
                                         </ul>
                                     </li>
-                                    @elseif (Auth::user()->position == 'District Pastor')
                                     <li>
-                                        <a><i class="icon-stack2"></i> <span>Department and Ministries</span></a>
-                                        <ul>
-                                            <li><a href="/report/dept=1">Communication Department</a></li>
-                                            <li><a href="/report/dept=2">Children's Ministries</a></li>
-                                            <li><a href="/report/dept=3">Women's Ministries</a></li>
-                                            <li><a href="/report/dept=4">Ministerial</a></li>
-                                            <li><a href="/report/dept=5">Stewardship Ministries</a></li>
-                                            <li><a href="/report/dept=6">Health Ministries</a></li>
-                                            <li><a href="/report/dept=7">Personal Ministries</a></li>
-                                        </ul>
-                                    </li>    
-                                    @else
-                                         @for ($i = 0; $i < 8; $i++)
-                                        @if (Auth::user()->position == 'Director of '.$dept[$i] )
-                                    <li><a href="/report/dept={{$sidebar}}"><i class="icon-stack2"></i> <span>{{$dept[$sidebar]}}</span></a></li>
-                                        @endif  
-                                    @endfor
-                                    @endif
-                                    <li>
-                                        <a href="/messenger.chatbox"><i class="icon-comment-discussion"></i> <span>Messages<span class="label bg-blue-400">8</span></span></a>
+                                        <a href="/chat"><i class="icon-comment-discussion"></i> <span>Chatroom</a>
                                     </li>
                                     <li>
-                                        <a href="#"><i class="icon-bell2"></i> <span>Notifications<span class="label bg-orange-400">15</span></span></a> 
+                                        <a href="/notif"><i class="icon-bell2"></i> <span>Notifications</span></a>
                                     </li>
                                     <!-- /main -->
                                 </ul>
@@ -275,8 +258,10 @@
                                         @endif
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="form-group{{ $errors->has('dept') ? ' has-error' : '' }}">
+                                <div class="col-md-4">
+                                    <!-- <div class="form-group{{ $errors->has('dept') ? ' has-error' : '' }}">
                                         <label for="dept" class="col-md-4 control-label">Department</label>
                                             <div class="col-md-9">
                                                 <select name="dept">
@@ -288,6 +273,9 @@
                                                     <option value="5">Stewardship Ministries</option>
                                                     <option value="6">Health Ministries</option>
                                                     <option value="7">Personal Ministries</option>
+                                                    <option value="8">Youth Ministries</option>
+                                                    <option value="9">Music Ministries</option>
+                                                    <option value="10">Family Ministries</option>
                                                 </select>
                                                  @if ($errors->has('dept'))
                                                     <span class="help-block">
@@ -295,16 +283,59 @@
                                                     </span>
                                                 @endif
                                             </div>
-                                    </div>
 
+                                            
+                                    </div> -->
                                     <div class="form-group{{ $errors->has('district') ? ' has-error' : '' }}">
                                         <label for="district" class="col-md-5 control-label">District</label>
                                         <div class="col-md-8">
                                         <select name="district">
                                             <option value="All">All</option>
-                                            <option value="District 1">District 1</option>
-                                            <option value="District 2">District 2</option>
-                                            <option value="District 3">District 3</option>
+                                            <option value="Metro Lipa District">Metro Lipa District</option>
+                                            <option value="East. BatangasDist">East. BatangasDist</option>
+                                            <option value="San Juan District">San Juan District</option>
+                                            <option value="Metro Batangas">Metro Batangas</option>
+                                            <option value="Central Batangas I">Central Batangas I</option>
+                                            <option value="Central Batangas II">Central Batangas II</option>
+                                            <option value="West. Batangas I">West. Batangas I</option>
+                                            <option value="West. Batangas II">West. Batangas II</option>
+                                            <option value="Metro San Pablo Di">Metro San Pablo Di </option>
+                                            <option value="Upper Laguna ">Upper Laguna </option>
+                                            <option value="Eastern Laguna">Eastern Laguna</option>
+                                            <option value="Central Laguna">Central Laguna</option>
+                                            <option value="Luisiana-CavintiDist">Luisiana-CavintiDist</option>
+                                            <option value="Greater Laguna/MC">Greater Laguna/MC</option>
+                                            <option value="Makiling View">Makiling View</option>
+                                            <option value="San Pedro District">San Pedro District</option>
+                                            <option value="Binan District">Binan District</option>
+                                            <option value="Sta. Rosa">Sta. Rosa</option>
+                                            <option value="Cabuyao">Cabuyao</option>
+                                            <option value="Central Quezon I">Central Quezon I</option>
+                                            <option value="Central Quezon II">Central Quezon II</option>
+                                            <option value="Banahaw">Banahaw</option>
+                                            <option value="Southern Quezon I">Southern Quezon I</option>
+                                            <option value="Southern Quezon II ">Southern Quezon II </option>
+                                            <option value="Southern Quezon III">Southern Quezon III</option>
+                                            <option value="Bondoc Peninsula I">Bondoc Peninsula I</option>
+                                            <option value="Bondoc Peninsula II">Bondoc Peninsula II</option>
+                                            <option value="Infanta-Panukulan">Infanta-Panukulan</option>
+                                            <option value="Polillo">Polillo</option>
+                                            <option value="Marinduque">Marinduque</option>
+                                            <option value="North Or. Mindoro">North Or. Mindoro</option>
+                                            <option value="Lakeside Or. Mdo.">Lakeside Or. Mdo.</option>
+                                            <option value="Central Or. Mdo. ">Central Or. Mdo. </option>
+                                            <option value="Pinamalayan District">Pinamalayan District</option>
+                                            <option value="Bansud District">Bansud District</option>
+                                            <option value="Bongabong District">Bongabong District</option>
+                                            <option value="Roxas District">Roxas District</option>
+                                            <option value="Gloria District">Gloria District</option>
+                                            <option value="South Or, Mindoro">South Or, Mindoro</option>
+                                            <option value="North Occ. Mindoro">North Occ. Mindoro</option>
+                                            <option value="Cent. Occ. Mdo. I">Cent. Occ. Mdo. I</option>
+                                            <option value="Cent Occ. Mdo. II">Cent Occ. Mdo. II</option>
+                                            <option value="So-Cent Occ. Mdo.">So-Cent Occ. Mdo.</option>
+                                            <option value="So-Cent Occ. Mdo. I">So-Cent Occ. Mdo. I</option>
+                                            <option value="So-Cent Occ. Mdo. II">So-Cent Occ. Mdo. II</option>
                                         </select>
                                          @if ($errors->has('district'))
                                             <span class="help-block">
@@ -313,60 +344,77 @@
                                         @endif
                                         </div>
                                     </div>
+                                    
                                 </div>
-
-                                <div class="col-md-8">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                        <label>Department</label>
+                                        <div class="multi-select-full">
+                                            <select class="multiselect" multiple="multiple" name="dept[]">
+                                                    <option value="0">All</option>
+                                                    <option value="1">Communication Department</option>
+                                                    <option value="2">Children's Ministries</option>
+                                                    <option value="3">Women's Ministries</option>
+                                                    <option value="4">Ministerial</option>
+                                                    <option value="5">Stewardship Ministries</option>
+                                                    <option value="6">Health Ministries</option>
+                                                    <option value="7">Personal Ministries</option>
+                                                    <option value="8">Youth Ministries</option>
+                                                    <option value="9">Music Ministries</option>
+                                                    <option value="10">Family Ministries</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <div class="col-md 12">
                                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-3 control-label">E-Mail Address</label>
+                                        <label for="email" class="col-md-2 control-label">E-Mail Address</label>
 
-                            <div class="col-md-9">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                        <div class="col-md-6">
+                                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                                            @if ($errors->has('email'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('email') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                        <label for="password" class="col-md-2 control-label">Password</label>
+
+                                        <div class="col-md-6">
+                                            <input id="password" type="password" class="form-control" name="password" required>
+
+                                            @if ($errors->has('password'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('password') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="password-confirm" class="col-md-2 control-label">Confirm Password</label>
+
+                                        <div class="col-md-6">
+                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-3 control-label">Password</label>
-
-                            <div class="col-md-9">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-3 control-label">Confirm Password</label>
-
-                            <div class="col-md-9">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                                <div class="form-group"><br>
-                            <div class="text-right">
+                        <div class="text-right">
                                 <button type="submit" class="btn bg-teal">
                                     Register <i class="icon-arrow-right14 position-right"></i>
                                 </button>
                             </div>
-                            
-                        </div>
-                            </div>
-
-
-                        </div>
-
-                        
-                                </div>
-                            </div>
-                        </div>
-
                         
                     </form>
                 </div>

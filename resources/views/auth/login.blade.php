@@ -52,21 +52,14 @@
 
 							<div class="form-group login-options">
 								<div class="row">
-									<div class="col-sm-6">
-										<label>
-											<input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
-											Remember
-										</label>
-									</div>
-
-									<div class="col-sm-6 text-right">
+									<div class="col-sm-12 text-right">
 										<a href="{{ route('password.request') }}">Forgot password?</a>
 									</div>
 								</div>
 							</div>
 
 							<div class="form-group">
-								<button type="submit" class="btn bg-blue-400 btn-block">Login <i class="icon-arrow-right14 position-right"></i></button>
+								<button type="submit" class="btn bg-teal btn-block">Login <i class="icon-arrow-right14 position-right"></i></button>
 							</div>
 						</div>
 					</form>

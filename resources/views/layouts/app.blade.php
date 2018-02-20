@@ -5,7 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-
+    <?php echo
+    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+    header("Cache-Control: post-check=0, pre-check=0", false);
+    header("Pragma: no-cache");
+    header('Content-Type: text/html');
+    ?>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -30,7 +35,9 @@
 
 	<!-- Theme JS files -->
 	<script type="text/javascript" src="{{asset('js/plugins/forms/styling/uniform.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/plugins/forms/selects/bootstrap_multiselect.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/core/app.js')}}"></script>
+	<script type="text/javascript" src="{{asset('js/pages/form_multiselect.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/pages/login.js')}}"></script>
 
 @yield('pagescript')

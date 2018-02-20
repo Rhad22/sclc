@@ -25,36 +25,51 @@
 			@endif
 		</div>
 
+
+		<div class="panel panel-flat">
+								<div class="table-responsive">
+									<table class="table text-nowrap">
+										<thead>
+											<tr>
+												<th><i class="icon-watch2 text-warning position-left"></i>Posted</th>
+												<th><i style="margin-left: 7px" class=" icon-user text-success position-left"></i>Author</th>
+												<th><i class=" icon-envelop5 text-primary position-left"></i>Content</th>
+												
+											</tr>
+										</thead>
+										<tbody>
+											@foreach($announcements as $announcement)
+											<tr>
+												<td class="text-center">
+													@if ($announcement->created_at->format('y m d') < date('y m d')) {{$announcement->created_at->format(' M d')}} @else {{$announcement->created_at->format(' g:i a')}} @endif
+												</td>
+												<td>
+												<div class="media-left media-middle">
+														<a href="/myprofile/{{$announcement->email}}" >
+															<img src="{{Storage::url($announcement->profile_pic)}}" class="img-circle img-xs" alt="">
+														</a>
+													</div>
+
+													<div class="media-body">
+														<a href="/myprofile/{{$announcement->email}}" class="display-inline-block text-default text-semibold letter-icon-title" data-popup="tooltip" title="View Profile">{{$announcement->firstname}} {{$announcement->lastname}}</a>
+														<div class="text-muted text-size-small"><span class="status-mark border-success position-left"></span> {{$announcement->position}}</div>
+													</div>
+												</td>
+												<td>
+													<a href="/announcements/{{$announcement->id}}" data-popup="tooltip" title="View Content" class="text-default display-inline-block">
+														<span class="text-semibold">{!!substr("$announcement->title",0,120)!!}</span>
+														<span class="display-block text-muted">{!!substr("$announcement->content",3,120)!!}</span>
+													</a>
+												</td>
+											</tr>
+											@endforeach
+										</tbody>
+									</table>
+								</div>
+							</div>
+
 		<!-- Single line -->
-					<div class="panel panel-white">
-						
-						<div class="table-responsive">
-							<table class="table table-inbox">
-								<tbody data-link="row" class="rowlink">
-									@foreach($announcements as $announcement)
-									<tr>
-										<td class="table-inbox-image">
-											<img src="{{Storage::url($announcement->profile_pic)}}" class="img-circle img-xs" alt="">
-										</td>
-										<td class="table-inbox-name">
-											<a href="/myprofile/{{$announcement->email}}">
-												<div class="letter-icon-title text-default">&nbsp;&nbsp;&nbsp;{{$announcement->firstname}} {{$announcement->lastname}}</div>
-											</a>
-										</td>
-										<td class="table-inbox-message">
-											<a class="table-inbox-subject letter-icon-title text-default" href="/announcements/{{$announcement->id}}">
-											<span class="table-inbox-subject">{{$announcement->title}} &nbsp;-&nbsp;</span>
-											<span class="table-inbox-preview">
-												{!!substr("$announcement->content",3,200)!!}</span></a>
-										</td>
-										<td class="table-inbox-time"> @if ($announcement->created_at->format('y m d') < date('y m d')) {{$announcement->created_at->format(' M d')}} @else {{$announcement->created_at->format(' g:i a')}} @endif
-										</td>
-										@endforeach
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
+					
 					<div style="text-align: right;">{{ $announcements->links() }}</div>
     	@include('layouts.footer')
 	</div>

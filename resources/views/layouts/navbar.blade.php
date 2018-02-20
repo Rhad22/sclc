@@ -128,14 +128,21 @@
                                             <span class="media-heading text-semibold">{{ Auth::user()->firstname .' '. Auth::user()->lastname  }}</span>
                                             <div class="text-size-mini text-muted">
                                             <i class="icon-user-tie"></i> &nbsp; {{ Auth::user()->position }}
-                                            @if (Auth::user()->position == 'District Pastor') / {{Auth::user()->district}} 
-                                            @endif 
-                                            @if (Auth::user()->position == 'Secretary') 
-                                            of {{$dept[$sidebar]}} 
+
+                                            @if (Auth::user()->position == 'Director')
+                                            @foreach ($sidebar as $side) / {{$dept[$side->dept]}} @endforeach
                                             @endif
-                                            @if (Auth::user()->position == 'Director') 
-                                            of {{$dept[$sidebar]}} 
+
+                                            @if (Auth::user()->position == 'Secretary')
+                                            @foreach ($sidebar as $side) / {{$dept[$side->dept]}}@endforeach
                                             @endif
+
+                                            @if (Auth::user()->position == 'District Pastor')
+                                                @if (Auth::user()->district !== 'All') 
+                                                    / {{Auth::user()->district}}
+                                                @endif
+                                            @endif
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -174,7 +181,11 @@
                                     <!-- Main -->
                                     <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
                                     @if ( auth()->user()->position !== 'District Pastor' )
+                                    @if (auth()->user()->position !== 'Admin' )
+                                    <li><a href="/home/{{$sidebar[0]->dept}}/1"><i class="icon-stats-dots"></i> <span>Dashboard</span></a></li>
+                                    @else
                                     <li><a href="/home/1/1"><i class="icon-stats-dots"></i> <span>Dashboard</span></a></li>
+                                    @endif
                                     @endif
 
                                     @if (Auth::user()->position == 'Admin')
@@ -185,43 +196,49 @@
                                         {{--  @if ($unread > 0)<span class="label bg-green-400">{{$unread}}</span> @endif  --}}
                                         </span></a>
                                     </li>
-                                    
-                                    @if (Auth::user()->position == 'Admin')
                                     <li>
                                         <a><i class="icon-stack2"></i> <span>Department and Ministries</span></a>
                                         <ul>
-                                            <li><a href="/report/dept=1">Communication Department</a></li>
-                                            <li><a href="/report/dept=2">Children's Ministries</a></li>
-                                            <li><a href="/report/dept=3">Women's Ministries</a></li>
-                                            <li><a href="/report/dept=4">Ministerial</a></li>
-                                            <li><a href="/report/dept=5">Stewardship Ministries</a></li>
-                                            <li><a href="/report/dept=6">Health Ministries</a></li>
-                                            <li><a href="/report/dept=7">Personal Ministries</a></li>
+                                            @if (Auth::user()->position == 'Admin')
+                                                <li><a href="/report/dept=1">{{$dept[1]}}</a></li>
+                                                <li><a href="/report/dept=2">{{$dept[2]}}</a></li>
+                                                <li><a href="/report/dept=3">{{$dept[3]}}</a></li>
+                                                <li><a href="/report/dept=4">{{$dept[4]}}</a></li>
+                                                <li><a href="/report/dept=5">{{$dept[5]}}</a></li>
+                                                <li><a href="/report/dept=6">{{$dept[6]}}</a></li>
+                                                <li><a href="/report/dept=7">{{$dept[7]}}</a></li>
+                                                <li><a href="/report/dept=8">{{$dept[8]}}</a></li>
+                                                <li><a href="/report/dept=9">{{$dept[9]}}</a></li>
+                                                <li><a href="/report/dept=10">{{$dept[10]}}</a></li>
+                                            @endif
+                                            @if (Auth::user()->position == 'District Pastor')
+                                                <li><a href="/report/dept=1">{{$dept[1]}}</a></li>
+                                                <li><a href="/report/dept=2">{{$dept[2]}}</a></li>
+                                                <li><a href="/report/dept=3">{{$dept[3]}}</a></li>
+                                                <li><a href="/report/dept=4">{{$dept[4]}}</a></li>
+                                                <li><a href="/report/dept=5">{{$dept[5]}}</a></li>
+                                                <li><a href="/report/dept=6">{{$dept[6]}}</a></li>
+                                                <li><a href="/report/dept=7">{{$dept[7]}}</a></li>
+                                                <li><a href="/report/dept=8">{{$dept[8]}}</a></li>
+                                                <li><a href="/report/dept=9">{{$dept[9]}}</a></li>
+                                                <li><a href="/report/dept=10">{{$dept[10]}}</a></li>
+                                            @endif
+                                            @if (Auth::user()->position == 'Director')
+                                            @foreach ($sidebar as $side)
+                                            <li><a href="/report/dept={{$side->dept}}">{{$dept[$side->dept]}}
+                                             </a></li>
+                                            @endforeach
+                                            @endif
+                                            @if (Auth::user()->position == 'Secretary')
+                                            @foreach ($sidebar as $side)
+                                            <li><a href="/report/dept={{$side->dept}}">{{$dept[$side->dept]}}
+                                             </a></li>
+                                            @endforeach
+                                            @endif
                                         </ul>
                                     </li>
-                                    @elseif (Auth::user()->position == 'District Pastor')
                                     <li>
-                                        <a><i class="icon-stack2"></i> <span>Department and Ministries</span></a>
-                                        <ul>
-                                            <li><a href="/report/dept=1">Communication Department</a></li>
-                                            <li><a href="/report/dept=2">Children's Ministries</a></li>
-                                            <li><a href="/report/dept=3">Women's Ministries</a></li>
-                                            <li><a href="/report/dept=4">Ministerial</a></li>
-                                            <li><a href="/report/dept=5">Stewardship Ministries</a></li>
-                                            <li><a href="/report/dept=6">Health Ministries</a></li>
-                                            <li><a href="/report/dept=7">Personal Ministries</a></li>
-                                        </ul>
-                                    </li>    
-                                    @else
-
-                                        @if (Auth::user()->position == 'Director')
-                                    <li><a href="/report/dept={{$sidebar}}"><i class="icon-stack2"></i> <span>{{$dept[$sidebar]}}</span></a></li>
-                                        @else <li><a href="/report/dept={{$sidebar}}"><i class="icon-stack2"></i> <span>{{$dept[$sidebar]}}</span></a></li> 
-                                    @endif
-
-                                    @endif
-                                    <li>
-                                        <a href="/chat"><i class="icon-comment-discussion"></i> <span>Messenger</a>
+                                        <a href="/chat"><i class="icon-comment-discussion"></i> <span>Chatroom</a>
                                     </li>
                                     <li>
                                         <a href="/notif"><i class="icon-bell2"></i> <span>Notifications<span class="label bg-danger">@if (count($notifies) > 0){{count($notifies)}} @endif</span></span></a> 

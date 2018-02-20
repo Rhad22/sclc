@@ -48,12 +48,10 @@
 
 					<form class="form-horizontal" role="form" method="POST" action=""/announcements/{{ $announcements->id }}"">
 					<div class="navbar-collapse collapse" id="inbox-toolbar-toggle-single">
-						<div class="btn-group navbar-btn">
+						<div class="text-right">
 							@if (Auth::user()->id == $announcements->user_id)
-							<a href="/announcements/{{$announcements->id}}/edit" class="btn btn-default legitRipple"><i class="icon-pencil"></i> <span class="hidden-xs position-right">Edit</span></a>
-    							{{ csrf_field() }}
-    							{{ method_field('DELETE') }}
-    							<button class="btn btn-default legitRipple"><i class="icon-bin"></i> <span class="hidden-xs position-right">Delete</span></button>
+							<a href="/announcements/{{$announcements->id}}/edit" class="btn bg-teal legitRipple"><i class="icon-pencil"></i> <span class="hidden-xs position-right">Edit</span></a>
+    							
 							@endif
 						</div>
 					</div>

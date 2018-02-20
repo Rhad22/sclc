@@ -18,34 +18,31 @@
 				</div>
 			</div>
 
-
-			<div class="content">
 				<div class="row">
 					@foreach($users as $user)
-					<div class="col-lg-6 col-md-6">
+					<div class="col-lg-4 col-md-4">
 						<div class="panel panel-body">
 							<div class="media">
 								<div class="media-left">
-									<a href="" data-popup="lightbox">
+									<a href="/myprofile/{{$user->email}}" data-popup="lightbox">
 										<img src="{{Storage::url($user->profile_pic)}}" class="img-circle img-lg" alt="">
 									</a>
 								</div>
 
 								<div class="media-body">
-									<h6 class="media-heading">{{$user->firstname . ' '. $user->lastname}}</h6>
-									<span class="text-muted">{{$user->position}} @if ($user->position == 'District Pastor') / {{$user->district}} @endif @if ($user->position == 'Director') of {{$dept[$user->dept]}} @endif @if ($user->position == 'Secretary') of {{$dept[$user->dept]}} @endif</span>
+									<h6 class="media-heading">{{$user->firstname . ' '. $user->lastname}} @if ($user->isBan == 1) <span class="label label-danger">Deactivated</span> @endif</h6>
+									<span class="text-muted">{{$user->position}} 
+									</span>
 								</div>
 
 								<div class="media-right media-middle">
 									<ul class="icons-list">
-					                    <li class="dropdown">
-						                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-						                    <ul class="dropdown-menu dropdown-menu-right">
-												<li><a href="/edituser/{{$user->id}}"><i class=" icon-sync pull-right"></i>Edit info.</a></li>
-												<li><a href="#"><i class=" icon-user-cancel pull-right"></i>Deactivate account</a></li>
-											</ul>
-					                    </li>
-				                    </ul>
+										<li>
+											<a href="/edituser/{{$user->id}}" data-popup="tooltip" title="Edit Profile">
+												<i class="icon-menu7"></i>
+											</a>
+										</li>
+									</ul>
 								</div>
 							</div>
 						</div>
@@ -53,9 +50,9 @@
 					@endforeach
 				</div>
 				<div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_1_paginate">
-							{{ $users->links() }}
+				{{ $users->links() }}
 				</div>
 
-	</div>
+	
 <div>		
 @endsection

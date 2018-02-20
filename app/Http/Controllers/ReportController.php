@@ -357,7 +357,7 @@ class ReportController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', ' Report send successfully');
+        return redirect()->back()->with('success', ' Report sent successfully');
     }
 
     public function edit($ids, $id)

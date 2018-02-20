@@ -36,6 +36,7 @@
 						<div class="col-lg-9">
 							<div class="tabbable">
 								<div class="tab-content">
+									@if (count($activities) > 0) 
 									@foreach ($activities as $activity)
 									<div class="tab-pane @if (Request::segment(3) == 'settings')) {{'fade in'}} 	@else {{'active in'}} @endif" id="activity">
 										<div class="timeline timeline-left content-group">
@@ -46,17 +47,18 @@
 													</div>
 													<div class="panel panel-flat timeline-content">
 														<div class="panel-body">
-															<a class="table-inbox-subject letter-icon-title text-default" @if ($activity->type < 1)
-                                                href="/report/dept={{$activity->dept_id}}/{{$activity->link_id}}/{{$activity->id}}"
-                                            @elseif ($activity->type < 2) 
-                                                href="/announcements/{{$activity->link_id}}/{{$activity->id}}"
-                                            @else
-                                                href="/myprofile/{{$activity->link_id}}/{{$activity->id}}"
-                                            @endif >
+															<a class="table-inbox-subject letter-icon-title text-default" 
+															@if ($activity->type < 1)
+                                                				href="/report/dept={{$activity->dept_id}}/{{$activity->link_id}}/{{$activity->id}}"
+                                            				@elseif ($activity->type < 2) 
+                                                				href="/announcements/{{$activity->link_id}}/{{$activity->id}}"
+                                            				@else
+                                                				href="/myprofile/{{$activity->link_id}}"
+                                            				@endif>
 																{{$activity->firstname}} {{$activity->lastname}} {{$activity->content}}
-																	<div class="media-annotation">@if ($activity->type < 1)
-                                                <i class=" icon-file-plus text-warning"></i> @elseif ($activity->type < 2)<i class="icon-paperplane text-primary"></i> @else <i class="icon-profile text-success"></i> @endif{{$activity->created_at->diffForHumans()}} ...</div>
-
+															<div class="media-annotation">@if ($activity->type < 1)
+                                                				<i class=" icon-file-plus text-warning"></i> @elseif ($activity->type < 2)<i class="icon-paperplane text-primary"></i> @else <i class="icon-profile text-success"></i> @endif{{$activity->created_at->diffForHumans()}} ...
+                                                			</div>
 															</a>
 														</div>
 													</div>
@@ -65,6 +67,7 @@
 									    </div>
 									</div>
 									@endforeach
+									@endif
 
 									<div class="tab-pane fade" id="schedule">
 
@@ -211,7 +214,7 @@
 							                        	</div>
 							                        </div>	
 							                        <div class="text-right">
-							                        	<button type="submit" class="btn btn-primary">Save <i class="icon-arrow-right14 position-right"></i></button>
+							                        	<button type="submit" class="btn bg-teal">Save <i class="icon-arrow-right14 position-right"></i></button>
 							                        </div>
                                                 </form>
 											</div>
@@ -286,7 +289,7 @@
 
 
 							                        <div class="text-right">
-							                        	<button type="submit" class="btn btn-primary">Save <i class="icon-arrow-right14 position-right"></i></button>
+							                        	<button type="submit" class="btn bg-teal">Save <i class="icon-arrow-right14 position-right"></i></button>
 							                        </div>
 						            
 											</div>
@@ -304,17 +307,25 @@
 							<!-- User thumbnail -->
 							<div class="thumbnail ">
 								<div class="thumb thumb-rounded thumb-slide">
-									<img src="{{Storage::url(Auth::user()->profile_pic)}}" alt="">
-									<div class="caption">
-										<span>
-											<a href="#" class="btn bg-success-400 btn-icon btn-xs" data-popup="lightbox"><i class="icon-plus2"></i></a>
-											<a href="user_pages_profile.html" class="btn bg-success-400 btn-icon btn-xs"><i class="icon-link"></i></a>
-										</span>
-									</div>
+									<img src="{{Storage::url($user->profile_pic)}}" alt="">
 								</div>
 							
 						    	<div class="caption text-center">
-						    		<h6 class="text-semibold no-margin">{{$user->firstname}} {{$user->middlename}} {{$user->lastname }}<small class="display-block">{{$user->position }}@if ($user->position == 'District Pastor') / {{$user->district}} @endif</small></h6>
+						    		<h6 class="text-semibold no-margin">{{$user->firstname}} {{$user->middlename}} {{$user->lastname }}<small class="display-block">{{$user->position }} 
+						    				
+                                            	
+                                        @if ($user->position !== 'Admin')   
+                                            @if ($user->position == 'District Pastor')
+                                                @if ($user->district !== 'All') 
+                                                    / {{$user->district}}
+                                                @endif
+
+                                            @else
+                                            	@foreach ($userdept as $side) / {{$dept[$side->dept]}} 
+                                            	@endforeach
+                                            @endif
+                                        @endif
+						    		</small></h6>
 						    	</div>
 					    	</div>
 					    	<!-- /user thumbnail -->

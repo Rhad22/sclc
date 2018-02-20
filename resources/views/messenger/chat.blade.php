@@ -16,14 +16,14 @@
     <div class="page-header">
         <div class="page-header-content">
             <div class="page-title">
-                 <h3><span class="text-semibold">Messenger</span></h3>
+                 <h3><span class="text-semibold">Chatroom</span></h3>
             </div>
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-component">
             <ul class="breadcrumb">
-                <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
-                <li class="active">Conversation</li>
+                <li><a href="/home"><i class="icon-home2 position-left"></i> Home</a></li>
+                <li class="active">Chatroom</li>
             </ul>
         </div>
     </div>
@@ -31,13 +31,20 @@
         <div class="panel panel-flat">
             <div id="app">
                 <div class="panel-heading">
-                            <h6 class="panel-title">Group Chat <!-- (@{{ numberOfUsers }}) --></h6>
-                            <hr>
-                            <!-- <div class="heading-elements">
-                                <ul class="icons-list">
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6">
+                            <h6 class="panel-title">Conversation</h6>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <div style="text-align: right">
+                                <span class="label bg-teal">@{{ numberOfUsers }}</span> &nbsp;online
+                                <!-- <ul class="icons-list">
                                     <li><a href=''@click.prevent='deleteSession'><i class="icon-bin position-left"></i></a></li>
-                                </ul>
-                            </div> -->
+                                </ul> -->
+                            </div>
+                        </div>
+                    </div>
+                    <hr>       
                 </div>
                 <div class="badge badge-pill badge-primary">@{{ typing }}</div>
                 <div class="panel-body">
@@ -67,6 +74,7 @@
         </div>
         
 	</div>
+    @include('layouts.footer')
 	<script src="{{ asset('js/app.js') }}"></script>
     </div>
 </div>

@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Profile;
+use App\Department;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Redirect;
@@ -43,11 +43,13 @@ class RegisterController extends Controller
             'lastname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'dept' => 'required'
         ]);
     }
 
     protected function create(array $data)
     {
+
         $defaultprofile = 'public/profile/default.jpg';
 
         $user = User::create([
@@ -60,12 +62,23 @@ class RegisterController extends Controller
             'profile_pic' => $defaultprofile,
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'isBan' => 0,
             ]);
-    
-        Profile::create([
+
+        $profile = Profile::create([
             'user_id' => $user->id,
-            'dept' => $data['dept'],
             ]);
+
+        $depts = $data['dept'];
+        if (count($depts) > 0) {
+        foreach ($depts as $dept) {
+            $awe = Department::create([
+            'user_id' => $user->id,
+            'dept' => $dept,
+            ]);
+        }
+        }
+        
         
         return $user;
     }

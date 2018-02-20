@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Input as input;
 use App\User;
+use App\Profile;
 
 Route::post('change/password', function(){
 	$user= User::find(Auth::user()->id);
@@ -34,7 +35,10 @@ Route::resource('/announcements', 'AnnouncementController');
 Route::get('/announcements/{link_id}/{notif_id}', 'AnnouncementController@viewann');
 Route::get('/users', 'HomeController@users');
 Route::get('/edituser/{id}', 'HomeController@edituser');
-Route::post('/updateaccount', 'HomeController@updateaccount');
+Route::post('/changename', 'HomeController@changename');
+Route::post('/updateposition', 'HomeController@updateposition');
+Route::post('/disableaccount', 'HomeController@disableaccount');
+Route::delete('/delete/{id}', 'HomeController@destroy');
 Route::get('/notif', 'HomeController@notif');
 
 Route::get('report/dept={id}/4th', 'ReportController@fourth');
@@ -65,4 +69,6 @@ Route::post('getOldMessage','ChatController@getOldMessage');
 Route::get('check',function(){
 	return session('chat');
 });
+
+Route::get('user', 'TestingController@users');
 

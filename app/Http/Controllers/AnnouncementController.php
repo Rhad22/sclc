@@ -55,9 +55,6 @@ class AnnouncementController extends Controller
 
         foreach ($users as $position) {
 
-
-            if ($position->id !== auth()->user()->id) {
-
             Notify::create([
                 'sender' => auth()->user()->id,
                 'receiver' => $position->id,
@@ -67,10 +64,10 @@ class AnnouncementController extends Controller
                 'link_id' => $announcements->id,
                 'dept_id' => 0
             ]);
-
         }
+        
         return redirect('/announcements')->with('success', 'Post Created');
-    }
+    
     }
 
     public function show($id)
