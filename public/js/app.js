@@ -11865,8 +11865,11 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         },
         getTime: function getTime() {
             var time = new Date();
-
-            return time.getHours() + ':' + time.getMinutes();
+            if (time <= 13) {
+                return time.getHours() + ':' + time.getMinutes();
+            } else {
+                return time.getHours() - 12 + ':' + time.getMinutes();
+            }
         },
         getOldMessages: function getOldMessages() {
             var _this2 = this;

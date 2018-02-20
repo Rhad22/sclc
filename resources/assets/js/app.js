@@ -58,8 +58,13 @@ const app = new Vue({
     	},
     	getTime(){
     		let time = new Date();
-    		
-    			return time.getHours()+':'+time.getMinutes();
+    		if (time <= 13) {
+                return time.getHours()+':'+time.getMinutes();
+            }
+            else {
+                return time.getHours()-12+':'+time.getMinutes();
+            }
+
     		
     	},
         getOldMessages(){
